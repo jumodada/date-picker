@@ -1,0 +1,19 @@
+{
+  "name": "date-picker",
+  "version": "1.0.0",
+  "description": "轻量好用的日期选择器",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jumodada/date-picker.git"
+  },
+  "author": "jumodada",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jumodada/date-picker/issues"
+  },
+  "homepage": "https://github.com/jumodada/date-picker#readme"
+}
