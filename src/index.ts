@@ -1,5 +1,2 @@
-function asd() {
-
-}
-
-export default asd
+import dp from './dp'
+export default dp

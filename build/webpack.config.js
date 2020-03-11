@@ -15,7 +15,7 @@ const webpackConfig = {
         path:path.join(__dirname,'./dist')
     },
     resolve: {
-        extensions: ['.js', '.vue', '.json'],
+        extensions: ['.ts','.tsx','.js', '.vue', '.json'],
         modules: ['node_modules'],
         alias: {
             'vue': 'vue/dist/vue.js'
@@ -36,6 +36,26 @@ const webpackConfig = {
 
     module: {
         rules: [
+            {
+                test: /\.ts$/,
+                enforce: 'pre',
+                use: [
+                    {
+                        loader: 'tslint-loader'
+                    }
+                ]
+            },
+            {
+                test: /\.tsx?$/,
+                use: [
+                    {
+                        loader: 'ts-loader',
+                        options: {
+                            transpileOnly: true
+                        }
+                    }
+                ]
+            },
             {
                 test: /\.js$/,
                 loader: "babel-loader"

@@ -11,6 +11,7 @@ router.afterEach(() => {
    Vue.nextTick(() => document.querySelectorAll('pre code').forEach(block=>highlightJs.highlightBlock(block)))
 })
 
+
 new Vue({
    ...App,
    router
