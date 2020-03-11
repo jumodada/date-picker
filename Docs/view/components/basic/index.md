@@ -3,7 +3,7 @@
 ## 基础
 :::demo 暂定
 ```html
-<Input />
+<Input />Input
 
 <script>
 export default {
@@ -16,12 +16,7 @@ export default {
         this.$dp()
     },
     methods:{
-       exceeded(files){
-         console.log(files)
-        },
-       beforeRemove(){
-         return true
-       }    
+        
     }
  
 }
