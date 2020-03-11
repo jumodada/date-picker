@@ -34,7 +34,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import "../../../../assets/styles/color-select";
+    @import "../../../../assets/styles/color/color-select";
     .description {
         color: $text1-light;
         margin-top: 30px;

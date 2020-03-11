@@ -1,2 +1,2 @@
-import datePicker from '../src/index.ts'
+import datePicker from '../src/index'
 export default datePicker

@@ -75,12 +75,12 @@ const webpackConfig = {
                     isProd ? MiniCssExtractPlugin.loader : 'style-loader',
                     'css-loader',
                     'sass-loader',
-                    // {
-                    //     loader: 'sass-resources-loader',
-                    //     options: {
-                    //         resources: path.resolve(__dirname, '../src/styles/global.scss')
-                    //     }
-                    // }
+                    {
+                        loader: 'sass-resources-loader',
+                        options: {
+                            resources: path.resolve(__dirname, '../Docs/assets/styles/global.scss')
+                        }
+                    }
                 ]
             },
             {

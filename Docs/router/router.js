@@ -35,7 +35,7 @@ export default [
                     name: '基础',
                     type: 'component'
                 },
-                component: (resolve) => require(['../view/components/basic/index'], resolve)
+                component: (resolve) => require(['../view/components/basic/index.md'], resolve)
             },
         ]
     },

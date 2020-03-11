@@ -65,7 +65,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import "../../assets/styles/color-select";
+    @import "../../assets/styles/color/color-select";
     @import "../../assets/styles/shadow-select";
 
     .f-catalogue {
