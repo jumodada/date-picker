@@ -50,6 +50,15 @@ module.exports = function(source) {
     }
 
     output.push(content.slice(start))
+    output.forEach((item,index)=>{
+        if(item.indexOf('slot="highlight"')>-1){
+            let _ni = item.match(/mounted\(\)\{\s*([\s\S]+)\}\,\s*methods/)[1]
+            output[index] =
+                `<template slot="highlight"><pre v-pre><code class="html">`
+                + _ni
+                +`</code></pre></template></demo-card>' `
+        }
+    })
     return `
     <template>
       <div>

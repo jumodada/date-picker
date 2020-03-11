@@ -28,6 +28,15 @@ export default [
                 },
                 component: (resolve) => require(['../view/components/install/index.md'], resolve)
             },
+            {
+                path: '/components/Basic',
+                name: 'Basic',
+                meta: {
+                    name: '基础',
+                    type: 'component'
+                },
+                component: (resolve) => require(['../view/components/basic/index.md'], resolve)
+            },
         ]
     },
     {
