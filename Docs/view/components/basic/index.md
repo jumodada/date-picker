@@ -3,8 +3,9 @@
 ## 基础
 :::demo 暂定
 ```html
-<Input />Input
-
+<Input />
+<Input ref="input" >123</Input>
+<div ref="test" >123</div>
 <script>
 export default {
     data(){
@@ -13,7 +14,7 @@ export default {
         }
     },
     mounted(){
-        this.$dp()
+        this.$dp(this.$refs.input.$el)
     },
     methods:{
         
