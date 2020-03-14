@@ -1,4 +1,5 @@
 import flexOptions from '../types/options'
+import {mergeOptions} from "../methods/merge"
 
 export default class flex{
     defaults:flexOptions
@@ -6,8 +7,10 @@ export default class flex{
         this.defaults = initialOptions
     }
     create(el:HTMLInputElement,options:flexOptions){
-        el.addEventListener('click',(e)=>{
-            console.log(1)
-        })
+
+        mergeOptions<flexOptions>(this.defaults,options)
+        // el.addEventListener('click',(e)=>{
+        //     console.log(1)
+        // })
     }
 }
