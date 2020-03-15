@@ -10,7 +10,7 @@ const placement:placement[] = [
 export function checkOptions(options:flexOptions):boolean {
     if(isObject(options)){
         if('placement' in options&&placement.indexOf(options['placement']!)===-1){
-             console.error('placement format error')
+            console.error('Invalid placement format.')
             return false
         }
         return true
