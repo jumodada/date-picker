@@ -15,7 +15,7 @@ export default {
         }
     },
     mounted(){
-        this.$dp(this.$refs.test3,{})
+        this.$dp(this.$refs.test2,{})
     },
     methods:{
         

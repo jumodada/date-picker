@@ -1,4 +1,4 @@
-import {getNodeName} from "./node";
+import {getNodeName} from "./node"
 
 export function isInput($el:any) :boolean{
         return getNodeName($el)==='input'

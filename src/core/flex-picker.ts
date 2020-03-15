@@ -14,10 +14,10 @@ export default class flex {
     create(el: HTMLInputElement, options: flexOptions) {
         if(options&&!checkOptions(options))return
         let _inputElement = findInputElement(el)
-        if(isInputElement(el))return
+        if(!isInputElement(_inputElement as any))return
         (options as any) = mergeOptions<flexOptions>(this.defaults, options)
-        // el.addEventListener('click',(e)=>{
-        //     console.log(1)
-        // })
+        el.addEventListener('click',(e)=>{
+            console.log(1)
+        })
     }
 }
