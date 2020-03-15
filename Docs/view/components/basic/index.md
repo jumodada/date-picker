@@ -14,7 +14,7 @@ export default {
         }
     },
     mounted(){
-        this.$dp(this.$refs.input.$el)
+        this.$dp(this.$refs.input.$el,{})
     },
     methods:{
         

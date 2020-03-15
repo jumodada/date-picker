@@ -2,10 +2,14 @@ const DatePicker = require('datePicker')
 const $el = document.querySelector('#input')
 
 
-const dp  = new DatePicker()
+const dp  =  DatePicker($el,{
+    //optiopns
+})
 
-dp.onChange(callback)
-//日期选择器值发生改变时触发回调，参数为日期值和其他一些东西
+dp.on('change',callback)
+dp.on('cancel',callback)
+dp.on('show',callback)
+dp.on('close',callback)
 
-dp.destroy()
+dp.unbind()
 //销毁对输入框的绑定

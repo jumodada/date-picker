@@ -3,5 +3,5 @@ export interface types {
     Object: string,
     Array: string,
     String: string,
-    Number: string,
+    Number: string
 }
