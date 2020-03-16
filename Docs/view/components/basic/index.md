@@ -15,7 +15,7 @@ export default {
         }
     },
     mounted(){
-        this.$dp(this.$refs.test2,{})
+        this.$dp(this.$refs.test2,{trigger:'click'})
     },
     methods:{
         

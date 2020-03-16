@@ -1,7 +1,8 @@
 import {flexOptions} from "../types/options"
 
 const initOptions:flexOptions = {
-    placement:'bottom-start'
+    placement:'bottom-start',
+    trigger:'click'
 }
 
 

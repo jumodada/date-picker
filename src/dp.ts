@@ -9,7 +9,6 @@ function createInstance(config: flexOptions): flexInstance {
     extend(instance, context)
     return instance as flexInstance
 }
-
 const flex = createInstance(initialOptions)
 
 

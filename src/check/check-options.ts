@@ -1,18 +1,20 @@
-import {placement} from "../types/options"
+import {placement, trigger} from "../types/options"
 import {isObject} from "../methods/type-of"
-import {checkLists} from "../types/check"
 
-const placement:placement[] = [
-'top','top-start','top-end',
-'left','left-start','left-end',
-'bottom','bottom-start','bottom-end',
-'right','right-start','right-end']
+const fixedOptions = {
+    placement:[
+        'top','top-start','top-end',
+        'left','left-start','left-end',
+        'bottom','bottom-start','bottom-end',
+        'right','right-start','right-end'
+    ],
+    trigger:['click','hover']
+}
+const checkLists:string[]= ['placement','trigger']
 
-const checkLists:checkLists = [checkPlacement]
-
-function checkPlacement(options:any):boolean {
-    if("placement" in options&&placement.indexOf(options['placement']!)===-1){
-        console.error('Invalid placement format.')
+function _check(name:string,options:any):boolean {
+    if(name in options&&(fixedOptions as any)[name].indexOf(options[name]!)===-1){
+        console.error(`Invalid ${name} format.`)
         return false
     }
     return true
@@ -20,10 +22,7 @@ function checkPlacement(options:any):boolean {
 
 
 export function checkOptions(options:any):boolean {
-    if(isObject(options)){
-        let _checkResult = checkLists.some(list=>list(options))
-        return _checkResult
-    }
-    console.error('Options must be an object')
+    if(isObject(options))return checkLists.some(list => !_check(list,options))
+    console.error('Invalid argument provided.Options must be an object')
     return false
 }
