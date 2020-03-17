@@ -1,4 +1,4 @@
-import {isObject} from "./type-of";
+import {isObject} from "./type-of"
 
 export default function deepMerge(...objs:any[]) {
     const target = Object.create(null)
@@ -17,14 +17,15 @@ export default function deepMerge(...objs:any[]) {
 }
 
 
-export function mergeOptions<T>(source:T,target:T) {
+export function mergeOptions<T>(source:T,target?:T) {
     let mergeOptions = deepMerge(Object.create(null),source)
-    for(const key in target){
-        if(typeof target[key]!=='undefined'){
-            mergeOptions[key] = target[key]
+    if(target){
+        for(const key in target){
+            if(typeof target[key]!=='undefined'){
+                mergeOptions[key] = target[key]
+            }
         }
     }
-    console.assert(mergeOptions)
     return mergeOptions
 }
 

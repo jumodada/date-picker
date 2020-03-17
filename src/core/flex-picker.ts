@@ -17,9 +17,10 @@ export default class Flex {
         let _inputElement = findInputElement(el)
         if (!isInputElement(_inputElement as any)) return
 
-        Store._updateReference(el)
+        Store._updateReference(_inputElement)
         ;(options as any) = mergeOptions<flexOptions>(this.defaults, options)
-        console.log(1)
+        Store._updateOptions(options)
+
     }
 
 }
