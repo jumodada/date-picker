@@ -9,6 +9,12 @@ const Store = (function () {
     function _updateReference(val:any):void{
         state.reference = val
     }
+    function _getPop():any{
+        return state.popover
+    }
+    function _updatePop(val:any):void{
+        state.popover = val
+    }
     function _closePopover():void {
         state.visible = false
     }
@@ -38,8 +44,9 @@ const Store = (function () {
         _openPopover,
         _updateOptions,
         _updateKeyInOptions,
-        _getOptions
-
+        _getOptions,
+        _getPop,
+        _updatePop
     }
 })()
 

@@ -6,6 +6,7 @@ import highlightJs from 'highlight.js'
 import './assets/styles/index.scss'
 import Icon from './components/icon'
 import Input from './components/Input'
+import '../src/assets/date-time-picker.css'
 Vue.component(demoCard.name, demoCard)
 Vue.component(Input.name, Input)
 Vue.component(Icon.name,Icon)
