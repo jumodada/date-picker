@@ -22,7 +22,7 @@ function _check(name:string,options:any):boolean {
 
 
 export function checkOptions(options:any):boolean {
-    if(isObject(options))return checkLists.some(list => !_check(list,options))
+    if(isObject(options))return checkLists.every(list => _check(list,options))
     console.error('Invalid argument provided.Options must be an object')
     return false
 }
