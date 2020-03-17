@@ -4,10 +4,10 @@ import initState from "./watcher"
 const Store = (function () {
     const state = initState() as any
     function _getReference():any{
-        return state.referenceNode
+        return state.reference
     }
     function _updateReference(val:any):void{
-        state.referenceNode = val
+        state.reference = val
     }
     function _closePopover():void {
         state.visible = false
