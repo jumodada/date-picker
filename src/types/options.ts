@@ -10,7 +10,8 @@ export interface flexOptions {
     placement:placement
     trigger:trigger
     format?:string
-    offset?:number
+    offset?:number,
+    zIndex?:number
 }
 
 export default flexOptions

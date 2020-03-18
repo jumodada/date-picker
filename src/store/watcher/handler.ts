@@ -1,6 +1,9 @@
 import Store from '../../store'
 import {remove,on} from "../../event/eventListener"
 import flexOptions from "../../types/options"
+import {createPopover,updatePopover} from "../../popover"
+import {isElementExist} from "./is-element-exist";
+import {setStyle} from "../../popover/style"
 
 function showPopper():void {
     Store._togglePopover()
@@ -14,18 +17,18 @@ function watchReference(ref:HTMLElement) {
     on(ref,(trigger as any),showPopper as any)
 }
 
-function watchVisible(value:string) {
+function watchVisible(value:boolean) {
+        const _p = Store._getPop()
+        !_p?createPopover():updatePopover(_p,value)
+}
+function watchPopover(value:HTMLElement) {
     if(value){
         const _prePop = Store._getPop()
-        if(_prePop){
-
-        }else{
-
+        if(!isElementExist(_prePop)){
+            document.body.appendChild(value)
+            setStyle(value)
         }
-        const _pop = _prePop
-            ?_prePop
-            :document.createElement('div')
-        ;document.body.appendChild(_pop)
+
     }
 }
 
@@ -36,6 +39,7 @@ export default {
     set(target:any, key:string, value:any, receiver:any) {
         if(key==='reference')watchReference(value)
         if(key==='visible')watchVisible(value)
+        if(key==='popover')watchPopover(value)
         return Reflect.set(target, key, value, receiver)
     }
 }

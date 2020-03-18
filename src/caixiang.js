@@ -3,7 +3,10 @@ const $el = document.querySelector('#input')
 
 
 const dp  =  DatePicker($el,{
-    //optiopns
+    //options
+    trigger:'click',
+    format:'',
+    //....
 })
 
 dp.on('change',callback)
