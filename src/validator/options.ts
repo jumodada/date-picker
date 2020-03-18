@@ -12,7 +12,7 @@ const fixedOptions = {
 }
 const checkLists:string[]= ['placement','trigger']
 
-function _check(name:string,options:any):boolean {
+function _validate(name:string,options:any):boolean {
     if(name in options&&(fixedOptions as any)[name].indexOf(options[name]!)===-1){
         console.error(`Invalid ${name} format.`)
         return false
@@ -21,8 +21,8 @@ function _check(name:string,options:any):boolean {
 }
 
 
-export function checkOptions(options:any):boolean {
-    if(isObject(options))return checkLists.every(list => _check(list,options))
+export function _validateOptions(options:any):boolean {
+    if(isObject(options))return checkLists.every(list => _validate(list,options))
     console.error('Invalid argument provided.Options must be an object')
     return false
 }

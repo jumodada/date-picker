@@ -19,6 +19,8 @@ function watchVisible(value:string) {
         const _prePop = Store._getPop()
         if(_prePop){
 
+        }else{
+
         }
         const _pop = _prePop
             ?_prePop

@@ -1,8 +1,9 @@
 import {mergeOptions} from "../methods/merge"
 import initState from "./watcher"
+import {State} from "../types/state"
 
 const Store = (function () {
-    const state = initState() as any
+    const state = initState() as State
     function _getReference():any{
         return state.reference
     }
