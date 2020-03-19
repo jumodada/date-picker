@@ -1,3 +1,12 @@
 .fl-dateTimePicker{
-
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0, 0, 0, 0.62);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    list-style: none;
+    min-width: 200px;
+    min-height: 270px;
+    box-shadow: 0 1px 6px rgba(0,0,0,.2);
 }
