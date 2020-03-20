@@ -1,7 +1,7 @@
 import Store from "../store"
-import flexOptions, {placement} from "../types/options"
+import flexOptions from "../types/options"
 import {positionAttr, _spm} from "../types/popover"
-
+import nextTick from '../utils/nexttick'
 export function createPopover() {
     const _pop = document.createElement('div')
     Store._updatePop(_pop)
@@ -36,7 +36,7 @@ export function setPosition(el:HTMLElement) {
         .forEach(attr => el.style[attr as any] =
             position[placement as _spm]
                 [attr as positionAttr] + 'px')
-    setTimeout(()=>{
+    nextTick(()=>{
         let contentHeight = el.clientHeight
         let transform = {
             top: `translate(0,-100%)`,
@@ -45,5 +45,8 @@ export function setPosition(el:HTMLElement) {
             right: `translate(0,0)`,
         }
         el.style.transform = transform[placement as _spm]
+    })
+    nextTick(()=>{
+        console.log('第二个')
     })
 }

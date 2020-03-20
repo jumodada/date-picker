@@ -1,4 +1,4 @@
-import {getNodeName} from "../methods/dom-utils/node"
+import {getNodeName} from "../utils/dom-utils/node"
 
 
 export function isInputElement($el:HTMLInputElement):boolean {

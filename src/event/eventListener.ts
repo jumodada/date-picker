@@ -1,4 +1,4 @@
-import {isHTMLElement} from "../methods/dom-utils/element"
+import {isHTMLElement} from "../utils/dom-utils/element"
 import {eventName} from "../types/event"
 
 export function on(el:HTMLElement,eventName:eventName,handler:()=>{}) {

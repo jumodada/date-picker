@@ -1,5 +1,5 @@
 import {placement, trigger} from "../types/options"
-import {isObject} from "../methods/type-of"
+import {isObject} from "../utils/type-of"
 
 const fixedOptions = {
     placement:[

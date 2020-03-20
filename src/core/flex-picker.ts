@@ -1,8 +1,8 @@
 import flexOptions from '../types/options'
-import {mergeOptions} from "../methods/merge"
+import {mergeOptions} from "../utils/merge"
 import {_validateOptions} from "../validator/options"
 import {isInputElement} from "../validator/input-element"
-import {findInputElement} from "../methods/dom-utils/find-input-element"
+import {findInputElement} from "../utils/dom-utils/find-input-element"
 import Store from '../store'
 export default class Flex {
     defaults: flexOptions

@@ -1,4 +1,4 @@
-import {mergeOptions} from "../methods/merge"
+import {mergeOptions} from "../utils/merge"
 import initState from "./watcher"
 import {State} from "../types/state"
 
