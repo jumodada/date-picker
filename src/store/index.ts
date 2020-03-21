@@ -1,6 +1,6 @@
 import {mergeOptions} from "../utils/merge"
 import initState from "./watcher"
-import {State} from "../types/state"
+import {Rect, State} from "../types/state"
 
 const Store = (function () {
     const state = initState() as State
@@ -9,6 +9,12 @@ const Store = (function () {
     }
     function _updateReference(val:any):void{
         state.reference = val
+    }
+    function _getRect() {
+        return state.rect
+    }
+    function _updateRect(rect:Rect) {
+        state.rect = rect
     }
     function _getPop():any{
         return state.popover
@@ -40,6 +46,8 @@ const Store = (function () {
     return {
         _getReference,
         _updateReference,
+        _getRect,
+        _updateRect,
         _closePopover,
         _togglePopover,
         _openPopover,
