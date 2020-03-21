@@ -1,4 +1,4 @@
-import Store from '../../store'
+import {getOptions, getPop, getReference, openPopover} from '../index'
 import {remove, on} from "../../event/eventListener"
 import flexOptions from "../../types/options"
 import {createPopover, updatePopover} from "../../popover"
@@ -6,23 +6,23 @@ import {isElementExist} from "./is-element-exist";
 import {setPopoverStyle} from "../../popover/style"
 
 function showPopper(): void {
-    Store._togglePopover()
+    openPopover()
 }
 
 function watchReference(ref: HTMLElement) {
-    const preElement = Store._getReference()
-    const {trigger} = Store._getOptions() as flexOptions
+    const preElement = getReference()
+    const {trigger} = getOptions() as flexOptions
 
     remove(preElement, (trigger as any), showPopper as any)
     on(ref, (trigger as any), showPopper as any)
 }
 
 function watchVisible(value: boolean) {
-    const _p = Store._getPop()
+    const _p = getPop()
     const _exist = isElementExist(_p)
     if (!_exist) {
         createPopover()
-        updatePopover(Store._getPop(), value)
+        updatePopover(getPop(), value)
     } else {
         updatePopover(_p, value)
     }
@@ -30,7 +30,7 @@ function watchVisible(value: boolean) {
 
 function watchPopover(value: HTMLElement) {
     if (value) {
-        const _prePop = Store._getPop()
+        const _prePop = getPop()
         if (!isElementExist(_prePop)) {
             document.body.appendChild(value)
             setPopoverStyle(value)

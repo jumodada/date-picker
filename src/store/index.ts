@@ -59,4 +59,17 @@ const Store = (function () {
     }
 })()
 
+export const  getReference = Store._getReference
+export const  updateReference = Store._updateReference
+export const  getRect = Store._getRect
+export const  updateRect = Store._updateRect
+export const  closePopover = Store._closePopover
+export const  togglePopover = Store._togglePopover
+export const  openPopover = Store._openPopover
+export const  updateOptions = Store._updateOptions
+export const  updateKeyInOptions = Store._updateKeyInOptions
+export const  getOptions = Store._getOptions
+export const  getPop = Store._getPop
+export const  updatePop = Store._updatePop
+
 export default Store

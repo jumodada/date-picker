@@ -3,7 +3,7 @@ import {mergeOptions} from "../utils/merge"
 import {_validateOptions} from "../validator/options"
 import {isInputElement} from "../validator/input-element"
 import {findInputElement} from "../utils/dom-utils/find-input-element"
-import Store from '../store'
+import {updateOptions, updateReference} from '../store'
 export default class Flex {
     defaults: flexOptions
 
@@ -17,9 +17,9 @@ export default class Flex {
         let _inputElement = findInputElement(el)
         if (!isInputElement(_inputElement as any)) return
 
-        Store._updateReference(_inputElement)
+        updateReference(_inputElement)
         ;(options as any) = mergeOptions<flexOptions>(this.defaults, options)
-        Store._updateOptions(options)
+        updateOptions(options)
 
     }
 

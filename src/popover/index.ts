@@ -1,4 +1,4 @@
-import Store from "../store"
+import {getOptions, getRect, getReference, updatePop, updateRect} from "../store"
 import flexOptions from "../types/options"
 import {positionAttr, _spm} from "../types/popover"
 import nextTick from '../utils/nexttick'
@@ -13,7 +13,7 @@ const  transform = {
 
 export function createPopover() {
     const _pop = document.createElement('div')
-    Store._updatePop(_pop)
+    updatePop(_pop)
 }
 export function updatePopover(el:HTMLElement,value:boolean):void {
     if(value){
@@ -25,11 +25,11 @@ export function updatePopover(el:HTMLElement,value:boolean):void {
 }
 
 export function setPopoverLocation(el:HTMLElement) {
-    const placement = (Store._getOptions() as flexOptions).placement.split('-')[0] as _spm
-    const reference = Store._getReference()
+    const placement = (getOptions() as flexOptions).placement.split('-')[0] as _spm
+    const reference = getReference()
     let rect = reference.getBoundingClientRect()
     if(diffRect(rect))return
-    Store._updateRect(rect)
+    updateRect(rect)
     setPosition(el,placement,rect)
     setTransform(el,placement)
 }
@@ -45,7 +45,7 @@ export function setPosition(el:HTMLElement,placement:_spm,rect:Rect) {
 }
 
 export function diffRect(curRect:Rect) {
-    let preRect = Store._getRect()
+    let preRect = getRect()
     return Array.from(['width,left','top','height']).every(key=>preRect[key as rectKey]===curRect[key as rectKey])
 }
 
