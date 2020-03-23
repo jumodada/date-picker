@@ -14,7 +14,7 @@ const  transform = {
 
 export function createPopover() {
     const _pop = document.createElement('div')
-    const svg = createSVG('you1')
+    const svg = createSVG('right')
     _pop.appendChild(svg)
     updatePop(_pop)
 }

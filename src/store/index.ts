@@ -43,6 +43,9 @@ const Store = (function () {
     function _openPopover():void {
         state.visible = true
     }
+    function _getVisible():boolean {
+        return state.visible
+    }
 
     return {
         _getReference,
@@ -56,7 +59,8 @@ const Store = (function () {
         _updateKeyInOptions,
         _getOptions,
         _getPop,
-        _updatePop
+        _updatePop,
+        _getVisible
     }
 })()
 
@@ -72,5 +76,4 @@ export const  updateKeyInOptions = Store._updateKeyInOptions
 export const  getOptions = Store._getOptions
 export const  getPop = Store._getPop
 export const  updatePop = Store._updatePop
-
-export default Store
+export const  getVisible = Store._getVisible

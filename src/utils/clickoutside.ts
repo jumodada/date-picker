@@ -1,6 +1,8 @@
-import {closePopover, getPop, getReference} from "../store"
+import {closePopover, getPop, getReference, getVisible} from "../store"
 
 export default function clickOutside(e: any) {
+    const visible = getVisible()
+    if(!visible)return
     const reference = getReference()
     const popover = getPop()
     if (reference.contains(e.target)
