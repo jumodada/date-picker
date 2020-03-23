@@ -46,7 +46,8 @@ export function setPosition(el:HTMLElement,placement:_spm,rect:Rect) {
 
 export function diffRect(curRect:Rect) {
     let preRect = getRect()
-    return Array.from(['width,left','top','height']).every(key=>preRect[key as rectKey]===curRect[key as rectKey])
+    return Array.from(['width,left','top','height'])
+        .every(key=>preRect[key as rectKey]===curRect[key as rectKey])
 }
 
 export function getPosition({top,left,height,width}:Rect) {

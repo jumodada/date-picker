@@ -2,14 +2,14 @@ import Flex from './core/flex-picker'
 import {flexOptions} from "./types/options"
 import {flexInstance} from "./types/instance"
 import {extend} from "./utils/extend"
-import Store from '../src/store'
+import  {getOptions} from './store'
 function createInstance(config: flexOptions): flexInstance {
     const context = new Flex(config)
     const instance = Flex.prototype.create.bind(context)
-    extend(instance, context)
-    return instance
+    extend(context,instance)
+    return instance as unknown as flexInstance
 }
-const flex = createInstance(Store._getOptions() as flexOptions)
+const flex = createInstance(getOptions() as flexOptions)
 
 
 export default flex
