@@ -1,4 +1,4 @@
-import {getOptions, getPop, getReference, openPopover} from '../index'
+import {getOptions, getPop, getReference, getYe, openPopover} from '../index'
 import {remove, on} from "../../event/eventListener"
 import flexOptions from "../../types/options"
 import {createPopover, updatePopover} from "../../template"
@@ -39,6 +39,14 @@ function watchPopover(value: HTMLElement) {
 
     }
 }
+function watchYear(value:number):void {
+    const YE = getYe()
+    console.log(YE)
+    if(YE){
+        console.log(YE)
+        YE.innerText = value.toString()
+    }
+}
 
 export default {
     get(target: any, key: string, receiver: any) {
@@ -48,6 +56,7 @@ export default {
         if (key === 'reference') watchReference(value)
         if (key === 'visible') watchVisible(value)
         if (key === 'popover') watchPopover(value)
+        if (key === 'year') watchYear(value)
         return Reflect.set(target, key, value, receiver)
     }
 }

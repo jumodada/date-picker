@@ -11,6 +11,8 @@ export interface State {
     popover:HTMLElement
     options:flexOptions
     visible:boolean
-    rect:Rect
+    rect:Rect,
+    year:number,
+    ye:HTMLElement|null
 }
 

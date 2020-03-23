@@ -8,5 +8,6 @@ export interface types {
 
 export interface createChildrenArguments {
     name:'svg'|'span'|'div'|'ul'|'li',
-    val:any
+    val:any,
+    event?:(e:Event)=>any
 }

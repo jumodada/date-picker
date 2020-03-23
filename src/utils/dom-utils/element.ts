@@ -1,22 +1,26 @@
 import {isArray} from "../type-of";
 import {createChildrenArguments} from "../../types/methods"
 import createSVG from "../create-svg"
+import {on} from "../../event/eventListener";
 
 export function createEL(tagName?: string): HTMLElement {
     if (!tagName) tagName = 'div'
     return document.createElement(tagName)
 }
 
-export function createChildren(children:createChildrenArguments[]):Element[] {
+export function createChildren(children:createChildrenArguments[]):(Element|HTMLElement)[] {
     const childrenLists:Element[] = []
     children.forEach(child=>{
-        if(child.name==='svg'){
-            childrenLists.push(createSVG(child.val))
-        }else{
-            const el = createEL(child.name)
-            if(child.val)el.innerText = child.val
-            childrenLists.push(el)
+        const el = child.name==='svg'?createSVG(child.val):createEL(child.name)
+        if(child.name!=='svg'){
+            if(child.val){
+                (el as HTMLElement).innerText = child.val
+            }
         }
+        if(child.event){
+            on(el,'click',child.event)
+        }
+        childrenLists.push(el)
     })
     return childrenLists
 }

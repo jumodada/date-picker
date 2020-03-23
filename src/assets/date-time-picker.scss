@@ -6,12 +6,38 @@
     font-size: 14px;
     font-variant: tabular-nums;
     list-style: none;
-    min-width: 200px;
-    min-height: 270px;
+    min-width: 300px;
+    min-height: 100px;
+    background-color: #ffffff;
     box-shadow: 0 1px 6px rgba(0,0,0,.2);
+    span{
+        padding: 5px 9px;
+        text-align: center;
+
+    }
+    svg{
+        cursor: pointer;
+        margin:0 5px;
+        fill:rgba(0, 0, 0, 0.62);
+        transition: .3s fill;
+        &:hover{
+            fill:#26acee;
+        }
+    }
     &-year-header{
         display: flex;
         align-items: center;
         justify-content: center;
+        margin: 0 7px 7px;
+        span{
+            font-size: 20px;
+            cursor: pointer;
+            padding: 14px 20px;
+            min-width: 100px;
+            transition: .3s color;
+            &:hover{
+                color:#26acee;
+            }
+        }
     }
 }

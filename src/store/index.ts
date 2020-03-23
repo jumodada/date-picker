@@ -1,6 +1,7 @@
 import {mergeOptions} from "../utils/merge"
 import initState from "./watcher"
 import {Rect, State} from "../types/state"
+import {isNumber} from "../utils/type-of"
 
 const Store = (function () {
     const state = initState() as State
@@ -46,6 +47,27 @@ const Store = (function () {
     function _getVisible():boolean {
         return state.visible
     }
+    function _getYear():number|null {
+        return state.year
+    }
+    function _updateYear(val:number) {
+        state.year = val
+    }
+
+    function _plusYear(val:number) {
+        if(isNumber(state.year)){
+            (state.year as number) += val
+        }else{
+            state.year = val
+        }
+    }
+    function _getYe():HTMLElement|null {
+        return state.ye
+    }
+
+    function _updateYE(val:HTMLElement) {
+        state.ye = val
+    }
 
     return {
         _getReference,
@@ -60,7 +82,12 @@ const Store = (function () {
         _getOptions,
         _getPop,
         _updatePop,
-        _getVisible
+        _getVisible,
+        _getYear,
+        _updateYear,
+        _plusYear,
+        _getYe,
+        _updateYE
     }
 })()
 
@@ -77,3 +104,8 @@ export const  getOptions = Store._getOptions
 export const  getPop = Store._getPop
 export const  updatePop = Store._updatePop
 export const  getVisible = Store._getVisible
+export const  getYear = Store._getYear
+export const  updateYear = Store._updateYear
+export const  plusYear = Store._plusYear
+export const  getYe = Store._getYe
+export const  updateYE = Store._updateYE

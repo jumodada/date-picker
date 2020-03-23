@@ -5,8 +5,7 @@
 ```html
 <Input />
 <Input ref="test1" >123</Input>
-<!--<input ref="test2" >123</input>-->
-<div ref="test3"></div>
+<input ref="test2" >123</input>
 <script>
 export default {
     data(){
@@ -16,6 +15,7 @@ export default {
     },
     mounted(){
         this.$dp(this.$refs.test1.$el,{trigger:'click'})
+        this.$dp(this.$refs.test2,{trigger:'click'})
     },
     methods:{
         
