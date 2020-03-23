@@ -4,6 +4,18 @@ import {Rect, State} from "../types/state"
 
 const Store = (function () {
     const state = initState() as State
+    function _updateOptions(_o:object):void {
+        state.options = mergeOptions(state.options,_o)
+    }
+    function _updateKeyInOptions(key:string,val:any) {
+        if(typeof val==='undefined')return
+        const _o = Object.create(null)
+        _o[key] = val
+        state.options = mergeOptions(state.options,_o)
+    }
+    function _getOptions():object {
+        return mergeOptions(state.options)
+    }
     function _getReference():any{
         return state.reference
     }
@@ -31,18 +43,7 @@ const Store = (function () {
     function _openPopover():void {
         state.visible = true
     }
-    function _updateOptions(_o:object):void {
-        state.options = mergeOptions(state.options,_o)
-    }
-    function _updateKeyInOptions(key:string,val:any) {
-        if(typeof val==='undefined')return
-        const _o = Object.create(null)
-        _o[key] = val
-        state.options = mergeOptions(state.options,_o)
-    }
-    function _getOptions():object {
-      return mergeOptions(state.options)
-    }
+
     return {
         _getReference,
         _updateReference,

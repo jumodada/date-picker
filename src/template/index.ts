@@ -3,6 +3,7 @@ import flexOptions from "../types/options"
 import {positionAttr, _spm} from "../types/popover"
 import nextTick from '../utils/nexttick'
 import {Rect, rectKey} from "../types/state"
+import createSVG from "../utils/create-svg";
 const  transform = {
     top: `translate(0,-100%)`,
     left: `translate(-100%,0)`,
@@ -13,6 +14,8 @@ const  transform = {
 
 export function createPopover() {
     const _pop = document.createElement('div')
+    const svg = createSVG('you1')
+    _pop.appendChild(svg)
     updatePop(_pop)
 }
 export function updatePopover(el:HTMLElement,value:boolean):void {

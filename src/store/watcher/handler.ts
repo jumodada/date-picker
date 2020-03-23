@@ -1,9 +1,9 @@
 import {getOptions, getPop, getReference, openPopover} from '../index'
 import {remove, on} from "../../event/eventListener"
 import flexOptions from "../../types/options"
-import {createPopover, updatePopover} from "../../popover"
+import {createPopover, updatePopover} from "../../template"
 import {isElementExist} from "./is-element-exist"
-import {setPopoverStyle} from "../../popover/style"
+import {setPopoverStyle} from "../../template/style"
 import clickOutside from "../../utils/clickoutside"
 
 function showPopper(): void {
