@@ -5,19 +5,15 @@ import {createPopover, updatePopover} from "../../template"
 import {isElementExist} from "./is-element-exist"
 import {setPopoverStyle} from "../../template/style"
 import clickOutside from "../../utils/clickoutside"
-
-function showPopper(): void {
-    openPopover()
-}
+import {appendChild} from "../../utils/dom-utils/element"
 
 function watchReference(ref: HTMLElement) {
     const preElement = getReference()
     const {trigger} = getOptions() as flexOptions
-
-    remove(preElement, (trigger as any), showPopper)
+    remove(preElement, (trigger as any), openPopover)
     remove(document.body,'click', clickOutside)
     if(ref){
-        on(ref, (trigger as any), showPopper)
+        on(ref, (trigger as any), openPopover)
         on(document.body, 'click', clickOutside)
     }
 }
@@ -37,7 +33,7 @@ function watchPopover(value: HTMLElement) {
     if (value) {
         const _prePop = getPop()
         if (!isElementExist(_prePop)) {
-            document.body.appendChild(value)
+            appendChild(value)
             setPopoverStyle(value)
         }
 
