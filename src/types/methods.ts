@@ -5,3 +5,8 @@ export interface types {
     String: string,
     Number: string
 }
+
+export interface createChildrenArguments {
+    name:'svg'|'span'|'div'|'ul'|'li',
+    val:any
+}
