@@ -80,7 +80,7 @@ const Store = (function () {
         return state[uid].visible
     }
 
-    function _getYear(): number | null {
+    function _getYear(): number {
         return state[uid].year
     }
 
