@@ -96,12 +96,39 @@ const Store = (function () {
         }
     }
 
+    function _getMonth(): number {
+        return state[uid].month
+    }
+
+    function _updateMonth(val: number):void {
+        state[uid].month = val
+    }
+
+    function _plusMonth(val: number):void {
+        let month = _getMonth()
+        month += val
+        if(month>12||month<1){
+            let year = Math.floor(month/12)
+            if(year===0)year=-1
+            month = month>12?(month%12):((month%12)+12)
+            _plusYear(year)
+        }
+        state[uid].month = month
+    }
+
     function _getYe(): HTMLElement | null {
         return state[uid].ye
     }
 
     function _updateYE(val: HTMLElement) {
         state[uid].ye = val
+    }
+    function _getME(): HTMLElement | null {
+        return state[uid].me
+    }
+
+    function _updateME(val: HTMLElement) {
+        state[uid].me = val
     }
     function _getPage():number {
         return state[uid].pageIdx
@@ -132,6 +159,11 @@ const Store = (function () {
         _plusYear,
         _getYe,
         _updateYE,
+        _getME,
+        _updateME,
+        _getMonth,
+        _updateMonth,
+        _plusMonth,
         _pageTurning,
         _getPage
     }
@@ -156,7 +188,12 @@ export const getVisible = Store._getVisible
 export const getYear = Store._getYear
 export const updateYear = Store._updateYear
 export const plusYear = Store._plusYear
+export const getMonth = Store._getMonth
+export const updateMonth = Store._updateMonth
+export const plusMonth = Store._plusMonth
 export const getYe = Store._getYe
 export const updateYE = Store._updateYE
+export const getME = Store._getME
+export const updateME = Store._updateME
 export const pageTurning = Store._pageTurning
 export const getPage:()=>number = Store._getPage

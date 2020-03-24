@@ -15,6 +15,8 @@ export interface stateValue {
     rect:Rect,
     year:number,
     ye:HTMLElement|null,
+    month:number,
+    me:HTMLElement|null,
     pageIdx:number
 }
 export type State = stateValue[]

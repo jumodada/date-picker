@@ -1,4 +1,4 @@
-import { getOptions, getPop, getReference, getYe, getYear, openPopover} from '../index'
+import {getME, getOptions, getPop, getReference, getYe, getYear, openPopover} from '../index'
 import {remove, on} from "../../event/eventListener"
 import flexOptions from "../../types/options"
 import {createPopover, updatePopover} from "../../template"
@@ -55,7 +55,12 @@ function watchYear(value:number):void {
         YE.innerText = value.toString()+'年'
     }
 }
-
+function watchMonth(value:number):void {
+    const ME = getME()
+    if(ME){
+        ME.innerText = value.toString()+'月'
+    }
+}
 export default {
     get(target: any, key: string, receiver: any) {
         return Reflect.get(target, key, receiver)
@@ -65,6 +70,7 @@ export default {
         if (key === 'visible') watchVisible(value)
         if (key === 'popover') watchPopover(value)
         if (key === 'year') watchYear(value)
+        if (key === 'month') watchMonth(value)
         if (key === 'pageIdx') watchPageIdx(value)
         return Reflect.set(target, key, value, receiver)
     }

@@ -1,15 +1,22 @@
 import {appendChild, createChildren, createEL, setAttr} from "../../utils/dom-utils/element"
-import {getPage, getYear, pageTurning, plusYear, updateYE} from "../../store"
+import {getPage, getYear, pageTurning, plusMonth, plusYear, updateME, updateYE} from "../../store"
+import {getMonth} from "../../utils/date"
 
 export function setYearStyle(el:HTMLElement) {
     setAttr(el,'fl-dateTimePicker-year-header')
 }
 
-export function increase() {
+export function increaseYear() {
     plusYear(1)
 }
+export function increaseMonth() {
+    plusMonth(1)
+}
+export function reduceMonth() {
+    plusMonth(-1)
+}
 
-export function reduce() {
+export function reduceYear() {
     plusYear(-1)
 }
 export function pageToggle() {
@@ -20,15 +27,17 @@ export function pageToggle() {
 
 export function createHeader() {
     const wrapper = createEL()
-    const yearChildren = createChildren([
-        {name:'svg',val:'d-left',event:reduce},
-        {name:'svg',val:'left'},
+    const headerChildren = createChildren([
+        {name:'svg',val:'d-left',event:reduceYear},
+        {name:'svg',val:'left',event:reduceMonth},
         {name:'span',val:getYear()+'年',event:pageToggle},
-        {name:'svg',val:'right'},
-        {name:'svg',val:'d-right',event:increase},
+        {name:'span',val:getMonth()+'月'},
+        {name:'svg',val:'right',event:increaseMonth},
+        {name:'svg',val:'d-right',event:increaseYear},
     ])
     setYearStyle(wrapper)
-    updateYE(yearChildren[2] as HTMLElement)
-    appendChild(yearChildren,wrapper)
+    updateYE(headerChildren[2] as HTMLElement)
+    updateME(headerChildren[3] as HTMLElement)
+    appendChild(headerChildren,wrapper)
     return wrapper
 }
