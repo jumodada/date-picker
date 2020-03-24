@@ -2,7 +2,7 @@ import Flex from './core/flex-picker'
 import {flexOptions} from "./types/options"
 import {flexInstance} from "./types/instance"
 import {extend} from "./utils/extend"
-import  {getOptions} from './store'
+import InitOptions from "./initial-options"
 import './svg'
 function createInstance(config: flexOptions): flexInstance {
     const context = new Flex(config)
@@ -10,7 +10,7 @@ function createInstance(config: flexOptions): flexInstance {
     extend(context,instance)
     return instance as unknown as flexInstance
 }
-const flex = createInstance(getOptions() as flexOptions)
+const flex = createInstance(new InitOptions() as flexOptions)
 
 
 export default flex

@@ -1,4 +1,4 @@
-import {getOptions, getPop, getReference, getYe, openPopover} from '../index'
+import {changeUId, getOptions, getPop, getReference, getState, getYe, openPopover} from '../index'
 import {remove, on} from "../../event/eventListener"
 import flexOptions from "../../types/options"
 import {createPopover, updatePopover} from "../../template"
@@ -6,12 +6,14 @@ import {isElementExist} from "./is-element-exist"
 import {setPopoverStyle} from "../../template/style"
 import clickOutside from "../../utils/clickoutside"
 import {appendChild} from "../../utils/dom-utils/element"
+import nextTick from "../../utils/nexttick"
 
 function watchReference(ref: HTMLElement) {
     const preElement = getReference()
     const {trigger} = getOptions() as flexOptions
-    remove(preElement, (trigger as any), openPopover)
-    remove(document.body,'click', clickOutside)
+     remove(preElement, (trigger as any), openPopover)
+     remove(document.body,'click', clickOutside)
+    console.log(1)
     if(ref){
         on(ref, (trigger as any), openPopover)
         on(document.body, 'click', clickOutside)
@@ -41,9 +43,7 @@ function watchPopover(value: HTMLElement) {
 }
 function watchYear(value:number):void {
     const YE = getYe()
-    console.log(YE)
     if(YE){
-        console.log(YE)
         YE.innerText = value.toString()
     }
 }

@@ -6,7 +6,8 @@ export interface Rect {
     top:number
 }
 export type rectKey = 'width'|'height'|'left'|'top'
-export interface State {
+
+export interface stateValue {
     reference:HTMLElement
     popover:HTMLElement
     options:flexOptions
@@ -15,4 +16,5 @@ export interface State {
     year:number,
     ye:HTMLElement|null
 }
+export type State = stateValue[]
 

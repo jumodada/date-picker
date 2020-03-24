@@ -1,75 +1,93 @@
 import {mergeOptions} from "../utils/merge"
 import initState from "./watcher"
-import {Rect, State} from "../types/state"
+import {Rect, State, stateValue} from "../types/state"
 import {isNumber} from "../utils/type-of"
-
 const Store = (function () {
-    const state = initState() as State
+    let uid = 0
+    const state = []as State
+    function _toggleToLastUId(){
+        uid = state.length-1
+    }
+    function getState() {
+        return state
+    }
+    function _changeUId(e:Event){
+        uid = state.findIndex(s=>(s.reference as any) === e.target)
+    }
+    function _pushInState() {
+        state.push(initState() as stateValue)
+        _toggleToLastUId()
+    }
     function _updateOptions(_o:object):void {
-        state.options = mergeOptions(state.options,_o)
+        state[uid].options = mergeOptions(state[uid].options,_o)
     }
     function _updateKeyInOptions(key:string,val:any) {
         if(typeof val==='undefined')return
         const _o = Object.create(null)
         _o[key] = val
-        state.options = mergeOptions(state.options,_o)
+        state[uid].options = mergeOptions(state[uid].options,_o)
     }
     function _getOptions():object {
-        return mergeOptions(state.options)
+        return mergeOptions(state[uid].options)
     }
     function _getReference():any{
-        return state.reference
+        return state[uid].reference
     }
     function _updateReference(val:any):void{
-        state.reference = val
+        state[uid].reference = val
     }
     function _getRect() {
-        return state.rect
+        return state[uid].rect
     }
     function _updateRect(rect:Rect) {
-        state.rect = rect
+        state[uid].rect = rect
     }
     function _getPop():any{
-        return state.popover
+        return state[uid].popover
     }
     function _updatePop(val:any):void{
-        state.popover = val
+        state[uid].popover = val
     }
     function _closePopover():void {
-        state.visible = false
+        state[uid].visible = false
     }
     function _togglePopover():void {
-        state.visible = !state.visible
+        state[uid].visible = !state[uid].visible
     }
-    function _openPopover():void {
-        state.visible = true
+    function _openPopover(e:Event):void {
+        _changeUId(e)
+        state[uid].visible = true
     }
     function _getVisible():boolean {
-        return state.visible
+        return state[uid].visible
     }
     function _getYear():number|null {
-        return state.year
+        return state[uid].year
     }
     function _updateYear(val:number) {
-        state.year = val
+        state[uid].year = val
     }
 
     function _plusYear(val:number) {
-        if(isNumber(state.year)){
-            (state.year as number) += val
+        if(isNumber(state[uid].year)){
+            (state[uid].year as number) += val
         }else{
-            state.year = val
+            state[uid].year = val
         }
     }
     function _getYe():HTMLElement|null {
-        return state.ye
+        return state[uid].ye
     }
 
     function _updateYE(val:HTMLElement) {
-        state.ye = val
+        state[uid].ye = val
     }
 
     return {
+        getState,
+        _changeUId,
+        _pushInState,
+        _toggleToLastUId,
         _getReference,
         _updateReference,
         _getRect,
@@ -91,6 +109,9 @@ const Store = (function () {
     }
 })()
 
+export const  toggleToLastUId = Store._toggleToLastUId
+export const  changeUId = Store._changeUId
+export const  pushInState = Store._pushInState
 export const  getReference = Store._getReference
 export const  updateReference = Store._updateReference
 export const  getRect = Store._getRect
@@ -109,3 +130,4 @@ export const  updateYear = Store._updateYear
 export const  plusYear = Store._plusYear
 export const  getYe = Store._getYe
 export const  updateYE = Store._updateYE
+export const  getState = Store.getState
