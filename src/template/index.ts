@@ -4,7 +4,7 @@ import {positionAttr, _spm} from "../types/popover"
 import nextTick from '../utils/nexttick'
 import {Rect, rectKey} from "../types/state"
 import {createEL} from "../utils/dom-utils/element"
-import {createYear} from "./picker/year";
+import {createHeader} from "./picker/header";
 const  transform = {
     top: `translate(0,-100%)`,
     left: `translate(-100%,0)`,
@@ -15,7 +15,7 @@ const  transform = {
 
 export function createPopover() {
     const _pop = createEL()
-    _pop.appendChild(createYear())
+    _pop.appendChild(createHeader())
     updatePop(_pop)
 }
 export function updatePopover(el:HTMLElement,value:boolean):void {

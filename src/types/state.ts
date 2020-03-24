@@ -14,7 +14,8 @@ export interface stateValue {
     visible:boolean
     rect:Rect,
     year:number,
-    ye:HTMLElement|null
+    ye:HTMLElement|null,
+    pageIdx:number
 }
 export type State = stateValue[]
 

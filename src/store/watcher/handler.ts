@@ -1,4 +1,4 @@
-import {changeUId, getOptions, getPop, getReference, getState, getYe, openPopover} from '../index'
+import { getOptions, getPop, getReference, getYe, getYear, openPopover} from '../index'
 import {remove, on} from "../../event/eventListener"
 import flexOptions from "../../types/options"
 import {createPopover, updatePopover} from "../../template"
@@ -6,14 +6,12 @@ import {isElementExist} from "./is-element-exist"
 import {setPopoverStyle} from "../../template/style"
 import clickOutside from "../../utils/clickoutside"
 import {appendChild} from "../../utils/dom-utils/element"
-import nextTick from "../../utils/nexttick"
 
 function watchReference(ref: HTMLElement) {
     const preElement = getReference()
     const {trigger} = getOptions() as flexOptions
      remove(preElement, (trigger as any), openPopover)
      remove(document.body,'click', clickOutside)
-    console.log(1)
     if(ref){
         on(ref, (trigger as any), openPopover)
         on(document.body, 'click', clickOutside)
@@ -31,6 +29,16 @@ function watchVisible(value: boolean) {
     }
 }
 
+function watchPageIdx(value:number) {
+    const el = getYe()
+    let year = getYear()
+    let period = (year as number) + 9
+    if(!el)return
+    if(value===2){
+        el.innerText =  year+' - '+period
+    }
+}
+
 function watchPopover(value: HTMLElement) {
     if (value) {
         const _prePop = getPop()
@@ -44,7 +52,7 @@ function watchPopover(value: HTMLElement) {
 function watchYear(value:number):void {
     const YE = getYe()
     if(YE){
-        YE.innerText = value.toString()
+        YE.innerText = value.toString()+'年'
     }
 }
 
@@ -57,6 +65,7 @@ export default {
         if (key === 'visible') watchVisible(value)
         if (key === 'popover') watchPopover(value)
         if (key === 'year') watchYear(value)
+        if (key === 'pageIdx') watchPageIdx(value)
         return Reflect.set(target, key, value, receiver)
     }
 }

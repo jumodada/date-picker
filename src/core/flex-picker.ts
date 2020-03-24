@@ -3,7 +3,7 @@ import {mergeOptions} from "../utils/merge"
 import {_validateOptions} from "../validator/options"
 import {isInputElement} from "../validator/input-element"
 import {findInputElement} from "../utils/dom-utils/find-input-element"
-import {getState, pushInState, updateOptions, updateReference} from '../store'
+import { pushInState, updateOptions, updateReference} from '../store'
 export default class Flex {
     defaults: flexOptions
 

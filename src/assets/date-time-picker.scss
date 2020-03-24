@@ -29,8 +29,14 @@
         align-items: center;
         justify-content: center;
         margin: 0 7px 7px;
+        height: 54px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        border-bottom: 1px solid #dde0e7;
         span{
-            font-size: 20px;
+            font-size: 18px;
             cursor: pointer;
             padding: 14px 20px;
             min-width: 100px;
