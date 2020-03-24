@@ -1,4 +1,4 @@
-import {getME, getOptions, getPop, getReference, getYe, getYear, openPopover} from '../index'
+import {getArrow, getME, getOptions, getPop, getReference, getYe, getYear, openPopover} from '../index'
 import {remove, on} from "../../event/eventListener"
 import flexOptions from "../../types/options"
 import {createPopover, updatePopover} from "../../template"
@@ -30,12 +30,19 @@ function watchVisible(value: boolean) {
 }
 
 function watchPageIdx(value:number) {
-    const el = getYe()
+    const ye = getYe()
+    const me = getME()
     let year = getYear()
+    const arrow =getArrow()
     let period = (year as number) + 9
-    if(!el)return
+    if(!ye||!me)return
     if(value===2){
-        el.innerText =  year+' - '+period
+        ye.innerText =  year+' - '+period
+        me.style.display = 'none'
+        arrow.forEach(_a=>(_a as HTMLElement).style.display='none')
+    }else if(value===0){
+        me.style.display = 'block'
+        arrow.forEach(_a=>(_a as HTMLElement).style.display='block')
     }
 }
 

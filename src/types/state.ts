@@ -12,12 +12,15 @@ export interface stateValue {
     popover:HTMLElement
     options:flexOptions
     visible:boolean
-    rect:Rect,
-    year:number,
-    ye:HTMLElement|null,
-    month:number,
-    me:HTMLElement|null,
+    rect:Rect
+    year:number
+    ye:HTMLElement|null
+    month:number
+    me:HTMLElement|null
+    arrowLeft:HTMLElement|null
+    arrowRight:HTMLElement|null
     pageIdx:number
+
 }
 export type State = stateValue[]
 

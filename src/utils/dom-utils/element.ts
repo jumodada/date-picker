@@ -1,7 +1,7 @@
 import {isArray} from "../type-of";
 import {createChildrenArguments} from "../../types/methods"
 import createSVG from "../create-svg"
-import {on} from "../../event/eventListener";
+import {on} from "../../event/eventListener"
 
 export function createEL(tagName?: string): HTMLElement {
     if (!tagName) tagName = 'div'
@@ -20,6 +20,13 @@ export function createChildren(children:createChildrenArguments[]):(Element|HTML
         if(child.event){
             on(el,'click',child.event)
         }
+        if(child.class){
+            el.setAttribute('class',child.class)
+        }
+        if(child.style){
+            el.setAttribute('style',child.style)
+        }
+
         childrenLists.push(el)
     })
     return childrenLists

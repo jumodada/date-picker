@@ -13,6 +13,8 @@ export default class InitState {
     month:number
     me:null|HTMLElement
     pageIdx:number
+    arrowLeft:null|HTMLElement
+    arrowRight:null|HTMLElement
     constructor() {
         this.reference = null
         this.popover = null
@@ -23,6 +25,8 @@ export default class InitState {
         this.ye = null
         this.month = getMonth()
         this.me = null
+        this.arrowLeft = null
+        this.arrowRight = null
         this.pageIdx = 0
     }
 }

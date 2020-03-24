@@ -130,6 +130,14 @@ const Store = (function () {
     function _updateME(val: HTMLElement) {
         state[uid].me = val
     }
+    function _getArrow(): (null|HTMLElement)[] {
+        return [state[uid].arrowLeft,state[uid].arrowRight]
+    }
+
+    function _updateArrow(val: HTMLElement[]):void {
+        state[uid].arrowLeft = val[0]
+        state[uid].arrowRight = val[1]
+    }
     function _getPage():number {
         return state[uid].pageIdx
     }
@@ -161,6 +169,8 @@ const Store = (function () {
         _updateYE,
         _getME,
         _updateME,
+        _getArrow,
+        _updateArrow,
         _getMonth,
         _updateMonth,
         _plusMonth,
@@ -194,6 +204,8 @@ export const plusMonth = Store._plusMonth
 export const getYe = Store._getYe
 export const updateYE = Store._updateYE
 export const getME = Store._getME
+export const getArrow = Store._getArrow
+export const updateArrow = Store._updateArrow
 export const updateME = Store._updateME
 export const pageTurning = Store._pageTurning
 export const getPage:()=>number = Store._getPage
