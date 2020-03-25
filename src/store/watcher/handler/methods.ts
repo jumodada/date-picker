@@ -1,4 +1,4 @@
-import {getArrow, getME, getOptions, getPop, getReference, getYe, getYear, openPopover} from "../../index"
+import {getHeader, getOptions, getPop, getReference, getYear, openPopover} from "../../index"
 import flexOptions from "../../../types/options"
 import {on, remove} from "../../../event/eventListener"
 import clickOutside from "../../../utils/clickoutside"
@@ -36,7 +36,6 @@ export function watchReference(ref: HTMLElement) {
     }
 }
 export function watchVisible(value: boolean) {
-    console.log(value)
     const _p = getPop()
     const _exist = isElementExist(_p)
     if (!_exist) {
@@ -46,20 +45,21 @@ export function watchVisible(value: boolean) {
         updatePopover(_p, value)
     }
 }
+
+export function isShow(arr:HTMLElement[],isShow:boolean) {
+    const display = isShow?'block':'none'
+    arr.forEach(_a=>_a.style.display=display)
+}
 export function watchPageIdx(value:number) {
-    const ye = getYe()
-    const me = getME()
+    const {ye,me,ar,al} = getHeader()
     let year = getYear()
-    const arrow =getArrow()
     let period = (year as number) + 9
-    if(!ye||!me)return
+    if(!ye||!me||!ar||!al)return
     if(value===2){
         ye.innerText =  year+' - '+period
-        me.style.display = 'none'
-        arrow.forEach(_a=>(_a as HTMLElement).style.display='none')
+        isShow([me,al,ar],false)
     }else if(value===0){
-        me.style.display = 'block'
-        arrow.forEach(_a=>(_a as HTMLElement).style.display='block')
+        isShow([me,al,ar],true)
     }
 }
 export function watchPopover(value: HTMLElement) {
@@ -73,14 +73,14 @@ export function watchPopover(value: HTMLElement) {
     }
 }
 export function watchYear(value:number):void {
-    const YE = getYe()
-    if(YE){
-        YE.innerText = value.toString()+'年'
+    const {ye} = getHeader()
+    if(ye){
+        ye.innerText = value.toString()+'年'
     }
 }
 export function watchMonth(value:number):void {
-    const ME = getME()
-    if(ME){
-        ME.innerText = value.toString()+'月'
+    const {me} = getHeader()
+    if(me){
+        me.innerText = value.toString()+'月'
     }
 }

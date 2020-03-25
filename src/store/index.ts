@@ -2,6 +2,7 @@ import {mergeOptions} from "../utils/merge"
 import initState from "./watcher"
 import {Rect, State, stateValue} from "../types/state"
 import {isNumber} from "../utils/type-of"
+import {Header, headerKey} from "../types/template"
 
 const Store = (function () {
     let uid = 0
@@ -116,28 +117,14 @@ const Store = (function () {
         state[uid].month = month
     }
 
-    function _getYe(): HTMLElement | null {
-        return state[uid].ye
+    function _getHeader(): Header {
+        return state[uid].header
     }
 
-    function _updateYE(val: HTMLElement) {
-        state[uid].ye = val
-    }
-    function _getME(): HTMLElement | null {
-        return state[uid].me
+    function _updateHeader(val: any,key:headerKey) {
+        state[uid].header[key] = val
     }
 
-    function _updateME(val: HTMLElement) {
-        state[uid].me = val
-    }
-    function _getArrow(): (null|HTMLElement)[] {
-        return [state[uid].arrowLeft,state[uid].arrowRight]
-    }
-
-    function _updateArrow(val: HTMLElement[]):void {
-        state[uid].arrowLeft = val[0]
-        state[uid].arrowRight = val[1]
-    }
     function _getPage():number {
         return state[uid].pageIdx
     }
@@ -165,12 +152,8 @@ const Store = (function () {
         _getYear,
         _updateYear,
         _plusYear,
-        _getYe,
-        _updateYE,
-        _getME,
-        _updateME,
-        _getArrow,
-        _updateArrow,
+        _getHeader,
+        _updateHeader,
         _getMonth,
         _updateMonth,
         _plusMonth,
@@ -201,11 +184,7 @@ export const plusYear = Store._plusYear
 export const getMonth = Store._getMonth
 export const updateMonth = Store._updateMonth
 export const plusMonth = Store._plusMonth
-export const getYe = Store._getYe
-export const updateYE = Store._updateYE
-export const getME = Store._getME
-export const getArrow = Store._getArrow
-export const updateArrow = Store._updateArrow
-export const updateME = Store._updateME
+export const getHeader = Store._getHeader
+export const updateHeader = Store._updateHeader
 export const pageTurning = Store._pageTurning
 export const getPage:()=>number = Store._getPage

@@ -14,12 +14,14 @@ export interface stateValue {
     visible:boolean
     rect:Rect
     year:number
-    ye:HTMLElement|null
     month:number
-    me:HTMLElement|null
-    arrowLeft:HTMLElement|null
-    arrowRight:HTMLElement|null
     pageIdx:number
+    header:{
+        al:HTMLElement,
+        ye:HTMLElement,
+        me:HTMLElement,
+        ar:HTMLElement
+    }
 
 }
 export type State = stateValue[]

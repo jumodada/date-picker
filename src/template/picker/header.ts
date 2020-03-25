@@ -1,14 +1,12 @@
 import {appendChild, createChildren, createEL, setAttr} from "../../utils/dom-utils/element"
 import {
     getPage,
-    getYe,
+    getHeader,
     getYear,
     pageTurning,
     plusMonth,
     plusYear,
-    updateArrow,
-    updateME,
-    updateYE,
+    updateHeader,
     updateYear
 } from "../../store"
 import {getMonth} from "../../utils/date"
@@ -20,7 +18,7 @@ export function changeYear(val:number) {
     if(getPage()!==2){
         plusYear(val)
     }else{
-        const ye = getYe()
+        const {ye} = getHeader()
         if(!ye)return
         const year= getYear()
         const curYear = year+(val>0?10:-10)
@@ -59,9 +57,10 @@ export function createHeader() {
         {name:'svg',val:'d-right',event:increaseYear,style:'right:3px'},
     ])
     setYearStyle(wrapper)
-    updateYE(headerChildren[2] as HTMLElement)
-    updateME(headerChildren[3] as HTMLElement)
-    updateArrow([headerChildren[1] as HTMLElement,headerChildren[4]as HTMLElement])
+    updateHeader(headerChildren[1],'al')
+    updateHeader(headerChildren[2],'ye')
+    updateHeader(headerChildren[3],'me')
+    updateHeader(headerChildren[4],'ar')
     appendChild(headerChildren,wrapper)
     return wrapper
 }
