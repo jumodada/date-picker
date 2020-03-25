@@ -1,5 +1,5 @@
 import {appendChild, createChildren, createEL} from "../../utils/dom-utils/element";
-import {getYear, updateArrow, updateME, updateYE} from "../../store";
+import {getYear} from "../../store"
 import {getMonth} from "../../utils/date";
 import {increaseMonth, increaseYear, pageToggle, reduceMonth, reduceYear, setYearStyle} from "./header";
 
@@ -19,9 +19,6 @@ export function createBody() {
         {name:'svg',val:'d-right',event:increaseYear,style:'right:3px'},
     ])
     setYearStyle(wrapper)
-    updateYE(headerChildren[2] as HTMLElement)
-    updateME(headerChildren[3] as HTMLElement)
-    updateArrow([headerChildren[1],headerChildren[4]])
     appendChild(headerChildren,wrapper)
     return wrapper
 }

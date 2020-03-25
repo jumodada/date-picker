@@ -8,10 +8,15 @@ export interface types {
 
 export interface createChildrenArguments {
     name:'svg'|'span'|'div'|'ul'|'li',
-    val:any,
+    val?:any,
     event?:(e:Event)=>any,
     class?:string
     style?:string
+    update?:{
+        name:string,
+        method:(val:any,key:any)=>any
+    },
+    children?:createChildrenArguments[]
 }
 
 export interface watchHandleKeys {

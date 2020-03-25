@@ -8,28 +8,33 @@ export function createEL(tagName?: string): HTMLElement {
     return document.createElement(tagName)
 }
 
-export function createChildren(children:createChildrenArguments[]):(Element|HTMLElement)[] {
-    const childrenLists:Element[] = []
-    children.forEach(child=>{
-        const el = child.name==='svg'?createSVG(child.val):createEL(child.name)
-        if(child.name!=='svg'){
-            if(child.val){
-                (el as HTMLElement).innerText = child.val
-            }
+export function createChildren(node:createChildrenArguments):(Element|HTMLElement) {
+    const el = node.name==='svg'?createSVG(node.val):createEL(node.name)
+    if(node.name!=='svg'){
+        if(node.val){
+            (el as HTMLElement).innerText = node.val
         }
-        if(child.event){
-            on(el,'click',child.event)
-        }
-        if(child.class){
-            el.setAttribute('class',child.class)
-        }
-        if(child.style){
-            el.setAttribute('style',child.style)
-        }
+    }
+    if(node.event){
+        on(el,'click',node.event)
+    }
+    if(node.class){
+        el.setAttribute('class',node.class)
+    }
+    if(node.style){
+        el.setAttribute('style',node.style)
+    }
+    if(node.update){
+        node.update.method(el,node.update.name)
+    }
+    if(node.children){
+        node.children.forEach(child=>{
+            let childNode = createChildren(child)
+            el.appendChild(childNode)
+        })
+    }
 
-        childrenLists.push(el)
-    })
-    return childrenLists
+    return el
 }
 
 export function appendChild(children:Element|Element[],parent?:Element):void{
@@ -42,11 +47,6 @@ export function appendChild(children:Element|Element[],parent?:Element):void{
         parent.appendChild(children as Element)
     }
 }
-
-export function isHTMLElement(el: any): boolean {
-    return el ? el instanceof window.HTMLElement : false
-}
-
 
 export function setAttr(el:HTMLElement,val:string,name?:string) {
     if(!name)name='class'

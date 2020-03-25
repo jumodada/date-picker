@@ -48,19 +48,18 @@ export function pageToggle() {
 
 export function createHeader() {
     const wrapper = createEL()
-    const headerChildren = createChildren([
-        {name:'svg',val:'d-left',event:reduceYear,style:'left:3px'},
-        {name:'svg',val:'left',event:reduceMonth,style:'left:30px'},
-        {name:'span',val:getYear()+'年',event:pageToggle,class:'fl-dateTimePicker-header-year'},
-        {name:'span',val:getMonth()+'月',class:'fl-dateTimePicker-header-month'},
-        {name:'svg',val:'right',event:increaseMonth,style:'right:30px'},
-        {name:'svg',val:'d-right',event:increaseYear,style:'right:3px'},
-    ])
+    const headerChildren = createChildren({
+        name:'div',
+        children:[
+            {name:'svg',val:'d-left',event:reduceYear,style:'left:3px'},
+            {name:'svg',val:'left',event:reduceMonth,style:'left:30px',update:{method:updateHeader,name:'al'}},
+            {name:'span',val:getYear()+'年',event:pageToggle,class:'fl-dateTimePicker-header-year',update:{method:updateHeader,name:'ye'}},
+            {name:'span',val:getMonth()+'月',class:'fl-dateTimePicker-header-month',update:{method:updateHeader,name:'me'}},
+            {name:'svg',val:'right',event:increaseMonth,style:'right:30px',update:{method:updateHeader,name:'ar'}},
+            {name:'svg',val:'d-right',event:increaseYear,style:'right:3px'},
+        ]
+    })
     setYearStyle(wrapper)
-    updateHeader(headerChildren[1],'al')
-    updateHeader(headerChildren[2],'ye')
-    updateHeader(headerChildren[3],'me')
-    updateHeader(headerChildren[4],'ar')
     appendChild(headerChildren,wrapper)
     return wrapper
 }
