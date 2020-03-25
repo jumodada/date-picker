@@ -1,5 +1,6 @@
 import {createNode} from "../../utils/dom-utils/element"
 import {createNodeArguments} from "../../types/methods";
+import {updateDP} from "../../store";
 
 
 export function createDayHeader():(HTMLElement|Element) {
@@ -10,8 +11,23 @@ export function createDayHeader():(HTMLElement|Element) {
         childrenNodes.push(node)
     })
     return createNode({
-        name:'div',
+        name:'ul',
         class:'fl-dateTimePicker-body-day-header',
+        update:{method:updateDP,name:'header'},
+        children:childrenNodes
+    })
+}
+
+export function createDayBody():(HTMLElement|Element) {
+    const childrenNodes:createNodeArguments[] = []
+    Array.from({length:42}).forEach((_u,index)=>{
+        let node:createNodeArguments = {name:'li',val:index+1}
+        childrenNodes.push(node)
+    })
+    return createNode({
+        name:'ul',
+        class:'fl-dateTimePicker-body-day-body',
+        update:{method:updateDP,name:'body'},
         children:childrenNodes
     })
 }
@@ -21,7 +37,8 @@ export function createDayPage() {
         name:'div',
         class:'fl-dateTimePicker-body',
         children:[
-            {el:createDayHeader()}
+            {el:createDayHeader()},
+            {el:createDayBody()},
         ]
     })
 }

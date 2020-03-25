@@ -6,7 +6,7 @@
   font-size: 14px;
   font-variant: tabular-nums;
   list-style: none;
-  min-width: 320px;
+  width: 320px;
   min-height: 300px;
   background-color: #ffffff;
   box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
@@ -63,20 +63,33 @@
     }
   }
   &-body{
+    margin-top: 10px;
+    text-align: center;
+    padding: 10px;
     li{
       display: inline-block;
       width: 40px;
       height: 40px;
       line-height: 34px;
       padding: 3px;
+      border: 1px solid;
+      font-size: 14px;
+    }
+    ul{
+      text-align: center;
+      color: rgba(0, 0, 0, 0.62);
+      width: 300px;
+      margin: 0 0 3px;
+      padding: 0;
+      list-style: none;
     }
     &-day{
       &-header{
-        color: rgba(0, 0, 0, 0.42);
-        text-align: center;
-        li{
-          font-size: 14px;
-        }
+       li{
+         color: rgba(0, 0, 0, 0.42);
+       }
+      }
+      &-body{
       }
     }
   }

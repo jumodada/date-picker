@@ -24,7 +24,7 @@ export interface stateValue {
     }
     dayPage:{
         header:any
-        body:any[]
+        body:any
     }
 
 }

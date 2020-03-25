@@ -27,24 +27,7 @@ export interface watchHandleKeys {
     visible:(value:any)=>any
     rect:(value:any)=>any
     month:(value:any)=>any
-    ye:(value:any)=>any
-    me:(value:any)=>any
     year:(value:any)=>any
-    arrowLeft:(value:any)=>any
-    arrowRight:(value:any)=>any
     pageIdx:(value:any)=>any
 }
 
-export type watchHandleKey =
-    'reference'|
-    'popover'|
-    'options'|
-    'visible'|
-    'rect'|
-    'year'|
-    'ye'|
-    'month'|
-    'me'|
-    'arrowLeft'|
-    'arrowRight'|
-    'pageIdx'

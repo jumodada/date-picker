@@ -1,4 +1,4 @@
-import {getHeader, getOptions, getPop, getReference, getYear, openPopover} from "../../index"
+import {getDP, getHeader, getOptions, getPop, getReference, getYear, openPopover} from "../../index"
 import flexOptions from "../../../types/options"
 import {on, remove} from "../../../event/eventListener"
 import clickOutside from "../../../utils/clickoutside"
@@ -11,18 +11,6 @@ export function watchOptions() {
 // todo
 }
 export function watchRect() {
-// todo
-}
-export function watchYe() {
-// todo
-}
-export function watchMe() {
-// todo
-}
-export function watchArrowLeft() {
-// todo
-}
-export function watchArrowRight() {
 // todo
 }
 export function watchReference(ref: HTMLElement) {
@@ -52,14 +40,15 @@ export function isShow(arr:HTMLElement[],isShow:boolean) {
 }
 export function watchPageIdx(value:number) {
     const {ye,me,ar,al} = getHeader()
+    const {header} = getDP()
     let year = getYear()
     let period = (year as number) + 9
-    if(!ye||!me||!ar||!al)return
+    if(!ye||!me||!ar||!al||!header)return
     if(value===2){
         ye.innerText =  year+' - '+period
-        isShow([me,al,ar],false)
+        isShow([me,al,ar,header],false)
     }else if(value===0){
-        isShow([me,al,ar],true)
+        isShow([me,al,ar,header],true)
     }
 }
 export function watchPopover(value: HTMLElement) {

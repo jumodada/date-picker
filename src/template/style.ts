@@ -1,6 +1,6 @@
 import {getOptions} from "../store"
 import flexOptions from "../types/options"
-import {setAttr} from "../utils/dom-utils/element";
+import {setAttr} from "../utils/dom-utils/element"
 
 
 export function setPopoverStyle(el: HTMLElement): void {

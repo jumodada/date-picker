@@ -33,7 +33,7 @@ export function createNode(node:createNodeArguments):(Element|HTMLElement) {
 export function appendChild(children:Element|Element[],parent?:Element):void{
     if(!parent) parent = document.body
     if(isArray(children)){
-        (children as []).forEach(child=>{
+        ;(children as []).forEach(child=>{
             (parent as Element).appendChild(child)
         })
     }else{
