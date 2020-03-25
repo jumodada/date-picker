@@ -13,3 +13,32 @@ export interface createChildrenArguments {
     class?:string
     style?:string
 }
+
+export interface watchHandleKeys {
+    reference:(value:any)=>any
+    popover:(value:any)=>any
+    options:(value:any)=>any
+    visible:(value:any)=>any
+    rect:(value:any)=>any
+    month:(value:any)=>any
+    ye:(value:any)=>any
+    me:(value:any)=>any
+    year:(value:any)=>any
+    arrowLeft:(value:any)=>any
+    arrowRight:(value:any)=>any
+    pageIdx:(value:any)=>any
+}
+
+export type watchHandleKey =
+    'reference'|
+    'popover'|
+    'options'|
+    'visible'|
+    'rect'|
+    'year'|
+    'ye'|
+    'month'|
+    'me'|
+    'arrowLeft'|
+    'arrowRight'|
+    'pageIdx'
