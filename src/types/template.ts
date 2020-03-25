@@ -5,4 +5,10 @@ export interface Header {
     me:HTMLElement|null
 }
 
+export interface DayPage {
+    header:HTMLElement|null
+    body:(HTMLElement|null)[]
+}
+
 export type headerKey = 'ar'|'al'|'ye'|'me'
+export type dpKey = 'header'|'body'

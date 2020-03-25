@@ -6,11 +6,14 @@
   font-size: 14px;
   font-variant: tabular-nums;
   list-style: none;
-  min-width: 300px;
-  min-height: 100px;
+  min-width: 320px;
+  min-height: 300px;
   background-color: #ffffff;
   box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
-
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   span {
     padding: 5px 9px;
     text-align: center;
@@ -35,13 +38,9 @@
   &-header {
     position: relative;
     text-align: center;
-    margin: 0 7px 7px;
+    margin: 0 7px;
     line-height: 54px;
     height: 54px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
     border-bottom: 1px solid #dde0e7;
 
     span {
@@ -61,6 +60,24 @@
 
     &-month {
       padding-left: 4px !important;
+    }
+  }
+  &-body{
+    li{
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      line-height: 34px;
+      padding: 3px;
+    }
+    &-day{
+      &-header{
+        color: rgba(0, 0, 0, 0.42);
+        text-align: center;
+        li{
+          font-size: 14px;
+        }
+      }
     }
   }
 }

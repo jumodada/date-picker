@@ -17,10 +17,14 @@ export interface stateValue {
     month:number
     pageIdx:number
     header:{
-        al:HTMLElement,
-        ye:HTMLElement,
-        me:HTMLElement,
+        al:HTMLElement
+        ye:HTMLElement
+        me:HTMLElement
         ar:HTMLElement
+    }
+    dayPage:{
+        header:any
+        body:any[]
     }
 
 }

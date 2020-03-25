@@ -1,5 +1,5 @@
 import {isArray} from "../type-of";
-import {createChildrenArguments} from "../../types/methods"
+import {createNodeArguments} from "../../types/methods"
 import createSVG from "../create-svg"
 import {on} from "../../event/eventListener"
 
@@ -8,28 +8,21 @@ export function createEL(tagName?: string): HTMLElement {
     return document.createElement(tagName)
 }
 
-export function createChildren(node:createChildrenArguments):(Element|HTMLElement) {
+export function createNode(node:createNodeArguments):(Element|HTMLElement) {
+    if(node.el)return node.el
     const el = node.name==='svg'?createSVG(node.val):createEL(node.name)
     if(node.name!=='svg'){
         if(node.val){
             (el as HTMLElement).innerText = node.val
         }
     }
-    if(node.event){
-        on(el,'click',node.event)
-    }
-    if(node.class){
-        el.setAttribute('class',node.class)
-    }
-    if(node.style){
-        el.setAttribute('style',node.style)
-    }
-    if(node.update){
-        node.update.method(el,node.update.name)
-    }
+    if(node.event) on(el,'click',node.event)
+    if(node.class)el.setAttribute('class',node.class)
+    if(node.style)  el.setAttribute('style',node.style)
+    if(node.update)node.update.method(el,node.update.name)
     if(node.children){
         node.children.forEach(child=>{
-            let childNode = createChildren(child)
+            let childNode = createNode(child)
             el.appendChild(childNode)
         })
     }

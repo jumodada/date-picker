@@ -2,7 +2,7 @@ import {mergeOptions} from "../utils/merge"
 import initState from "./watcher"
 import {Rect, State, stateValue} from "../types/state"
 import {isNumber} from "../utils/type-of"
-import {Header, headerKey} from "../types/template"
+import {DayPage, dpKey, Header, headerKey} from "../types/template"
 
 const Store = (function () {
     let uid = 0
@@ -124,7 +124,13 @@ const Store = (function () {
     function _updateHeader(val: any,key:headerKey) {
         state[uid].header[key] = val
     }
+    function _getDP(): DayPage {
+        return state[uid].dayPage
+    }
 
+    function _updateDP(val: any,key:dpKey) {
+        state[uid].dayPage[key] = val
+    }
     function _getPage():number {
         return state[uid].pageIdx
     }
@@ -158,7 +164,9 @@ const Store = (function () {
         _updateMonth,
         _plusMonth,
         _pageTurning,
-        _getPage
+        _getPage,
+        _getDP,
+        _updateDP
     }
 })()
 
@@ -186,5 +194,7 @@ export const updateMonth = Store._updateMonth
 export const plusMonth = Store._plusMonth
 export const getHeader = Store._getHeader
 export const updateHeader = Store._updateHeader
+export const getDP = Store._getDP
+export const updateDP = Store._updateDP
 export const pageTurning = Store._pageTurning
 export const getPage:()=>number = Store._getPage

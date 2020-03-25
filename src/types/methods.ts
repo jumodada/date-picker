@@ -6,17 +6,18 @@ export interface types {
     Number: string
 }
 
-export interface createChildrenArguments {
-    name:'svg'|'span'|'div'|'ul'|'li',
+export interface createNodeArguments {
+    name?:'svg'|'span'|'div'|'ul'|'li',
+    el?:HTMLElement|Element
     val?:any,
     event?:(e:Event)=>any,
     class?:string
     style?:string
     update?:{
-        name:string,
+        name?:string,
         method:(val:any,key:any)=>any
     },
-    children?:createChildrenArguments[]
+    children?:createNodeArguments[]
 }
 
 export interface watchHandleKeys {

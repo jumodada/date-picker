@@ -3,8 +3,9 @@ import flexOptions from "../types/options"
 import {positionAttr, _spm} from "../types/popover"
 import nextTick from '../utils/nexttick'
 import {Rect, rectKey} from "../types/state"
-import {createEL} from "../utils/dom-utils/element"
-import {createHeader} from "./picker/header";
+import {createNode} from "../utils/dom-utils/element"
+import {createHeader} from "./picker/header"
+import {createDayPage} from "./picker/body"
 const  transform = {
     top: `translate(0,-100%)`,
     left: `translate(-100%,0)`,
@@ -14,9 +15,14 @@ const  transform = {
 
 
 export function createPopover() {
-    const _pop = createEL()
-    _pop.appendChild(createHeader())
-    updatePop(_pop)
+    createNode({
+        name:'div',
+        children:[
+            {el:createHeader()},
+            {el:createDayPage()},
+        ],
+        update:{method:updatePop}
+    })
 }
 export function updatePopover(el:HTMLElement,value:boolean):void {
     if(value){

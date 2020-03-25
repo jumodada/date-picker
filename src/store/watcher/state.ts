@@ -15,6 +15,10 @@ export default class InitState {
         al:any
         ar:any
     }
+    dayPage:{
+       header:any
+       body:any[]
+    }
     month:number
     pageIdx:number
 
@@ -31,6 +35,10 @@ export default class InitState {
             me:null,
             al:null,
             ar:null
+        }
+        this.dayPage= {
+            header:null,
+            body:[]
         }
         this.pageIdx = 0
     }

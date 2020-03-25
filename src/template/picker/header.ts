@@ -1,19 +1,7 @@
-import {appendChild, createChildren, createEL, setAttr} from "../../utils/dom-utils/element"
-import {
-    getPage,
-    getHeader,
-    getYear,
-    pageTurning,
-    plusMonth,
-    plusYear,
-    updateHeader,
-    updateYear
-} from "../../store"
+import {createNode} from "../../utils/dom-utils/element"
+import {getHeader, getPage, getYear, pageTurning, plusMonth, plusYear, updateHeader, updateYear} from "../../store"
 import {getMonth} from "../../utils/date"
 
-export function setYearStyle(el:HTMLElement) {
-    setAttr(el,'fl-dateTimePicker-header')
-}
 export function changeYear(val:number) {
     if(getPage()!==2){
         plusYear(val)
@@ -47,19 +35,39 @@ export function pageToggle() {
 }
 
 export function createHeader() {
-    const wrapper = createEL()
-    const headerChildren = createChildren({
-        name:'div',
-        children:[
-            {name:'svg',val:'d-left',event:reduceYear,style:'left:3px'},
-            {name:'svg',val:'left',event:reduceMonth,style:'left:30px',update:{method:updateHeader,name:'al'}},
-            {name:'span',val:getYear()+'年',event:pageToggle,class:'fl-dateTimePicker-header-year',update:{method:updateHeader,name:'ye'}},
-            {name:'span',val:getMonth()+'月',class:'fl-dateTimePicker-header-month',update:{method:updateHeader,name:'me'}},
-            {name:'svg',val:'right',event:increaseMonth,style:'right:30px',update:{method:updateHeader,name:'ar'}},
-            {name:'svg',val:'d-right',event:increaseYear,style:'right:3px'},
+    return createNode({
+        name: 'div',
+        class: 'fl-dateTimePicker-header',
+        children: [
+            {name: 'svg', val: 'd-left', event: reduceYear, style: 'left:3px'},
+            {
+                name: 'svg',
+                val: 'left',
+                event: reduceMonth,
+                style: 'left:30px',
+                update: {method: updateHeader, name: 'al'}
+            },
+            {
+                name: 'span',
+                val: getYear() + '年',
+                event: pageToggle,
+                class: 'fl-dateTimePicker-header-year',
+                update: {method: updateHeader, name: 'ye'}
+            },
+            {
+                name: 'span',
+                val: getMonth() + '月',
+                class: 'fl-dateTimePicker-header-month',
+                update: {method: updateHeader, name: 'me'}
+            },
+            {
+                name: 'svg',
+                val: 'right',
+                event: increaseMonth,
+                style: 'right:30px',
+                update: {method: updateHeader, name: 'ar'}
+            },
+            {name: 'svg', val: 'd-right', event: increaseYear, style: 'right:3px'},
         ]
     })
-    setYearStyle(wrapper)
-    appendChild(headerChildren,wrapper)
-    return wrapper
 }
