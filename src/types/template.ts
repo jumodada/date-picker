@@ -7,7 +7,7 @@ export interface Header {
 
 export interface DayPage {
     header:HTMLElement|null
-    body:(HTMLElement|null)[]
+    body:(HTMLElement)
 }
 
 export type headerKey = 'ar'|'al'|'ye'|'me'

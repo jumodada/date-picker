@@ -1,3 +1,13 @@
+import {
+    watchMonth,
+    watchOptions, watchPageIdx,
+    watchPopover,
+    watchRect,
+    watchReference,
+    watchVisible,
+    watchYear
+} from "../store/watcher/handler/methods"
+
 export interface types {
     Date:string,
     Object: string,
@@ -19,6 +29,16 @@ export interface createNodeArguments {
     },
     children?:createNodeArguments[]
 }
+
+export type watchHandleKey =
+    'reference'
+    |'popover'
+    |'options'
+    |'visible'
+    |'rect'
+    |'year'
+    |'month'
+    |'pageIdx'
 
 export interface watchHandleKeys {
     reference:(value:any)=>any

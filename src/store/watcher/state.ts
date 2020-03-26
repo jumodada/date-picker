@@ -1,5 +1,5 @@
 import InitOptions from "../../initial-options"
-import {getFullYear,getMonth} from "../../utils/date"
+import {getFullYear,getRealMonth} from "../../utils/date"
 import flexOptions from "../../types/options"
 
 export default class InitState {
@@ -29,7 +29,7 @@ export default class InitState {
         this.visible = false
         this.rect = {x: 0, y: 0, width: 0, height: 0, top: 0, right: 0, bottom: 0, left: 0}
         this.year = getFullYear()
-        this.month = getMonth()
+        this.month = getRealMonth()
         this.header ={
             ye:null,
             me:null,

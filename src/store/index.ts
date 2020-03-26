@@ -3,6 +3,7 @@ import initState from "./watcher"
 import {Rect, State, stateValue} from "../types/state"
 import {isNumber} from "../utils/type-of"
 import {DayPage, dpKey, Header, headerKey} from "../types/template"
+import {renderDate} from "../template/picker/body"
 
 const Store = (function () {
     let uid = 0
@@ -130,6 +131,9 @@ const Store = (function () {
 
     function _updateDP(val: any,key:dpKey) {
         state[uid].dayPage[key] = val
+        if(key==='body'){
+            renderDate()
+        }
     }
     function _getPage():number {
         return state[uid].pageIdx

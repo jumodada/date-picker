@@ -1,3 +1,5 @@
+$blue:#26acee;
+
 .fl-dateTimePicker {
   box-sizing: border-box;
   margin: 0;
@@ -31,7 +33,7 @@
     width: 15px;
     height: 15px;
     &:hover {
-      fill: #26acee;
+      fill: $blue;
     }
   }
 
@@ -69,17 +71,19 @@
     li{
       display: inline-block;
       width: 40px;
+      border-radius: 5px;
       height: 40px;
       line-height: 34px;
       padding: 3px;
-      border: 1px solid;
       font-size: 14px;
+      position: relative;
+      transition: .3s color ease;
     }
     ul{
       text-align: center;
       color: rgba(0, 0, 0, 0.62);
       width: 300px;
-      margin: 0 0 3px;
+      margin:0;
       padding: 0;
       list-style: none;
     }
@@ -90,7 +94,39 @@
        }
       }
       &-body{
+        li{
+          cursor: pointer;
+          &:hover{
+            color: $blue;
+          }
+        }
       }
+    }
+  }
+  &-isSelect-day{
+    color: white;
+    &:after{
+      display: block;
+      content: '';
+      border-radius: 50%;
+      background-color: #26acee;
+      position: absolute;
+      z-index: -1;
+      width: 30px;
+      height: 30px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+    }
+    &:hover{
+      color: white !important;
+    }
+  }
+  &-today{
+    border: 1px solid $blue;
+    &:hover{
+      background-color: $blue;
+      color: white !important;
     }
   }
 }

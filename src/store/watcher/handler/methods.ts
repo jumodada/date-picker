@@ -6,6 +6,7 @@ import {isElementExist} from "../is-element-exist"
 import {createPopover, updatePopover} from "../../../template"
 import {appendChild} from "../../../utils/dom-utils/element"
 import {setPopoverStyle} from "../../../template/style"
+import {renderDate} from "../../../template/picker/body"
 
 export function watchOptions() {
 // todo
@@ -40,15 +41,15 @@ export function isShow(arr:HTMLElement[],isShow:boolean) {
 }
 export function watchPageIdx(value:number) {
     const {ye,me,ar,al} = getHeader()
-    const {header} = getDP()
-    let year = getYear()
+    const {header,body} = getDP()
+    const year = getYear()
     let period = (year as number) + 9
-    if(!ye||!me||!ar||!al||!header)return
+    if(!ye||!me||!ar||!al||!header||!body)return
     if(value===2){
         ye.innerText =  year+' - '+period
-        isShow([me,al,ar,header],false)
+        isShow([me,al,ar,header,body],false)
     }else if(value===0){
-        isShow([me,al,ar,header],true)
+        isShow([me,al,ar,header,body],true)
     }
 }
 export function watchPopover(value: HTMLElement) {
@@ -66,10 +67,12 @@ export function watchYear(value:number):void {
     if(ye){
         ye.innerText = value.toString()+'年'
     }
+    renderDate()
 }
 export function watchMonth(value:number):void {
     const {me} = getHeader()
     if(me){
         me.innerText = value.toString()+'月'
     }
+    renderDate()
 }

@@ -1,4 +1,4 @@
-import {watchHandleKeys} from "../../../types/methods"
+import {watchHandleKey, watchHandleKeys} from "../../../types/methods"
 import {
     watchReference,watchPopover,
     watchOptions,watchVisible,
@@ -17,10 +17,10 @@ const keys:watchHandleKeys= {
     pageIdx:watchPageIdx
 }
 export default {
-    get(target: any, key: string, receiver: any) {
+    get(target: any, key: watchHandleKey, receiver: any) {
         return Reflect.get(target, key, receiver)
     },
-    set(target: any, key: string, value: any, receiver: any) {
+    set(target: any, key: watchHandleKey, value: any, receiver: any) {
         keys[key](value)
 
         return Reflect.set(target, key, value, receiver)

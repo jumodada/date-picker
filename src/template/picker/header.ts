@@ -1,6 +1,6 @@
 import {createNode} from "../../utils/dom-utils/element"
 import {getHeader, getPage, getYear, pageTurning, plusMonth, plusYear, updateHeader, updateYear} from "../../store"
-import {getMonth} from "../../utils/date"
+import {getRealMonth} from "../../utils/date"
 
 export function changeYear(val:number) {
     if(getPage()!==2){
@@ -56,7 +56,7 @@ export function createHeader() {
             },
             {
                 name: 'span',
-                val: getMonth() + '月',
+                val: getRealMonth() + '月',
                 class: 'fl-dateTimePicker-header-month',
                 update: {method: updateHeader, name: 'me'}
             },
