@@ -1,4 +1,4 @@
-import {getDP, getYear,getMonth} from "../store"
+import { getYear,getMonth} from "../store"
 
 export function getFullYear():number {
     return new Date().getFullYear()
@@ -10,7 +10,6 @@ export function getRealMonth():number {
 export function monthHasDays(year:number,month:number):number {
     return new Date(year, month, 0).getDate()
 }
-
 export function getLastMonthHasDays():number {
     let  [year,month] = [getYear(),getMonth()]
     month--
@@ -27,7 +26,6 @@ export function getMonthHasDays():number {
 
 export function whatDayIsMonthFirstDay():number {
     const [year,month] = [getYear(),getMonth()]
-    console.log(year,month)
     const firstDate = new Date(`${year},${month}, 01`)
     return firstDate.getDay()
 }

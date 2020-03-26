@@ -1,8 +1,8 @@
-import {createNode} from "../../utils/dom-utils/element"
+import {createNode, setAttr} from "../../utils/dom-utils/element"
 import {createNodeArguments} from "../../types/methods"
 import {getDP, updateDP} from "../../store"
 import {getLastMonthHasDays, getMonthHasDays, whatDayIsMonthFirstDay} from "../../utils/date";
-import nexttick from "../../utils/nexttick";
+import nexttick from "../../utils/nexttick"
 
 
 export function createDayHeader(): (HTMLElement | Element) {
@@ -45,19 +45,20 @@ export function renderDate() {
         const days = getMonthHasDays()
         const lastMonthDays = getLastMonthHasDays()
         const childrenNodes = getDP().body?.childNodes
-        const totalDays = firstDay+days
-        const surplusDays = 42-totalDays
+        const totalDays = firstDay + days
         if (childrenNodes && childrenNodes.length === 42) {
-            for(let l=1;l<=firstDay;l++){
-                (childrenNodes[firstDay - l] as any).innerText = lastMonthDays-l+1
+            for(let i=1;i<43;i++){
+                const node = childrenNodes[i-1] as any
+                let innerText = 0
+                const isFade = i<=firstDay||i>totalDays
+                innerText = i <= firstDay 
+                    ? lastMonthDays - firstDay + i
+                    : innerText = i > totalDays
+                        ? i - totalDays : i - firstDay
+                node.innerText = innerText.toString()
+                setAttr(node, `fl-dateTimePicker-${isFade?'not':''}-this-month`)
             }
-            for (let t = 0; t < days; t++) {
-                (childrenNodes[firstDay + t] as any).innerText = t + 1
-            }
-            for(let s=0;s<surplusDays;s++){
-                (childrenNodes[totalDays + s] as any).innerText = s + 1
-            }
-        }else{
+        } else {
             console.error('renderDate error ')
         }
     })

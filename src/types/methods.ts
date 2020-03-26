@@ -1,13 +1,3 @@
-import {
-    watchMonth,
-    watchOptions, watchPageIdx,
-    watchPopover,
-    watchRect,
-    watchReference,
-    watchVisible,
-    watchYear
-} from "../store/watcher/handler/methods"
-
 export interface types {
     Date:string,
     Object: string,
