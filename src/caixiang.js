@@ -14,5 +14,6 @@ dp.on('cancel',callback)
 dp.on('show',callback)
 dp.on('close',callback)
 
+
 dp.unbind()
 //销毁对输入框的绑定

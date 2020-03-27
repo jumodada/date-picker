@@ -15,6 +15,7 @@ export interface stateValue {
     rect:Rect
     year:number
     month:number
+    date:Date
     pageIdx:number
     header:{
         al:HTMLElement

@@ -3,7 +3,7 @@ import {
     watchReference,watchPopover,
     watchOptions,watchVisible,
     watchRect,watchYear,watchMonth,
-    watchPageIdx
+    watchPageIdx,watchDate
 } from "./methods"
 
 const keys:watchHandleKeys= {
@@ -13,6 +13,7 @@ const keys:watchHandleKeys= {
     visible:watchVisible,
     rect:watchRect,
     year:watchYear,
+    date:watchDate,
     month:watchMonth,
     pageIdx:watchPageIdx
 }
