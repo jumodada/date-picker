@@ -4,6 +4,7 @@ import {getDate, getDP, getMonth, getYear, updateDate, updateDP} from "../../sto
 import {getLastMonthHasDays, getMonthHasDays, getSelectDate, joinDate, whatDayIsMonthFirstDay} from "../../utils/date";
 import nexttick from "../../utils/nexttick"
 import {_Event} from "../../types/event"
+import {selectedClass} from "../../utils/class-name";
 
 
 export function createDayHeader(): (HTMLElement | Element) {
@@ -72,9 +73,9 @@ export function renderDate() {
                     innerText = i - firstDay
                 }
                 if(innerText===selectDay&&!view){
-                    addAttr(node, 'fl-dateTimePicker-isSelect-day')
+                    addAttr(node, selectedClass)
                 }else{
-                     removeAttr(node,'fl-dateTimePicker-isSelect-day')
+                     removeAttr(node,selectedClass)
                 }
                 node.innerText = innerText.toString()
                 addAttr(node, `fl-dateTimePicker${isFade ? '-not' : ''}-this-month`)

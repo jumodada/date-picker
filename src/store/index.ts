@@ -92,7 +92,7 @@ const Store = (function () {
         } else {
             date = new Date(val)
         }
-        //if (equalDate(date,_getDate())) return
+        // if (equalDate(date,_getDate())) return
         state[uid].date = date
         renderDate()
     }

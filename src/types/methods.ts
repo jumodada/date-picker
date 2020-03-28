@@ -32,15 +32,15 @@ export type watchHandleKey =
     |'month'
     |'pageIdx'
 
-export interface watchHandleKeys {
-    reference:(value:any)=>any
-    popover:(value:any)=>any
-    options:(value:any)=>any
-    visible:(value:any)=>any
-    rect:(value:any)=>any
-    month:(value:any)=>any
-    year:(value:any)=>any
-    pageIdx:(value:any)=>any
-    date:(value:any)=>any
+export interface watchHandleKeys<T=(value:any)=>any> {
+    reference:T
+    popover:T
+    options:T
+    visible:T
+    rect:T
+    month:T
+    year:T
+    pageIdx:T
+    date:T
 }
 

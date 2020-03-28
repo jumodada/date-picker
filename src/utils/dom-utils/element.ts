@@ -56,11 +56,9 @@ export function addAttr(el: HTMLElement, val: string, name?: string) {
 
 export function removeAttr(el: HTMLElement, val: string, name?: string) {
     if (!name) name = 'class'
-    let attrVal = el.getAttribute(name)
+    let attrVal:string | null = el.getAttribute(name)
     if (attrVal && attrVal.indexOf(val) > -1) {
-        attrVal = attrVal.split(` ${val} `).join(' ')
-        console.log(attrVal)
-        console.log(val)
+        attrVal = attrVal.split(' ').filter(c=>c!==val&&c).join(' ')
         el.setAttribute(name, attrVal)
     }
 }
