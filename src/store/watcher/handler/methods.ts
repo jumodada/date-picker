@@ -14,6 +14,10 @@ export function watchOptions() {
 export function watchRect() {
 // todo
 }
+
+export function watchDate() {
+
+}
 export function watchReference(ref: HTMLElement) {
     const preElement = getReference()
     const {trigger} = getOptions() as flexOptions

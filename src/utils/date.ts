@@ -1,19 +1,25 @@
-import { getYear,getMonth} from "../store"
+import {getYear, getMonth, getDate} from "../store"
 
-export function getFullYear():number {
-    return new Date().getFullYear()
+export function getFullYear(date?:Date):number {
+    if(!date)date = new Date()
+    return date.getFullYear()
 }
 
-export function getRealMonth():number {
-    return new Date().getMonth() + 1
+export function getRealMonth(date?:Date):number {
+    if(!date)date = new Date()
+    return date.getMonth() + 1
+}
+
+export function getDay(date?:Date):number {
+    if(!date)date = new Date()
+    return date.getDate()
 }
 export function monthHasDays(year:number,month:number):number {
     return new Date(year, month, 0).getDate()
 }
 export function getLastMonthHasDays():number {
     let  [year,month] = [getYear(),getMonth()]
-    month--
-    if(month===0){
+    if(--month===0){
         month=12
         year--
     }
@@ -28,4 +34,24 @@ export function whatDayIsMonthFirstDay():number {
     const [year,month] = [getYear(),getMonth()]
     const firstDate = new Date(`${year},${month}, 01`)
     return firstDate.getDay()
+}
+
+export function joinDate<T=number,U=string>(year:T|U,month:T|U,day:T|U) {
+    return year+'/'+month+'/'+day
+}
+
+export function getSelectDate<T=number>():number|boolean {
+    let date = getDate()
+    let [year,month] = [getFullYear(date),getRealMonth(date)]
+    if(year===getYear()&&month===getMonth()){
+        return getDay(date)
+    }else{
+        return false
+    }
+}
+
+export function equalDate(preDate:Date,curDate:Date){
+    const [py,pm,pd] = [preDate.getFullYear(),preDate.getMonth(),preDate.getDay()]
+    const [cy,cm,cd] = [curDate.getFullYear(),curDate.getMonth(),curDate.getDay()]
+    return py===cy&&pm===cm&&pd===cd
 }

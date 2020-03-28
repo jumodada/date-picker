@@ -20,6 +20,7 @@ export default class InitState {
        body:any
     }
     month:number
+    date:Date
     pageIdx:number
 
     constructor() {
@@ -30,6 +31,7 @@ export default class InitState {
         this.rect = {x: 0, y: 0, width: 0, height: 0, top: 0, right: 0, bottom: 0, left: 0}
         this.year = getFullYear()
         this.month = getRealMonth()
+        this.date = new Date()
         this.header ={
             ye:null,
             me:null,

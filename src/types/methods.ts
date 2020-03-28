@@ -1,3 +1,5 @@
+import {_Event} from "./event"
+
 export interface types {
     Date:string,
     Object: string,
@@ -10,7 +12,7 @@ export interface createNodeArguments {
     name?:'svg'|'span'|'div'|'ul'|'li',
     el?:HTMLElement|Element
     val?:any,
-    event?:(e:Event)=>any,
+    event?:(e:_Event)=>any,
     class?:string
     style?:string
     update?:{
@@ -39,5 +41,6 @@ export interface watchHandleKeys {
     month:(value:any)=>any
     year:(value:any)=>any
     pageIdx:(value:any)=>any
+    date:(value:any)=>any
 }
 

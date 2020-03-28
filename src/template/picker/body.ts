@@ -1,8 +1,9 @@
-import {createNode, setAttr} from "../../utils/dom-utils/element"
+import {createNode, addAttr, removeAttr} from "../../utils/dom-utils/element"
 import {createNodeArguments} from "../../types/methods"
-import {getDP, updateDP} from "../../store"
-import {getLastMonthHasDays, getMonthHasDays, whatDayIsMonthFirstDay} from "../../utils/date";
+import {getDate, getDP, getMonth, getYear, updateDate, updateDP} from "../../store"
+import {getLastMonthHasDays, getMonthHasDays, getSelectDate, joinDate, whatDayIsMonthFirstDay} from "../../utils/date";
 import nexttick from "../../utils/nexttick"
+import {_Event} from "../../types/event"
 
 
 export function createDayHeader(): (HTMLElement | Element) {
@@ -20,8 +21,17 @@ export function createDayHeader(): (HTMLElement | Element) {
     })
 }
 
-export function toSelectDate(e: Event): void {
-    console.log(e)
+export function toSelectDate(e: _Event): void {
+    let {innerText, dataset} = e.target
+    let view = dataset.view
+    let [year, month] = [getYear(), getMonth()]
+    if (view === 'pre' && --month === 0) {
+        year--
+    } else if (view === 'next' && ++month === 13) {
+        year++
+    }
+    innerText = joinDate<number, string>(year, month, innerText)
+    updateDate(innerText)
 }
 
 export function createDayBody(): (HTMLElement | Element) {
@@ -46,17 +56,29 @@ export function renderDate() {
         const lastMonthDays = getLastMonthHasDays()
         const childrenNodes = getDP().body?.childNodes
         const totalDays = firstDay + days
+        const selectDay = getSelectDate()
         if (childrenNodes && childrenNodes.length === 42) {
-            for(let i=1;i<43;i++){
-                const node = childrenNodes[i-1] as any
-                let innerText = 0
-                const isFade = i<=firstDay||i>totalDays
-                innerText = i <= firstDay 
-                    ? lastMonthDays - firstDay + i
-                    : innerText = i > totalDays
-                        ? i - totalDays : i - firstDay
+            for (let i = 1; i < 43; i++) {
+                const node = childrenNodes[i - 1] as any
+                let [view, innerText] = ['', 0]
+                const isFade = i <= firstDay || i > totalDays
+                if (i <= firstDay) {
+                    view = 'pre'
+                    innerText = lastMonthDays - firstDay + i
+                } else if (i > totalDays) {
+                    view = 'next'
+                    innerText = i - totalDays
+                } else {
+                    innerText = i - firstDay
+                }
+                if(innerText===selectDay&&!view){
+                    addAttr(node, 'fl-dateTimePicker-isSelect-day')
+                }else{
+                     removeAttr(node,'fl-dateTimePicker-isSelect-day')
+                }
                 node.innerText = innerText.toString()
-                setAttr(node, `fl-dateTimePicker-${isFade?'not':''}-this-month`)
+                addAttr(node, `fl-dateTimePicker${isFade ? '-not' : ''}-this-month`)
+                addAttr(node, view, 'data-view')
             }
         } else {
             console.error('renderDate error ')

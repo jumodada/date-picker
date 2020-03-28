@@ -4,6 +4,7 @@ import {Rect, State, stateValue} from "../types/state"
 import {isNumber} from "../utils/type-of"
 import {DayPage, dpKey, Header, headerKey} from "../types/template"
 import {renderDate} from "../template/picker/body"
+import {equalDate} from "../utils/date";
 
 const Store = (function () {
     let uid = 0
@@ -78,6 +79,24 @@ const Store = (function () {
         state[uid].visible = true
     }
 
+    function _getDate(): Date {
+        return state[uid].date
+    }
+
+    function _updateDate(val: string): void {
+        let date: Date
+        if (val.toString().length < 3) {
+            const year = getYear()
+            const month = getMonth()
+            date = new Date(year + '/' + month + '/' + val)
+        } else {
+            date = new Date(val)
+        }
+        //if (equalDate(date,_getDate())) return
+        state[uid].date = date
+        renderDate()
+    }
+
     function _getVisible(): boolean {
         return state[uid].visible
     }
@@ -102,17 +121,17 @@ const Store = (function () {
         return state[uid].month
     }
 
-    function _updateMonth(val: number):void {
+    function _updateMonth(val: number): void {
         state[uid].month = val
     }
 
-    function _plusMonth(val: number):void {
+    function _plusMonth(val: number): void {
         let month = _getMonth()
         month += val
-        if(month>12||month<1){
-            let year = Math.floor(month/12)
-            if(year===0)year=-1
-            month = month>12?(month%12):((month%12)+12)
+        if (month > 12 || month < 1) {
+            let year = Math.floor(month / 12)
+            if (year === 0) year = -1
+            month = month > 12 ? (month % 12) : ((month % 12) + 12)
             _plusYear(year)
         }
         state[uid].month = month
@@ -122,22 +141,25 @@ const Store = (function () {
         return state[uid].header
     }
 
-    function _updateHeader(val: any,key:headerKey) {
+    function _updateHeader(val: any, key: headerKey) {
         state[uid].header[key] = val
     }
+
     function _getDP(): DayPage {
         return state[uid].dayPage
     }
 
-    function _updateDP(val: any,key:dpKey) {
+    function _updateDP(val: any, key: dpKey) {
         state[uid].dayPage[key] = val
-        if(key==='body'){
+        if (key === 'body') {
             renderDate()
         }
     }
-    function _getPage():number {
+
+    function _getPage(): number {
         return state[uid].pageIdx
     }
+
     function _pageTurning(val: number) {
         state[uid].pageIdx = val
     }
@@ -170,7 +192,9 @@ const Store = (function () {
         _pageTurning,
         _getPage,
         _getDP,
-        _updateDP
+        _updateDP,
+        _getDate,
+        _updateDate
     }
 })()
 
@@ -201,4 +225,6 @@ export const updateHeader = Store._updateHeader
 export const getDP = Store._getDP
 export const updateDP = Store._updateDP
 export const pageTurning = Store._pageTurning
-export const getPage:()=>number = Store._getPage
+export const getDate = Store._getDate
+export const updateDate = Store._updateDate
+export const getPage: () => number = Store._getPage
