@@ -1,4 +1,14 @@
-import {getDP, getHeader, getOptions, getPop, getReference, getYear, openPopover} from "../../index"
+import {
+    getDP,
+    getHeader,
+    getMonth,
+    getOptions,
+    getPop,
+    getReference,
+    getYear,
+    openPopover, updateMonth,
+    updateYear
+} from "../../index"
 import flexOptions from "../../../types/options"
 import {on, remove} from "../../../event/eventListener"
 import clickOutside from "../../../utils/clickoutside"
@@ -15,8 +25,11 @@ export function watchRect() {
 // todo
 }
 
-export function watchDate() {
-// todo
+export function watchDate(value:Date) {
+    const year = value.getFullYear()
+    const month = value.getMonth()+1
+    updateYear(year)
+    updateMonth(month)
 }
 export function watchReference(ref: HTMLElement) {
     const preElement = getReference()

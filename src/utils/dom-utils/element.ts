@@ -4,15 +4,19 @@ import createSVG from "../create-svg"
 import {on} from "../../event/eventListener"
 
 const nodeOptions: NodeOptions = {
-    event: (el, node) => on(el, 'click', node.event as any),
+    event: (el, node) =>
+        on(el, 'click', node.event as any),
     val: (el, node) => {
         if (node.name !== 'svg') {
             ;(el as HTMLElement).innerText = node.val
         }
     },
-    class: (el, node) => el.setAttribute('class', node.class as any),
-    style: (el, node) => el.setAttribute('style', node.style as any),
-    update: (el, node) => node.update?.method(el, node.update.name),
+    class: (el, node) =>
+        el.setAttribute('class', node.class as any),
+    style: (el, node) =>
+        el.setAttribute('style', node.style as any),
+    update: (el, node) =>
+        node.update?.method(el, node.update.name),
     children: (el, node) => {
         node.children?.forEach(child => {
             let childNode = createNode(child)
@@ -20,6 +24,7 @@ const nodeOptions: NodeOptions = {
         })
     },
     name: () => {
+        // todo
     },
 }
 
@@ -49,9 +54,15 @@ export function appendChild(children: Element | Element[], parent?: Element): vo
     }
 }
 
+export function resetAttr(el: HTMLElement, val: string, name?: string) {
+    if (!name) name = 'class'
+    el.setAttribute(name, val)
+}
+
 export function addAttr(el: HTMLElement, val: string, name?: string) {
     if (!name) name = 'class'
     let attrVal = el.getAttribute(name)
+
     if (attrVal) {
         if (attrVal.indexOf(val) === -1) {
             val += ' ' + attrVal
@@ -62,11 +73,23 @@ export function addAttr(el: HTMLElement, val: string, name?: string) {
     }
 }
 
-export function removeClass(el: HTMLElement, val: string, name?: string) {
-    if (!name) name = 'class'
-    let attrVal: string | null = el.getAttribute(name)
+function filterClasses(classes:string,val:string) {
+    return classes.split(' ').filter(c => c !== val && c).join(' ')
+}
+
+export function toggleClass(el: HTMLElement, val: string[]) {
+    let classes = el.getAttribute('class')
+    if (!classes) classes= ''
+    let [fv, sv] = [val[0], val[1]]
+    const toggle = [sv,fv]
+    classes = filterClasses(classes,toggle[0]) + ' ' + toggle[1]
+    el.setAttribute('class', classes)
+}
+
+export function removeClass(el: HTMLElement, val: string) {
+    let attrVal: string | null = el.getAttribute('class')
     if (attrVal && attrVal.indexOf(val) > -1) {
         attrVal = attrVal.split(' ').filter(c => c !== val && c).join(' ')
-        el.setAttribute(name, attrVal)
+        el.setAttribute('class', attrVal)
     }
 }

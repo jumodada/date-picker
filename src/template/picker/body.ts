@@ -1,10 +1,10 @@
-import {createNode, addAttr, removeClass} from "../../utils/dom-utils/element"
+import {createNode, addAttr, removeClass, resetAttr, toggleClass} from "../../utils/dom-utils/element"
 import {createNodeArguments} from "../../types/methods"
 import { getDP, getMonth, getYear, updateDate, updateDP} from "../../store"
-import {getLastMonthHasDays, getMonthHasDays, getSelectDate, joinDate, whatDayIsMonthFirstDay} from "../../utils/date";
+import {getLastMonthHasDays, getMonthHasDays, getSelectDate, joinDate, whatDayIsMonthFirstDay} from "../../utils/date"
 import nexttick from "../../utils/nexttick"
 import {_Event} from "../../types/event"
-import {selectedClass} from "../../utils/class-name";
+import {notThisMonth, selectedClass, thisMonth} from "../../utils/class-name"
 
 
 export function createDayHeader(): (HTMLElement | Element) {
@@ -28,10 +28,13 @@ export function toSelectDate(e: _Event): void {
     let [year, month] = [getYear(), getMonth()]
     if (view === 'pre' && --month === 0) {
         year--
+        month=12
     } else if (view === 'next' && ++month === 13) {
         year++
+        month=1
     }
     innerText = joinDate<number, string>(year, month, innerText)
+    console.log(innerText)
     updateDate(innerText)
 }
 
@@ -78,8 +81,8 @@ export function renderDate() {
                     removeClass(node,selectedClass)
                 }
                 node.innerText = innerText.toString()
-                addAttr(node, `fl-dateTimePicker${isFade ? '-not' : ''}-this-month`)
-                addAttr(node, view, 'data-view')
+                toggleClass(node, isFade?[notThisMonth,thisMonth]:[thisMonth,notThisMonth])
+                resetAttr(node, view, 'data-view')
             }
         } else {
             console.error('renderDate error ')
