@@ -44,3 +44,20 @@ export interface watchHandleKeys<T=(value:any)=>any> {
     date:T
 }
 
+export interface NodeOptions<T=(el:HTMLElement,node:createNodeArguments)=>any> {
+    event:T
+    class:T
+    style:T
+    update:T
+    children:T
+    name:()=>void
+    val:T
+}
+export type nodeKey =
+    'event'|
+    'class'|
+    'style'|
+    'update'|
+    'children'|
+    'name'|
+    'val'

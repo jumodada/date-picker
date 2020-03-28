@@ -1,6 +1,6 @@
 import {closePopover, getPop, getReference, getVisible} from "../store"
 
-export default function clickOutside(e: any) {
+export default function clickOutside(e: Event) {
     const visible = getVisible()
     if(!visible)return
     const reference = getReference()

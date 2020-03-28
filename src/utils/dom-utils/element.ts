@@ -1,7 +1,28 @@
-import {isArray} from "../type-of";
-import {createNodeArguments} from "../../types/methods"
+import {isArray} from "../type-of"
+import {createNodeArguments, nodeKey, NodeOptions} from "../../types/methods"
 import createSVG from "../create-svg"
 import {on} from "../../event/eventListener"
+
+const nodeOptions: NodeOptions = {
+    event: (el, node) => on(el, 'click', node.event as any),
+    val: (el, node) => {
+        if (node.name !== 'svg') {
+            ;(el as HTMLElement).innerText = node.val
+        }
+    },
+    class: (el, node) => el.setAttribute('class', node.class as any),
+    style: (el, node) => el.setAttribute('style', node.style as any),
+    update: (el, node) => node.update?.method(el, node.update.name),
+    children: (el, node) => {
+        node.children?.forEach(child => {
+            let childNode = createNode(child)
+            el.appendChild(childNode)
+        })
+    },
+    name: () => {
+    },
+}
+
 
 export function createEL(tagName?: string): HTMLElement {
     if (!tagName) tagName = 'div'
@@ -11,22 +32,9 @@ export function createEL(tagName?: string): HTMLElement {
 export function createNode(node: createNodeArguments): (Element | HTMLElement) {
     if (node.el) return node.el
     const el = node.name === 'svg' ? createSVG(node.val) : createEL(node.name)
-    if (node.name !== 'svg') {
-        if (node.val) {
-            (el as HTMLElement).innerText = node.val
-        }
-    }
-    if (node.event) on(el, 'click', node.event)
-    if (node.class) el.setAttribute('class', node.class)
-    if (node.style) el.setAttribute('style', node.style)
-    if (node.update) node.update.method(el, node.update.name)
-    if (node.children) {
-        node.children.forEach(child => {
-            let childNode = createNode(child)
-            el.appendChild(childNode)
-        })
-    }
-
+    Object.keys(node).forEach(key => {
+        nodeOptions[key as nodeKey](el as HTMLElement, node)
+    })
     return el
 }
 
@@ -45,20 +53,20 @@ export function addAttr(el: HTMLElement, val: string, name?: string) {
     if (!name) name = 'class'
     let attrVal = el.getAttribute(name)
     if (attrVal) {
-        if(attrVal.indexOf(val)===-1){
+        if (attrVal.indexOf(val) === -1) {
             val += ' ' + attrVal
             el.setAttribute(name, val)
         }
-    }else{
+    } else {
         el.setAttribute(name, val)
     }
 }
 
-export function removeAttr(el: HTMLElement, val: string, name?: string) {
+export function removeClass(el: HTMLElement, val: string, name?: string) {
     if (!name) name = 'class'
-    let attrVal:string | null = el.getAttribute(name)
+    let attrVal: string | null = el.getAttribute(name)
     if (attrVal && attrVal.indexOf(val) > -1) {
-        attrVal = attrVal.split(' ').filter(c=>c!==val&&c).join(' ')
+        attrVal = attrVal.split(' ').filter(c => c !== val && c).join(' ')
         el.setAttribute(name, attrVal)
     }
 }

@@ -1,4 +1,4 @@
-import {_Event, eventType} from "../types/event"
+import { eventType} from "../types/event"
 
 export function on(el:any,eventName:eventType,handler:(e:Event)=>any) {
     if(el&&el.addEventListener){

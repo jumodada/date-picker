@@ -1,6 +1,6 @@
-import {createNode, addAttr, removeAttr} from "../../utils/dom-utils/element"
+import {createNode, addAttr, removeClass} from "../../utils/dom-utils/element"
 import {createNodeArguments} from "../../types/methods"
-import {getDate, getDP, getMonth, getYear, updateDate, updateDP} from "../../store"
+import { getDP, getMonth, getYear, updateDate, updateDP} from "../../store"
 import {getLastMonthHasDays, getMonthHasDays, getSelectDate, joinDate, whatDayIsMonthFirstDay} from "../../utils/date";
 import nexttick from "../../utils/nexttick"
 import {_Event} from "../../types/event"
@@ -75,7 +75,7 @@ export function renderDate() {
                 if(innerText===selectDay&&!view){
                     addAttr(node, selectedClass)
                 }else{
-                     removeAttr(node,selectedClass)
+                    removeClass(node,selectedClass)
                 }
                 node.innerText = innerText.toString()
                 addAttr(node, `fl-dateTimePicker${isFade ? '-not' : ''}-this-month`)

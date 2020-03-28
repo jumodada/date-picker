@@ -1,6 +1,7 @@
 import {createNode} from "../../utils/dom-utils/element"
 import {getHeader, getPage, getYear, pageTurning, plusMonth, plusYear, updateHeader, updateYear} from "../../store"
 import {getRealMonth} from "../../utils/date"
+import {headerClass, headerMonthClass, headerYearClass} from "../../utils/class-name"
 
 export function changeYear(val:number) {
     if(getPage()!==2){
@@ -37,7 +38,7 @@ export function pageToggle() {
 export function createHeader() {
     return createNode({
         name: 'div',
-        class: 'fl-dateTimePicker-header',
+        class: headerClass,
         children: [
             {name: 'svg', val: 'd-left', event: reduceYear, style: 'left:3px'},
             {
@@ -51,13 +52,13 @@ export function createHeader() {
                 name: 'span',
                 val: getYear() + '年',
                 event: pageToggle,
-                class: 'fl-dateTimePicker-header-year',
+                class: headerYearClass,
                 update: {method: updateHeader, name: 'ye'}
             },
             {
                 name: 'span',
                 val: getRealMonth() + '月',
-                class: 'fl-dateTimePicker-header-month',
+                class: headerMonthClass,
                 update: {method: updateHeader, name: 'me'}
             },
             {
