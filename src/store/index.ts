@@ -2,9 +2,9 @@ import {mergeOptions} from "../utils/merge"
 import initState from "./watcher"
 import {Rect, State, stateValue} from "../types/state"
 import {isNumber} from "../utils/type-of"
-import {DayPage, dpKey, Header, headerKey} from "../types/template"
-import {renderDate} from "../template/picker/body"
-import {equalDate} from "../utils/date";
+import {DayPage, dpKey, Header, headerKey, opKey, OtherPage} from "../types/template"
+import {renderDate, renderMonth} from "../template/picker/body"
+import {equalDate} from "../utils/date"
 
 const Store = (function () {
     let uid = 0
@@ -13,8 +13,6 @@ const Store = (function () {
     function _toggleToLastUId() {
         uid = state.length - 1
     }
-
-
     function _changeUId(e: Event) {
         uid = state.findIndex(s => (s.reference as any) === e.target)
     }
@@ -92,7 +90,7 @@ const Store = (function () {
         } else {
             date = new Date(val)
         }
-        // if (equalDate(date,_getDate())) return
+        if (equalDate(date, _getDate())) return
         state[uid].date = date
         renderDate()
     }
@@ -155,7 +153,15 @@ const Store = (function () {
             renderDate()
         }
     }
-
+    function _getOP():OtherPage {
+        return state[uid].otherPage
+    }
+    function _updateOP(val: any, key: opKey) {
+        state[uid].otherPage[key] = val
+        if (key === 'month') {
+            renderMonth()
+        }
+    }
     function _getPage(): number {
         return state[uid].pageIdx
     }
@@ -193,6 +199,8 @@ const Store = (function () {
         _getPage,
         _getDP,
         _updateDP,
+        _getOP,
+        _updateOP,
         _getDate,
         _updateDate
     }
@@ -224,6 +232,8 @@ export const getHeader = Store._getHeader
 export const updateHeader = Store._updateHeader
 export const getDP = Store._getDP
 export const updateDP = Store._updateDP
+export const getOP = Store._getOP
+export const updateOP = Store._updateOP
 export const pageTurning = Store._pageTurning
 export const getDate = Store._getDate
 export const updateDate = Store._updateDate

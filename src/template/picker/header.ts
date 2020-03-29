@@ -29,9 +29,14 @@ export function reduceMonth() {
     plusMonth(-1)
 }
 
-export function pageToggle() {
+export function toYear() {
     if(getPage()!==2){
         pageTurning(2)
+    }
+}
+export function toMonth() {
+    if(getPage()!==1){
+        pageTurning(1)
     }
 }
 
@@ -51,13 +56,14 @@ export function createHeader() {
             {
                 name: 'span',
                 val: getYear() + '年',
-                event: pageToggle,
+                event: toYear,
                 class: headerYearClass,
                 update: {method: updateHeader, name: 'ye'}
             },
             {
                 name: 'span',
                 val: getRealMonth() + '月',
+                event: toMonth,
                 class: headerMonthClass,
                 update: {method: updateHeader, name: 'me'}
             },

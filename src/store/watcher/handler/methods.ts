@@ -1,7 +1,7 @@
 import {
     getDP,
     getHeader,
-    getMonth,
+    getMonth, getOP,
     getOptions,
     getPop,
     getReference,
@@ -53,20 +53,25 @@ export function watchVisible(value: boolean) {
 }
 
 export function isShow(arr:HTMLElement[],isShow:boolean) {
-    const display = isShow?'block':'none'
+    const display = isShow?'':'none'
     arr.forEach(_a=>_a.style.display=display)
 }
 export function watchPageIdx(value:number) {
     const {ye,me,ar,al} = getHeader()
     const {header,body} = getDP()
+    const {month} = getOP()
     const year = getYear()
     let period = (year as number) + 9
     if(!ye||!me||!ar||!al||!header||!body)return
     if(value===2){
         ye.innerText =  year+' - '+period
+        isShow([me,al,ar,header,body,month],false)
+    }else if(value===1){
         isShow([me,al,ar,header,body],false)
+        isShow([month],true)
     }else if(value===0){
         isShow([me,al,ar,header,body],true)
+        isShow([month],false)
     }
 }
 export function watchPopover(value: HTMLElement) {

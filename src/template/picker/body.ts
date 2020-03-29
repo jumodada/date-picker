@@ -1,16 +1,17 @@
 import {createNode, addAttr, removeClass, resetAttr, toggleClass} from "../../utils/dom-utils/element"
 import {createNodeArguments} from "../../types/methods"
-import { getDP, getMonth, getYear, updateDate, updateDP} from "../../store"
+import {getDP, getMonth, getOP, getYear, pageTurning, updateDate, updateDP, updateMonth, updateOP} from "../../store"
 import {getLastMonthHasDays, getMonthHasDays, getSelectDate, joinDate, whatDayIsMonthFirstDay} from "../../utils/date"
 import nexttick from "../../utils/nexttick"
 import {_Event} from "../../types/event"
-import {notThisMonth, selectedClass, thisMonth} from "../../utils/class-name"
+import {dayBody, monthBody, notThisMonth, selectedClass, thisMonth} from "../../utils/class-name"
+import {dpKey, opKey} from "../../types/template"
+import {dayName, monthName} from "../../i18n/zh-CN"
 
 
 export function createDayHeader(): (HTMLElement | Element) {
     const childrenNodes: createNodeArguments[] = []
-    const names = ['日', '一', '二', '三', '四', '五', '六']
-    names.forEach(name => {
+    dayName.forEach(name => {
         let node: createNodeArguments = {name: 'li', val: name}
         childrenNodes.push(node)
     })
@@ -18,7 +19,7 @@ export function createDayHeader(): (HTMLElement | Element) {
         name: 'ul',
         class: 'fl-dateTimePicker-body-day-header',
         update: {method: updateDP, name: 'header'},
-        children: childrenNodes
+        children: childrenNodes,
     })
 }
 
@@ -28,29 +29,56 @@ export function toSelectDate(e: _Event): void {
     let [year, month] = [getYear(), getMonth()]
     if (view === 'pre' && --month === 0) {
         year--
-        month=12
+        month = 12
     } else if (view === 'next' && ++month === 13) {
         year++
-        month=1
+        month = 1
     }
     innerText = joinDate<number, string>(year, month, innerText)
     console.log(innerText)
     updateDate(innerText)
 }
 
-export function createDayBody(): (HTMLElement | Element) {
+export function toSelectMonth(e: _Event): void {
+    let parentNode = getOP().month
+    let {target} = e
+    let selectIMonth = Array.from(parentNode.childNodes).findIndex(child=>(child as any)===target)+1
+    updateMonth(selectIMonth)
+    pageTurning(0)
+}
+
+export function createPageBody<T>(
+    amount: number,
+    event: (e: _Event) => any,
+    classes: string,
+    update: (val: any, key: T) => any,
+    updateName: string,
+    initial?: 'hidden'
+): (HTMLElement | Element) {
     const childrenNodes: createNodeArguments[] = []
-    Array.from({length: 42}).forEach(() => {
-        let node: createNodeArguments = {name: 'li', event: toSelectDate}
+    Array.from({length: amount}).forEach(() => {
+        let node: createNodeArguments = {name: 'li', event: event}
         childrenNodes.push(node)
     })
     return createNode({
         name: 'ul',
-        class: 'fl-dateTimePicker-body-day-body',
-        update: {method: updateDP, name: 'body'},
-        children: childrenNodes
+        class: classes,
+        update: {method: update, name: updateName},
+        children: childrenNodes,
+        initial: initial
     })
 }
+
+export function createDayBody(): (HTMLElement | Element) {
+    return createPageBody<dpKey>(
+        42, toSelectDate, dayBody, updateDP, 'body')
+}
+
+export function createMonthBody(): (HTMLElement | Element) {
+    return createPageBody<opKey>(
+        12, toSelectMonth, monthBody, updateOP, 'month', 'hidden')
+}
+
 
 export function renderDate() {
     nexttick(() => {
@@ -75,31 +103,38 @@ export function renderDate() {
                 } else {
                     innerText = i - firstDay
                 }
-                if(innerText===selectDay&&!view){
+                if (innerText === selectDay && !view) {
                     addAttr(node, selectedClass)
-                }else{
-                    removeClass(node,selectedClass)
+                } else {
+                    removeClass(node, selectedClass)
                 }
                 node.innerText = innerText.toString()
-                toggleClass(node, isFade?[notThisMonth,thisMonth]:[thisMonth,notThisMonth])
+                toggleClass(node, isFade ? [notThisMonth, thisMonth] : [thisMonth, notThisMonth])
                 resetAttr(node, view, 'data-view')
             }
         } else {
             console.error('renderDate error ')
         }
     })
-
 }
 
+export function renderMonth() {
+    nexttick(() => {
+        let childrenNodes = getOP().month.childNodes
+        childrenNodes.forEach((node, index) => {
+            (node as HTMLElement).innerText = monthName[index].toString()
+        })
+    })
+}
 
-
-export function createDayPage() {
+export function createBody() {
     return createNode({
         name: 'div',
         class: 'fl-dateTimePicker-body',
         children: [
             {el: createDayHeader()},
             {el: createDayBody()},
+            {el: createMonthBody()},
         ]
     })
 }

@@ -10,5 +10,11 @@ export interface DayPage {
     body:(HTMLElement)
 }
 
+export interface OtherPage {
+    month:HTMLElement
+    year:(HTMLElement)
+}
+
 export type headerKey = 'ar'|'al'|'ye'|'me'
 export type dpKey = 'header'|'body'
+export type opKey = 'month'|'year'

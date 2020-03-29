@@ -26,6 +26,11 @@ const nodeOptions: NodeOptions = {
     name: () => {
         // todo
     },
+    initial:(el, node)=>{
+        if(node.initial==='hidden'){
+            addAttr(el,'display:none','style')
+        }
+    }
 }
 
 

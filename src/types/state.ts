@@ -27,6 +27,10 @@ export interface stateValue {
         header:any
         body:any
     }
+    otherPage:{
+        year:any
+        month:any
+    }
 
 }
 export type State = stateValue[]

@@ -1,7 +1,7 @@
-$blue:#26acee;
-$text-color:rgba(0, 0, 0, 0.62);
-$text-color-fade-1:rgba(0, 0, 0, 0.42);
-$text-color-fade-2:rgba(0, 0, 0, 0.22);
+$blue: #26acee;
+$text-color: rgba(0, 0, 0, 0.62);
+$text-color-fade-1: rgba(0, 0, 0, 0.42);
+$text-color-fade-2: rgba(0, 0, 0, 0.22);
 .fl-dateTimePicker {
   box-sizing: border-box;
   margin: 0;
@@ -11,13 +11,14 @@ $text-color-fade-2:rgba(0, 0, 0, 0.22);
   font-variant: tabular-nums;
   list-style: none;
   width: 320px;
-  min-height: 300px;
+  min-height: 200px;
   background-color: #ffffff;
   box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+
   span {
     padding: 5px 9px;
     text-align: center;
@@ -34,6 +35,7 @@ $text-color-fade-2:rgba(0, 0, 0, 0.22);
     transform: translateY(-50%);
     width: 15px;
     height: 15px;
+
     &:hover {
       fill: $blue;
     }
@@ -66,11 +68,22 @@ $text-color-fade-2:rgba(0, 0, 0, 0.22);
       padding-left: 4px !important;
     }
   }
-  &-body{
+
+  &-body {
     margin-top: 10px;
     text-align: center;
     padding: 10px;
-    li{
+
+    ul {
+      text-align: center;
+      color: $text-color;
+      width: 300px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
       display: inline-block;
       width: 40px;
       border-radius: 5px;
@@ -81,45 +94,57 @@ $text-color-fade-2:rgba(0, 0, 0, 0.22);
       position: relative;
       transition: .3s color ease;
     }
-    ul{
-      text-align: center;
-      color: $text-color;
-      width: 300px;
-      margin:0;
-      padding: 0;
-      list-style: none;
-    }
-    &-day{
-      &-header{
-       li{
-         color: $text-color-fade-1;
-       }
+
+    &-day {
+      &-header {
+        li {
+          color: $text-color-fade-1;
+        }
       }
-      &-body{
-        li{
+
+      &-body {
+        li {
           cursor: pointer;
         }
       }
     }
+
+    &-month-body {
+      li {
+        cursor: pointer;
+        width: 70px;
+        height: 50px;
+        line-height: 44px;
+        &:hover{
+          color: $blue;
+        }
+      }
+    }
   }
-  &-today{
+
+  &-today {
     border: 1px solid $blue;
-    &:hover{
+
+    &:hover {
       background-color: $blue;
       color: white !important;
     }
   }
-  &-not-this-month{
-   color: $text-color-fade-2;
+
+  &-not-this-month {
+    color: $text-color-fade-2;
   }
-  &-this-month{
-    &:hover{
+
+  &-this-month {
+    &:hover {
       color: $blue !important;
     }
   }
-  &-isSelect-day{
+
+  &-isSelect-day {
     color: white;
-    &:after{
+
+    &:after {
       display: block;
       content: '';
       border-radius: 50%;
@@ -130,9 +155,10 @@ $text-color-fade-2:rgba(0, 0, 0, 0.22);
       height: 30px;
       left: 50%;
       top: 50%;
-      transform: translate(-50%,-50%);
+      transform: translate(-50%, -50%);
     }
-    &:hover{
+
+    &:hover {
       color: white !important;
     }
   }

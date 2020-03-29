@@ -5,7 +5,7 @@ import nextTick from '../utils/nexttick'
 import {Rect, rectKey} from "../types/state"
 import {createNode} from "../utils/dom-utils/element"
 import {createHeader} from "./picker/header"
-import {createDayPage} from "./picker/body"
+import {createBody} from "./picker/body"
 const  transform = {
     top: `translate(0,-100%)`,
     left: `translate(-100%,0)`,
@@ -19,7 +19,7 @@ export function createPopover() {
         name:'div',
         children:[
             {el:createHeader()},
-            {el:createDayPage()},
+            {el:createBody()},
         ],
         update:{method:updatePop}
     })

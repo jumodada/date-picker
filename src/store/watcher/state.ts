@@ -19,6 +19,10 @@ export default class InitState {
        header:any
        body:any
     }
+    otherPage:{
+        year:any
+        month:any
+    }
     month:number
     date:Date
     pageIdx:number
@@ -41,6 +45,10 @@ export default class InitState {
         this.dayPage= {
             header:null,
             body:null
+        }
+        this.otherPage = {
+            month:null,
+            year:null
         }
         this.pageIdx = 0
     }

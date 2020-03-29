@@ -20,6 +20,7 @@ export interface createNodeArguments {
         method:(val:any,key:any)=>any
     },
     children?:createNodeArguments[]
+    initial?:'hidden'
 }
 
 export type watchHandleKey =
@@ -51,7 +52,8 @@ export interface NodeOptions<T=(el:HTMLElement,node:createNodeArguments)=>any> {
     update:T
     children:T
     name:()=>void
-    val:T
+    val:T,
+    initial:T
 }
 export type nodeKey =
     'event'|
@@ -60,4 +62,5 @@ export type nodeKey =
     'update'|
     'children'|
     'name'|
-    'val'
+    'val'|
+    'initial'
