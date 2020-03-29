@@ -91,6 +91,8 @@ export function renderDate() {
 
 }
 
+
+
 export function createDayPage() {
     return createNode({
         name: 'div',

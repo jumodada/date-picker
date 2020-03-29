@@ -73,23 +73,25 @@ export function addAttr(el: HTMLElement, val: string, name?: string) {
     }
 }
 
-function filterClasses(classes:string,val:string) {
-    return classes.split(' ').filter(c => c !== val && c).join(' ')
+function filterClasses(classes:string,val:string[]) {
+    val.forEach(v=>{
+        classes = classes.split(' ').filter(c => c !== v && c).join(' ')
+    })
+    return classes
 }
 
 export function toggleClass(el: HTMLElement, val: string[]) {
     let classes = el.getAttribute('class')
     if (!classes) classes= ''
     let [fv, sv] = [val[0], val[1]]
-    const toggle = [sv,fv]
-    classes = filterClasses(classes,toggle[0]) + ' ' + toggle[1]
+    classes = filterClasses(classes,[fv,sv]) + ' ' + fv
     el.setAttribute('class', classes)
 }
 
 export function removeClass(el: HTMLElement, val: string) {
     let attrVal: string | null = el.getAttribute('class')
     if (attrVal && attrVal.indexOf(val) > -1) {
-        attrVal = attrVal.split(' ').filter(c => c !== val && c).join(' ')
+        attrVal = filterClasses(attrVal,[val])
         el.setAttribute('class', attrVal)
     }
 }
