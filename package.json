@@ -1,6 +1,6 @@
 {
-  "name": "date-picker",
-  "version": "1.0.0",
+  "name": "flex-date-picker",
+  "version": "1.0.1",
   "description": "轻量好用的日期选择器",
   "main": "dist/flexDatePicker.umd.js",
   "module": "dist/flexDatePicker.es5.js",
@@ -9,9 +9,10 @@
     "bd": "webpack --config build/webpack.config.js",
     "dev": "webpack-dev-server --config build/webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prebp": "rimraf dist",
     "bp": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
-    "prepub": "npm run bp",
-    "pub": "sh release.sh"
+    "pub": "sh release.sh",
+    "prepub": "npm run bp"
   },
   "repository": {
     "type": "git",
@@ -34,7 +35,7 @@
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9"
   },
-  "author": "jumodada",
+  "author": "jumodada <864353360@qq.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jumodada/date-picker/issues"
