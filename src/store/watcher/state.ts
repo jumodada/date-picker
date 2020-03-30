@@ -1,6 +1,6 @@
 import InitOptions from "../../initial-options"
-import {getFullYear,getRealMonth} from "../../utils/date"
 import flexOptions from "../../types/options"
+import {getFullYear, getRealMonth} from "../../utils/date"
 
 export default class InitState {
     reference:null|HTMLElement

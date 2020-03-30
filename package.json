@@ -2,9 +2,9 @@
   "name": "date-picker",
   "version": "1.0.0",
   "description": "轻量好用的日期选择器",
-  "main": "dist/axios.umd.js",
-  "module": "dist/axios.es5.js",
-  "typings": "dist/types/axios.d.ts",
+  "main": "dist/flexDatePicker.umd.js",
+  "module": "dist/flexDatePicker.es5.js",
+  "typings": "dist/types/flexDatePicker.d.ts",
   "scripts": {
     "bd": "webpack --config build/webpack.config.js",
     "dev": "webpack-dev-server --config build/webpack.config.js",
