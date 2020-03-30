@@ -46,7 +46,6 @@ export function toSelectDate(e: _Event): void {
         month = 1
     }
     innerText = joinDate<number, string>(year, month, innerText)
-    console.log(innerText)
     updateDate(innerText)
 }
 

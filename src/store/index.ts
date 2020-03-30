@@ -92,7 +92,6 @@ const Store = (function () {
         }
         if (equalDate(_getDate(),date)) return
         state[uid].date = date
-        renderDate()
     }
 
     function _getVisible(): boolean {

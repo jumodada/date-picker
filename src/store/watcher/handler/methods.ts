@@ -2,7 +2,7 @@ import {
     getDP,
     getHeader,
     getMonth, getOP,
-    getOptions,
+    getOptions, getPage,
     getPop,
     getReference,
     getYear,
@@ -16,7 +16,7 @@ import {isElementExist} from "../../../utils/dom-utils/is-element-exist"
 import {createPopover, updatePopover} from "../../../template"
 import {appendChild} from "../../../utils/dom-utils/element"
 import {setPopoverStyle} from "../../../template/style"
-import {renderDate} from "../../../template/picker/body"
+import {renderDate, renderYear} from "../../../template/picker/body"
 
 export function watchOptions() {
 // todo
@@ -30,6 +30,7 @@ export function watchDate(value:Date) {
     const month = value.getMonth()+1
     updateYear(year)
     updateMonth(month)
+    renderDate()
 }
 export function watchReference(ref: HTMLElement) {
     const preElement = getReference()
@@ -86,16 +87,24 @@ export function watchPopover(value: HTMLElement) {
     }
 }
 export function watchYear(value:number):void {
+    if(getYear()===value)return
+    const page = getPage()
     const {ye} = getHeader()
     if(ye){
         ye.innerText = value.toString()+'年'
     }
-    renderDate()
+    if(page===2){
+        renderYear()
+    }else if(page===0){
+        renderDate()
+    }
 }
 export function watchMonth(value:number):void {
+    if(getMonth()===value)return
+    const page = getPage()
     const {me} = getHeader()
     if(me){
         me.innerText = value.toString()+'月'
     }
-    renderDate()
+    if(page===0)renderDate()
 }

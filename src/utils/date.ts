@@ -53,7 +53,7 @@ export function getSelectDate<T=number>():number|boolean {
 
 export function equalDate(preDate:Date,curDate:Date){
     if(!preDate||!curDate)return false
-    const [py,pm,pd] = [preDate.getFullYear(),preDate.getMonth(),preDate.getDay()]
-    const [cy,cm,cd] = [curDate.getFullYear(),curDate.getMonth(),curDate.getDay()]
+    const [py,pm,pd] = [preDate.getFullYear(),preDate.getMonth(),preDate.getDate()]
+    const [cy,cm,cd] = [curDate.getFullYear(),curDate.getMonth(),curDate.getDate()]
     return py===cy&&pm===cm&&pd===cd
 }
