@@ -12,7 +12,7 @@ import {
 import flexOptions from "../../../types/options"
 import {on, remove} from "../../../event/eventListener"
 import clickOutside from "../../../utils/clickoutside"
-import {isElementExist} from "../is-element-exist"
+import {isElementExist} from "../../../utils/dom-utils/is-element-exist"
 import {createPopover, updatePopover} from "../../../template"
 import {appendChild} from "../../../utils/dom-utils/element"
 import {setPopoverStyle} from "../../../template/style"
@@ -59,19 +59,20 @@ export function isShow(arr:HTMLElement[],isShow:boolean) {
 export function watchPageIdx(value:number) {
     const {ye,me,ar,al} = getHeader()
     const {header,body} = getDP()
-    const {month} = getOP()
-    const year = getYear()
-    let period = (year as number) + 9
+    const {month,year} = getOP()
+    const yearVal = getYear()
+    let period = (yearVal as number) + 9
     if(!ye||!me||!ar||!al||!header||!body)return
     if(value===2){
-        ye.innerText =  year+' - '+period
+        ye.innerText =  yearVal+' - '+period
         isShow([me,al,ar,header,body,month],false)
+        isShow([year],true)
     }else if(value===1){
-        isShow([me,al,ar,header,body],false)
+        isShow([me,al,ar,header,body,year],false)
         isShow([month],true)
     }else if(value===0){
         isShow([me,al,ar,header,body],true)
-        isShow([month],false)
+        isShow([month,year],false)
     }
 }
 export function watchPopover(value: HTMLElement) {

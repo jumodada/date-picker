@@ -42,6 +42,7 @@ export function joinDate<T=number,U=string>(year:T|U,month:T|U,day:T|U) {
 
 export function getSelectDate<T=number>():number|boolean {
     let date = getDate()
+    if(!date)return 0
     let [year,month] = [getFullYear(date),getRealMonth(date)]
     if(year===getYear()&&month===getMonth()){
         return getDay(date)
@@ -51,6 +52,7 @@ export function getSelectDate<T=number>():number|boolean {
 }
 
 export function equalDate(preDate:Date,curDate:Date){
+    if(!preDate||!curDate)return false
     const [py,pm,pd] = [preDate.getFullYear(),preDate.getMonth(),preDate.getDay()]
     const [cy,cm,cd] = [curDate.getFullYear(),curDate.getMonth(),curDate.getDay()]
     return py===cy&&pm===cm&&pd===cd

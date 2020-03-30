@@ -75,7 +75,6 @@ $text-color-fade-2: rgba(0, 0, 0, 0.22);
     padding: 10px;
 
     ul {
-      text-align: center;
       color: $text-color;
       width: 300px;
       margin: 0;
@@ -84,6 +83,7 @@ $text-color-fade-2: rgba(0, 0, 0, 0.22);
     }
 
     li {
+      text-align: center;
       display: inline-block;
       width: 40px;
       border-radius: 5px;
@@ -109,8 +109,9 @@ $text-color-fade-2: rgba(0, 0, 0, 0.22);
       }
     }
 
-    &-month-body {
+    &-month-body,&-year-body {
       li {
+        color: $text-color-fade-1;
         cursor: pointer;
         width: 70px;
         height: 50px;
@@ -118,6 +119,14 @@ $text-color-fade-2: rgba(0, 0, 0, 0.22);
         &:hover{
           color: $blue;
         }
+      }
+    }
+    &-year-body {
+      width: 280px !important;
+      display: inline-block;
+      text-align: left;
+      li {
+          font-size: 16px;
       }
     }
   }

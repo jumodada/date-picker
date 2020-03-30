@@ -1,10 +1,21 @@
 import {createNode, addAttr, removeClass, resetAttr, toggleClass} from "../../utils/dom-utils/element"
 import {createNodeArguments} from "../../types/methods"
-import {getDP, getMonth, getOP, getYear, pageTurning, updateDate, updateDP, updateMonth, updateOP} from "../../store"
+import {
+    getDP,
+    getMonth,
+    getOP,
+    getYear,
+    pageTurning,
+    updateDate,
+    updateDP,
+    updateMonth,
+    updateOP,
+    updateYear
+} from "../../store"
 import {getLastMonthHasDays, getMonthHasDays, getSelectDate, joinDate, whatDayIsMonthFirstDay} from "../../utils/date"
 import nexttick from "../../utils/nexttick"
 import {_Event} from "../../types/event"
-import {dayBody, monthBody, notThisMonth, selectedClass, thisMonth} from "../../utils/class-name"
+import {dayBody, monthBody, notThisMonth, selectedClass, thisMonth, yearBody} from "../../utils/class-name"
 import {dpKey, opKey} from "../../types/template"
 import {dayName, monthName} from "../../i18n/zh-CN"
 
@@ -47,6 +58,14 @@ export function toSelectMonth(e: _Event): void {
     pageTurning(0)
 }
 
+export function toSelectYear(e: _Event): void {
+    let parentNode = getOP().year
+    let {target} = e
+    let selectIYear= (Array.from(parentNode.childNodes).find(child=>(child as any)===target) as HTMLElement).innerText
+    updateYear(Number(selectIYear))
+    pageTurning(1)
+}
+
 export function createPageBody<T>(
     amount: number,
     event: (e: _Event) => any,
@@ -79,6 +98,10 @@ export function createMonthBody(): (HTMLElement | Element) {
         12, toSelectMonth, monthBody, updateOP, 'month', 'hidden')
 }
 
+export function createYearBody(): (HTMLElement | Element) {
+    return createPageBody<opKey>(
+        10, toSelectYear, yearBody, updateOP, 'year', 'hidden')
+}
 
 export function renderDate() {
     nexttick(() => {
@@ -127,6 +150,16 @@ export function renderMonth() {
     })
 }
 
+export function renderYear() {
+    nexttick(() => {
+        let childrenNodes = getOP().year.childNodes
+        const year = getYear()
+        childrenNodes.forEach((node, index) => {
+            (node as HTMLElement).innerText = (year+index).toString()
+        })
+    })
+}
+
 export function createBody() {
     return createNode({
         name: 'div',
@@ -135,6 +168,7 @@ export function createBody() {
             {el: createDayHeader()},
             {el: createDayBody()},
             {el: createMonthBody()},
+            {el: createYearBody()},
         ]
     })
 }

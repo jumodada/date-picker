@@ -3,7 +3,7 @@ import initState from "./watcher"
 import {Rect, State, stateValue} from "../types/state"
 import {isNumber} from "../utils/type-of"
 import {DayPage, dpKey, Header, headerKey, opKey, OtherPage} from "../types/template"
-import {renderDate, renderMonth} from "../template/picker/body"
+import {renderDate, renderMonth, renderYear} from "../template/picker/body"
 import {equalDate} from "../utils/date"
 
 const Store = (function () {
@@ -90,7 +90,7 @@ const Store = (function () {
         } else {
             date = new Date(val)
         }
-        if (equalDate(date, _getDate())) return
+        if (equalDate(_getDate(),date)) return
         state[uid].date = date
         renderDate()
     }
@@ -160,6 +160,8 @@ const Store = (function () {
         state[uid].otherPage[key] = val
         if (key === 'month') {
             renderMonth()
+        }else if(key==='year'){
+            renderYear()
         }
     }
     function _getPage(): number {
