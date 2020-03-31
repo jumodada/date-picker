@@ -6,11 +6,11 @@
   "module": "dist/flexDatePicker.es5.js",
   "typings": "dist/types/flexDatePicker.d.ts",
   "scripts": {
-    "bd": "webpack --config build/webpack.config.js",
-    "dev": "webpack-dev-server --config build/webpack.config.js",
+    "buildcss": "webpack --config build/webpack.config.js",
+    "dev": "webpack-dev-server --config build/webpack.demo.config.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prebp": "rimraf dist",
-    "bp": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
+    "prebuild": "rimraf dist",
+    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
     "pub": "sh release.sh",
     "prepub": "npm run bp"
   },
@@ -18,9 +18,7 @@
     "type": "git",
     "url": "git+https://github.com/jumodada/date-picker.git"
   },
-  "dependencies": {
-
-  },
+  "dependencies": {},
   "author": "jumodada <864353360@qq.com>",
   "license": "MIT",
   "bugs": {
@@ -39,6 +37,8 @@
     "rollup-plugin-commonjs": "^9.1.8",
     "rollup-plugin-json": "^3.1.0",
     "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-postcss": "^2.5.0",
+    "rollup-plugin-sass": "^1.2.2",
     "rollup-plugin-sourcemaps": "^0.4.2",
     "rollup-plugin-typescript2": "^0.18.0",
     "sass-loader": "^7.1.0",
