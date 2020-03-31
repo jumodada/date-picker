@@ -6,11 +6,11 @@
   "module": "dist/flexDatePicker.es5.js",
   "typings": "dist/types/flexDatePicker.d.ts",
   "scripts": {
-    "bd": "webpack --config build/webpack.config.js",
+    "bc": "gulp build --gulpfile src/assets/gulpfile.js && cp-cli src/assets/lib lib",
     "dev": "webpack-dev-server --config build/webpack.demo.config.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebp": "rimraf dist",
-    "bp": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
+    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
     "pub": "sh release.sh",
     "prepub": "npm run bp"
   },
@@ -79,6 +79,10 @@
     "typedoc": "^0.16.11",
     "typescript": "^3.0.3",
     "vue-router": "^3.1.6",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "gulp": "^4.0.0",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-sass": "^4.0.2",
+    "cp-cli": "^1.0.2"
   }
 }
