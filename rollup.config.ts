@@ -4,7 +4,8 @@ import sourceMaps from 'rollup-plugin-sourcemaps'
 import camelCase from 'lodash.camelcase'
 import typescript from 'rollup-plugin-typescript2'
 import json from 'rollup-plugin-json'
-
+import postcss from 'rollup-plugin-postcss'
+import postScss from 'rollup-plugin-sass'
 const pkg = require('./package.json')
 
 const libraryName = 'flex-date-time-picker'
@@ -23,6 +24,12 @@ export default {
   plugins: [
     // Allow json resolution
     json(),
+    postScss({
+      extensions: ['.scss']
+    }),
+    postcss({
+      extensions: ['.css']
+    }),
     // Compile TypeScript files
     typescript({ useTsconfigDeclarationDir: true }),
     // Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)

@@ -6,11 +6,11 @@
   "module": "dist/flexDatePicker.es5.js",
   "typings": "dist/types/flexDatePicker.d.ts",
   "scripts": {
-    "bd": "webpack --config build/webpack.config.js",
-    "dev": "webpack-dev-server --config build/webpack.config.js",
+    "buildcss": "webpack --config build/webpack.config.js",
+    "dev": "webpack-dev-server --config build/webpack.demo.config.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prebp": "rimraf dist",
-    "bp": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
+    "prebuild": "rimraf dist",
+    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
     "pub": "sh release.sh",
     "prepub": "npm run bp"
   },
@@ -18,23 +18,7 @@
     "type": "git",
     "url": "git+https://github.com/jumodada/date-picker.git"
   },
-  "dependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/preset-env": "^7.6.3",
-    "babel-loader": "^8.0.6",
-    "css-loader": "^3.2.0",
-    "highlight.js": "^9.16.2",
-    "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^3.2.0",
-    "markdown-loader": "^5.1.0",
-    "marked": "^0.6.1",
-    "text-loader": "^0.0.1",
-    "vue": "^2.5.17",
-    "vue-loader": "^15.7.1",
-    "vue-style-loader": "^4.1.2",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9"
-  },
+  "dependencies": {},
   "author": "jumodada <864353360@qq.com>",
   "license": "MIT",
   "bugs": {
@@ -44,19 +28,7 @@
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/preset-env": "^7.6.3",
-    "@vue/cli-plugin-babel": "^3.4.0",
-    "@vue/cli-plugin-unit-mocha": "^3.4.0",
-    "@vue/cli-service": "^3.4.0",
-    "@vue/test-utils": "^1.0.0-beta.20",
-    "animejs": "^3.1.0",
-    "babel-loader": "^8.0.6",
-    "clean-webpack-plugin": "^3.0.0",
     "lodash.camelcase": "^4.3.0",
-    "markdown-it": "^10.0.0",
-    "markdown-it-anchor": "^5.0.2",
-    "markdown-it-chain": "^1.3.0",
-    "markdown-it-container": "^2.0.0",
-    "markdown-it-emoji": "^1.4.0",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.9.0",
     "path": "^0.12.7",
@@ -65,10 +37,11 @@
     "rollup-plugin-commonjs": "^9.1.8",
     "rollup-plugin-json": "^3.1.0",
     "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-postcss": "^2.5.0",
+    "rollup-plugin-sass": "^1.2.2",
     "rollup-plugin-sourcemaps": "^0.4.2",
     "rollup-plugin-typescript2": "^0.18.0",
     "sass-loader": "^7.1.0",
-    "sass-resources-loader": "^2.0.1",
     "style-loader": "^1.0.0",
     "transliteration": "^2.1.7",
     "ts-loader": "^6.2.1",
@@ -77,8 +50,6 @@
     "tslint-config-standard": "^8.0.1",
     "tslint-loader": "^3.5.4",
     "typedoc": "^0.16.11",
-    "typescript": "^3.0.3",
-    "vue-router": "^3.1.6",
-    "vue-template-compiler": "^2.6.10"
+    "typescript": "^3.0.3"
   }
 }
