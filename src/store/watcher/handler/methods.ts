@@ -87,12 +87,12 @@ export function watchPopover(value: HTMLElement) {
     }
 }
 export function watchYear(value:number):void {
-    if(getYear()===value)return
     const page = getPage()
     const {ye} = getHeader()
     if(ye){
         ye.innerText = value.toString()+'年'
     }
+    if(getYear()===value)return
     if(page===2){
         renderYear()
     }else if(page===0){
