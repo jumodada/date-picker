@@ -101,10 +101,9 @@ export function watchYear(value:number):void {
 }
 export function watchMonth(value:number):void {
     if(getMonth()===value)return
-    const page = getPage()
     const {me} = getHeader()
     if(me){
         me.innerText = value.toString()+'月'
     }
-    if(page===0)renderDate()
+    renderDate()
 }
