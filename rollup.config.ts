@@ -4,9 +4,9 @@ import sourceMaps from 'rollup-plugin-sourcemaps'
 import camelCase from 'lodash.camelcase'
 import typescript from 'rollup-plugin-typescript2'
 import json from 'rollup-plugin-json'
-import {uglify} from 'rollup-plugin-uglify'
 const pkg = require('./package.json')
 import babel from 'rollup-plugin-babel'
+import { terser } from 'rollup-plugin-terser'
 const libraryName = 'flex-date-time-picker'
 
 const config = {
@@ -34,10 +34,11 @@ const config = {
 
     // Resolve source maps to the original source
     sourceMaps(),
-    uglify(),
+    terser(),
     babel({
-      exclude: 'node_modules/**',
-    })
+      exclude: 'node_modules/**', // 防止打包node_modules下的文件
+      runtimeHelpers: true,       // 使plugin-transform-runtime生效
+    }),
   ],
 }
 
