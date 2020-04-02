@@ -4,11 +4,12 @@ import sourceMaps from 'rollup-plugin-sourcemaps'
 import camelCase from 'lodash.camelcase'
 import typescript from 'rollup-plugin-typescript2'
 import json from 'rollup-plugin-json'
+import {uglify} from 'rollup-plugin-uglify'
 const pkg = require('./package.json')
-
+import babel from 'rollup-plugin-babel'
 const libraryName = 'flex-date-time-picker'
 
-export default {
+const config = {
   input: `src/index.ts`,
   output: [
     { file: pkg.main, name: camelCase(libraryName), format: 'umd', sourcemap: true },
@@ -33,5 +34,11 @@ export default {
 
     // Resolve source maps to the original source
     sourceMaps(),
+    uglify(),
+    babel({
+      exclude: 'node_modules/**',
+    })
   ],
 }
+
+export default config
