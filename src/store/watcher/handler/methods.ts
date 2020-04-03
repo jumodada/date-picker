@@ -1,15 +1,13 @@
 import {
     getDP,
     getHeader,
-    getMonth, getOP,
-    getOptions, getPage,
+    getMonth, getOP, getPage,
     getPop,
     getReference,
     getYear,
     openPopover, updateMonth,
     updateYear
 } from "../../index"
-import flexOptions from "../../../types/options"
 import {on, remove} from "../../../event/eventListener"
 import clickOutside from "../../../utils/clickoutside"
 import {isElementExist} from "../../../utils/dom-utils/is-element-exist"
@@ -34,11 +32,10 @@ export function watchDate(value:Date) {
 }
 export function watchReference(ref: HTMLElement) {
     const preElement = getReference()
-    const {trigger} = getOptions() as flexOptions
-    remove(preElement, (trigger as any), openPopover)
+    remove(preElement, 'click', openPopover)
     remove(document.body,'click', clickOutside)
     if(ref){
-        on(ref, (trigger as any), openPopover)
+        on(ref, 'click', openPopover)
         on(document.body, 'click', clickOutside)
     }
 }
@@ -53,9 +50,9 @@ export function watchVisible(value: boolean) {
     }
 }
 
-export function isShow(arr:HTMLElement[],isShow:boolean) {
-    const display = isShow?'':'none'
-    arr.forEach(_a=>_a.style.display=display)
+export function isShow(...arr:any) {
+    const display = arguments[0]?'':'none'
+    Array.from(arguments).slice(1).forEach(_a=>_a.style.display=display)
 }
 export function watchPageIdx(value:number) {
     const {ye,me,ar,al} = getHeader()
@@ -63,17 +60,18 @@ export function watchPageIdx(value:number) {
     const {month,year} = getOP()
     const yearVal = getYear()
     let period = (yearVal as number) + 9
-    if(!ye||!me||!ar||!al||!header||!body)return
+    const date = [me,al,ar,header,body]
+    if(!ye)return
     if(value===2){
         ye.innerText =  yearVal+' - '+period
-        isShow([me,al,ar,header,body,month],false)
-        isShow([year],true)
+        isShow(false,...date,month)
+        isShow(true,year)
     }else if(value===1){
-        isShow([me,al,ar,header,body,year],false)
-        isShow([month],true)
+        isShow(false,...date,year)
+        isShow(true,month)
     }else if(value===0){
-        isShow([me,al,ar,header,body],true)
-        isShow([month,year],false)
+        isShow(true,...date,body)
+        isShow(false,month,year)
     }
 }
 export function watchPopover(value: HTMLElement) {

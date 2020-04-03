@@ -18,7 +18,7 @@ export default class Flex {
         if (!isInputElement(_inputElement as any)) return
         pushInState()
         updateReference(_inputElement)
-        ;(options as any) = mergeOptions<flexOptions>(this.defaults, options)
+        options = mergeOptions<flexOptions>(this.defaults, options)
         updateOptions(options)
 
     }

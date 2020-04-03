@@ -14,8 +14,8 @@ export default {
         }
     },
     mounted(){
-        this.$dp(this.$refs.test1.$el,{trigger:'click'})
-        this.$dp(this.$refs.test2,{trigger:'click'},)
+        this.$dp(this.$refs.test1.$el,{type:'date'})
+        this.$dp(this.$refs.test2,{type:'date-range'},)
     },
     methods:{
         

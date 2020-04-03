@@ -1,12 +1,12 @@
-import {placement, trigger} from "../types/options"
+import {placement, type} from "../types/options"
 
 class InitOptions{
     placement:placement
-    trigger:trigger
+    type:type
     zIndex:number
     constructor() {
-        this.placement = 'bottom-start'
-        this.trigger = 'click'
+        this.placement = 'bottom'
+        this.type = 'date'
         this.zIndex = 2000
     }
 }

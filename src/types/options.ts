@@ -1,14 +1,14 @@
 export type placement =
-    'top'|'top-start'|'top-end'|
-    'left'|'left-start'|'left-end'|
-    'bottom'|'bottom-start'|'bottom-end'|
-    'right'|'right-start'|'right-end'
+    'top'
+    |'left'
+    |'bottom'
+    |'right'
 
-export type trigger = 'click'|'hover'
+export type type = 'date'|'date-range'
 
 export interface flexOptions {
     placement:placement
-    trigger:trigger
+    type:type
     format?:string
     offset?:number,
     zIndex?:number

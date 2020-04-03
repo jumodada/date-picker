@@ -1,19 +1,19 @@
-import {placement, trigger} from "../types/options"
+import flexOptions, {placement} from "../types/options"
 import {isObject} from "../utils/type-of"
 
-const fixedOptions = {
+const fixedOptions:flexOptions = {
     placement:[
-        'top','top-start','top-end',
-        'left','left-start','left-end',
-        'bottom','bottom-start','bottom-end',
-        'right','right-start','right-end'
+        'top',
+        'left',
+        'bottom',
+        'right'
     ],
-    trigger:['click','hover']
+    type:['date','date-range']
 }
-const checkLists:string[]= ['placement','trigger']
+const checkLists:string[]= ['placement','type']
 
 function _validate(name:string,options:any):boolean {
-    if(name in options&&(fixedOptions as any)[name].indexOf(options[name]!)===-1){
+    if(name in options&&fixedOptions[name].indexOf(options[name]!)===-1){
         console.error(`Invalid ${name} format.`)
         return false
     }
