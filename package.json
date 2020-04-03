@@ -1,6 +1,6 @@
 {
   "name": "flex-date-picker",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "轻量好用的日期选择器",
   "main": "dist/flexDatePicker.umd.js",
   "module": "dist/flexDatePicker.es5.js",
@@ -17,21 +17,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jumodada/date-picker.git"
-  },
-  "dependencies": {
-    "@babel/cli": "^7.8.4",
-    "css-loader": "^3.2.0",
-    "highlight.js": "^9.16.2",
-    "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^3.2.0",
-    "markdown-loader": "^5.1.0",
-    "marked": "^0.6.1",
-    "text-loader": "^0.0.1",
-    "vue": "^2.5.17",
-    "vue-loader": "^15.7.1",
-    "vue-style-loader": "^4.1.2",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9"
   },
   "author": "jumodada <864353360@qq.com>",
   "license": "MIT",
@@ -91,6 +76,19 @@
     "typedoc": "^0.16.11",
     "typescript": "^3.0.3",
     "vue-router": "^3.1.6",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "@babel/cli": "^7.8.4",
+    "css-loader": "^3.2.0",
+    "highlight.js": "^9.16.2",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "markdown-loader": "^5.1.0",
+    "marked": "^0.6.1",
+    "text-loader": "^0.0.1",
+    "vue": "^2.5.17",
+    "vue-loader": "^15.7.1",
+    "vue-style-loader": "^4.1.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9"
   }
 }
