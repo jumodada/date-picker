@@ -50,9 +50,11 @@ export function watchVisible(value: boolean) {
     }
 }
 
-export function isShow(...arr:any) {
+export function elementShow(...arr:any) {
     const display = arguments[0]?'':'none'
-    Array.from(arguments).slice(1).forEach(_a=>_a.style.display=display)
+    Array.from(arguments).slice(1).forEach(arg=>{
+        arg.forEach((_a: { style: { display: string } })=>_a.style.display=display)
+    })
 }
 export function watchPageIdx(value:number) {
     const {ye,me,ar,al} = getHeader()
@@ -61,18 +63,13 @@ export function watchPageIdx(value:number) {
     const yearVal = getYear()
     let period = (yearVal as number) + 9
     const date = [me,al,ar,header,body]
+    const $elements = [date,[month],[year]]
     if(!ye)return
     if(value===2){
         ye.innerText =  yearVal+' - '+period
-        isShow(false,...date,month)
-        isShow(true,year)
-    }else if(value===1){
-        isShow(false,...date,year)
-        isShow(true,month)
-    }else if(value===0){
-        isShow(true,...date,body)
-        isShow(false,month,year)
     }
+    elementShow(true,$elements.splice(value,1)[0])
+    elementShow(false,...$elements)
 }
 export function watchPopover(value: HTMLElement) {
     if (value) {
