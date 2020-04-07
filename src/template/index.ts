@@ -5,28 +5,36 @@ import {Rect, rectKey} from "../types/state"
 import {createNode} from "../utils/dom-utils/element"
 import {createHeader} from "./picker/header"
 import {createBody} from "./picker/body"
+import {datepickerClass} from "../utils/class-name";
+import {createLeft} from "./picker/left";
+import {createRight} from "./picker/right";
+
 const transform = {
     top: `translate(0,-100%)`,
     left: `translate(-100%,0)`,
     bottom: `translate(0,0)`,
     right: `translate(0,0)`
 }
-const popoverByType = {
-    date: {
-        children: [{el: createHeader}, {el: createBody}],
-        class: 'fl-dateTimePicker',
-        update: {method: updatePop}
+let popoverByType: any
+
+nextTick(() => {
+    popoverByType = {
+        date: {
+            children: [{el: createHeader}, {el: createBody}],
+            class:datepickerClass,
+            update: {method: updatePop}
+        },
+        'date-range':{
+            children: [{el: createLeft}, {el: createRight}],
+            class: datepickerClass,
+            update: {method: updatePop}
+        }
     }
-}
+})
 
 export function createPopover() {
     const {type} = getOptions()
-    console.log(popoverByType.date)
-    createNode({
-        children: [{el: createHeader}, {el: createBody}],
-        class: 'fl-dateTimePicker',
-        update: {method: updatePop}
-    })
+    createNode(popoverByType[type])
 }
 
 export function updatePopover(el: HTMLElement, value: boolean): void {

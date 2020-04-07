@@ -101,6 +101,14 @@ const Store = (function () {
     function _getYear(): number {
         return state[uid].year
     }
+    function _getEndYear(): number {
+        let month = state[uid].month
+        if(++month>12){
+            return state[uid].year + 1
+        }else{
+            return state[uid].year
+        }
+    }
 
     function _updateYear(val: number) {
         state[uid].year = val
@@ -116,6 +124,15 @@ const Store = (function () {
 
     function _getMonth(): number {
         return state[uid].month
+    }
+
+    function _getEndMonth(): number {
+        let month = state[uid].month
+        if(++month>12){
+            return 1
+        }else{
+            return month
+        }
     }
 
     function _updateMonth(val: number): void {
@@ -141,6 +158,7 @@ const Store = (function () {
     function _updateHeader(val: any, key: headerKey) {
         state[uid].header[key] = val
     }
+
 
     function _getDP(): DayPage {
         return state[uid].dayPage
@@ -189,11 +207,13 @@ const Store = (function () {
         _updatePop,
         _getVisible,
         _getYear,
+        _getEndYear,
         _updateYear,
         _plusYear,
         _getHeader,
         _updateHeader,
         _getMonth,
+        _getEndMonth,
         _updateMonth,
         _plusMonth,
         _pageTurning,
@@ -224,9 +244,11 @@ export const getPop = Store._getPop
 export const updatePop = Store._updatePop
 export const getVisible = Store._getVisible
 export const getYear = Store._getYear
+export const getEndYear = Store._getEndYear
 export const updateYear = Store._updateYear
 export const plusYear = Store._plusYear
 export const getMonth = Store._getMonth
+export const getEndMonth = Store._getEndMonth
 export const updateMonth = Store._updateMonth
 export const plusMonth = Store._plusMonth
 export const getHeader = Store._getHeader

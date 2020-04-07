@@ -1,7 +1,7 @@
 import {
     getDP,
     getHeader,
-    getMonth, getOP, getPage,
+    getMonth, getOP, getOptions, getPage,
     getPop,
     getReference,
     getYear,
@@ -96,9 +96,13 @@ export function watchYear(value:number):void {
 }
 export function watchMonth(value:number):void {
     if(getMonth()===value)return
-    const {me} = getHeader()
+    const {me,rightMe} = getHeader()
+    const {type} = getOptions()
     if(me){
         me.innerText = value.toString()+'月'
+    }
+    if(type==='date-range'){
+        rightMe.innerText = (value+1).toString()+'月'
     }
     renderDate()
 }

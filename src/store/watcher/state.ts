@@ -14,6 +14,8 @@ export default class InitState {
         me:any
         al:any
         ar:any
+        rightYe:any
+        rightMe:any
     }
     dayPage:{
        header:any
@@ -40,11 +42,15 @@ export default class InitState {
             ye:null,
             me:null,
             al:null,
-            ar:null
+            ar:null,
+            rightYe:null,
+            rightMe:null
         }
         this.dayPage= {
             header:null,
-            body:null
+            body:null,
+            rightHeader:null,
+            rightBody:null
         }
         this.otherPage = {
             month:null,

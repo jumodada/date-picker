@@ -1,20 +1,24 @@
-export interface Header {
-    ar:HTMLElement|null
-    al:HTMLElement|null
-    ye:HTMLElement|null
-    me:HTMLElement|null
+export interface Header<T =HTMLElement|null> {
+    ar:T
+    al:T
+    ye:T
+    me:T
+    rightYe:T
+    rightMe:T
 }
 
-export interface DayPage {
-    header:HTMLElement|null
-    body:(HTMLElement)
+export interface DayPage<T=HTMLElement> {
+    header:T
+    body:T
+    rightHeader:T,
+    rightBody:T
 }
 
-export interface OtherPage {
-    month:HTMLElement
-    year:(HTMLElement)
+export interface OtherPage<T=HTMLElement> {
+    month:T
+    year:T
 }
 
-export type headerKey = 'ar'|'al'|'ye'|'me'
-export type dpKey = 'header'|'body'
+export type headerKey = 'ar'|'al'|'ye'|'me'|'rightYe'|'rightMe'
+export type dpKey = 'header'|'body'|'rightHeader'|'rightBody'
 export type opKey = 'month'|'year'

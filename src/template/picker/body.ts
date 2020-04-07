@@ -15,7 +15,15 @@ import {
 import {getLastMonthHasDays, getMonthHasDays, getSelectDate, joinDate, whatDayIsMonthFirstDay} from "../../utils/date"
 import nexttick from "../../utils/nexttick"
 import {_Event} from "../../types/event"
-import {dayBody, monthBody, notThisMonth, selectedClass, thisMonth, yearBody} from "../../utils/class-name"
+import {
+    datepickerBodyClass,
+    dayBodyClass, dayHeaderClass,
+    monthBodyClass,
+    notThisMonth,
+    selectedClass,
+    thisMonth,
+    yearBodyClass
+} from "../../utils/class-name"
 import {dpKey, opKey} from "../../types/template"
 import {dayName, monthName} from "../../i18n/zh-CN"
 
@@ -28,7 +36,7 @@ export function createDayHeader(): (HTMLElement | Element) {
     })
     return createNode({
         name: 'ul',
-        class: 'fl-dateTimePicker-body-day-header',
+        class: dayHeaderClass,
         update: {method: updateDP, name: 'header'},
         children: childrenNodes,
     })
@@ -89,17 +97,17 @@ export function createPageBody<T>(
 
 export function createDayBody(): (HTMLElement | Element) {
     return createPageBody<dpKey>(
-        42, toSelectDate, dayBody, updateDP, 'body')
+        42, toSelectDate, dayBodyClass, updateDP, 'body')
 }
 
 export function createMonthBody(): (HTMLElement | Element) {
     return createPageBody<opKey>(
-        12, toSelectMonth, monthBody, updateOP, 'month', 'hidden')
+        12, toSelectMonth, monthBodyClass, updateOP, 'month', 'hidden')
 }
 
 export function createYearBody(): (HTMLElement | Element) {
     return createPageBody<opKey>(
-        10, toSelectYear, yearBody, updateOP, 'year', 'hidden')
+        10, toSelectYear, yearBodyClass, updateOP, 'year', 'hidden')
 }
 
 export function renderDate() {
@@ -162,7 +170,7 @@ export function renderYear() {
 export function createBody() {
     return createNode({
         name: 'div',
-        class: 'fl-dateTimePicker-body',
+        class: datepickerBodyClass,
         children: [
             {el: createDayHeader},
             {el: createDayBody},
