@@ -1,5 +1,4 @@
-import {
-    getDP,
+import {getDP,
     getHeader,
     getMonth, getOP, getPage,
     getPop,

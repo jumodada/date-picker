@@ -6,11 +6,12 @@ export interface types {
     Array: string,
     String: string,
     Number: string
+    Function: string
 }
 
 export interface createNodeArguments {
     name?:'svg'|'span'|'div'|'ul'|'li',
-    el?:HTMLElement|Element
+    el?:()=>HTMLElement|Element
     val?:any,
     event?:(e:_Event)=>any,
     class?:string

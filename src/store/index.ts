@@ -5,7 +5,7 @@ import {isNumber} from "../utils/type-of"
 import {DayPage, dpKey, Header, headerKey, opKey, OtherPage} from "../types/template"
 import {renderDate, renderMonth, renderYear} from "../template/picker/body"
 import {equalDate} from "../utils/date"
-
+import flexOptions from "../types/options"
 const Store = (function () {
     let uid = 0
     const state = [] as State
@@ -33,7 +33,7 @@ const Store = (function () {
         state[uid].options = mergeOptions(state[uid].options, _o)
     }
 
-    function _getOptions(): object {
+    function _getOptions(): flexOptions {
         return mergeOptions(state[uid].options)
     }
 
@@ -239,3 +239,4 @@ export const pageTurning = Store._pageTurning
 export const getDate = Store._getDate
 export const updateDate = Store._updateDate
 export const getPage: () => number = Store._getPage
+

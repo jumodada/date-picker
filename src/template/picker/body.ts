@@ -164,10 +164,10 @@ export function createBody() {
         name: 'div',
         class: 'fl-dateTimePicker-body',
         children: [
-            {el: createDayHeader()},
-            {el: createDayBody()},
-            {el: createMonthBody()},
-            {el: createYearBody()},
+            {el: createDayHeader},
+            {el: createDayBody},
+            {el: createMonthBody},
+            {el: createYearBody},
         ]
     })
 }

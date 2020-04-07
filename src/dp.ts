@@ -11,4 +11,4 @@ function createInstance(config: flexOptions): flexInstance {
     return instance as unknown as flexInstance
 }
 const flex = createInstance(new InitOptions() as flexOptions)
-export default flex;
+export default flex

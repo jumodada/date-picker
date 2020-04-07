@@ -1,6 +1,6 @@
 import {placement, type} from "../types/options"
 
-class InitOptions{
+class InitOptionsByDate{
     placement:placement
     type:type
     zIndex:number
@@ -12,4 +12,5 @@ class InitOptions{
 }
 
 
-export default InitOptions
+
+export default InitOptionsByDate

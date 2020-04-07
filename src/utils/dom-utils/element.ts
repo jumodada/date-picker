@@ -1,4 +1,4 @@
-import {isArray} from "../type-of"
+import {isArray, isFunc} from "../type-of"
 import {createNodeArguments, nodeKey, NodeOptions} from "../../types/methods"
 import createSVG from "../create-svg"
 import {on} from "../../event/eventListener"
@@ -40,7 +40,7 @@ export function createEL(tagName?: string): HTMLElement {
 }
 
 export function createNode(node: createNodeArguments): (Element | HTMLElement) {
-    if (node.el) return node.el
+    if (node.el&&isFunc(node.el)) return node.el()
     const el = node.name === 'svg' ? createSVG(node.val) : createEL(node.name)
     Object.keys(node).forEach(key => {
         nodeOptions[key as nodeKey](el as HTMLElement, node)

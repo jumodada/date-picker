@@ -7,8 +7,8 @@ export type placement =
 export type type = 'date'|'date-range'
 
 export interface flexOptions {
-    placement:placement
-    type:type
+    placement:placement|placement[]
+    type:type|type[]
     format?:string
     offset?:number,
     zIndex?:number
