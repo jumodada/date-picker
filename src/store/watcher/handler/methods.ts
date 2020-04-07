@@ -1,4 +1,5 @@
-import {getDP,
+import {
+    getDP,
     getHeader,
     getMonth, getOP, getPage,
     getPop,
@@ -49,9 +50,9 @@ export function watchVisible(value: boolean) {
     }
 }
 
-export function elementShow(...arr:any) {
-    const display = arguments[0]?'':'none'
-    Array.from(arguments).slice(1).forEach(arg=>{
+export function elementShow(elements:any[],isHidden:boolean) {
+    const display = isHidden?'none':''
+    elements.forEach(arg=>{
         arg.forEach((_a: { style: { display: string } })=>_a.style.display=display)
     })
 }
@@ -67,8 +68,8 @@ export function watchPageIdx(value:number) {
     if(value===2){
         ye.innerText =  yearVal+' - '+period
     }
-    elementShow(true,$elements.splice(value,1)[0])
-    elementShow(false,...$elements)
+    elementShow($elements.splice(value,1),false)
+    elementShow($elements,true)
 }
 export function watchPopover(value: HTMLElement) {
     if (value) {
