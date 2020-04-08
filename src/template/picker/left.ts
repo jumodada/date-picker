@@ -1,8 +1,15 @@
 import {createNode} from "../../utils/dom-utils/element"
-import {headerClass, headerMonthClass, dayHeaderClass, headerYearClass} from "../../utils/class-name"
+import {
+    headerClass,
+    headerMonthClass,
+    headerYearClass,
+    leftClass
+} from "../../utils/class-name"
 import {getYear, updateHeader} from "../../store"
 import {getRealMonth} from "../../utils/date"
 import {reduceMonth, reduceYear} from "./header"
+import {createDay} from "./body"
+import {_Event} from "../../types/event"
 
 
 export function createLeftHeader() {
@@ -34,12 +41,19 @@ export function createLeftHeader() {
     })
 }
 
+
+export function toSelectDate(e:_Event):void {
+    // todo
+}
+
+
 export function createLeft(): (HTMLElement | Element) {
     return createNode({
-        name: 'ul',
-        class: dayHeaderClass,
+        name: 'div',
+        class: leftClass,
         children: [
-            {el:createLeftHeader}
+            {el:createLeftHeader},
+            {el:createDay(toSelectDate,'body')},
         ],
     })
 }

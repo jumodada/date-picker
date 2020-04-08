@@ -17,7 +17,7 @@ import nexttick from "../../utils/nexttick"
 import {_Event} from "../../types/event"
 import {
     datepickerBodyClass,
-    dayBodyClass, dayHeaderClass,
+    dayBodyClass, dayClass, dayHeaderClass,
     monthBodyClass,
     notThisMonth,
     selectedClass,
@@ -95,9 +95,9 @@ export function createPageBody<T>(
     })
 }
 
-export function createDayBody(): (HTMLElement | Element) {
+export function createDayBody(eventHandler:(e:_Event)=>any,updateName:string): (HTMLElement | Element) {
     return createPageBody<dpKey>(
-        42, toSelectDate, dayBodyClass, updateDP, 'body')
+        42, toSelectDate, dayBodyClass, updateDP, updateName)
 }
 
 export function createMonthBody(): (HTMLElement | Element) {
@@ -167,13 +167,22 @@ export function renderYear() {
     })
 }
 
-export function createBody() {
+export function createDay(eventHandler:(e:_Event)=>any,updateName:string) {
     return createNode({
-        name: 'div',
-        class: datepickerBodyClass,
+        class:dayClass,
         children: [
             {el: createDayHeader},
-            {el: createDayBody},
+            {el: createDayBody(eventHandler,updateName)},
+        ]
+    })
+}
+
+
+export function createBody() {
+    return createNode({
+        class: datepickerBodyClass,
+        children: [
+            {el: createDay(toSelectDate,'body')},
             {el: createMonthBody},
             {el: createYearBody},
         ]

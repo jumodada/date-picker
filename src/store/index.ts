@@ -101,8 +101,8 @@ const Store = (function () {
     function _getYear(): number {
         return state[uid].year
     }
-    function _getEndYear(): number {
-        let month = state[uid].month
+    function _getEndYear(month?:any): number {
+        if(!month)month = state[uid].month
         if(++month>12){
             return state[uid].year + 1
         }else{
@@ -126,8 +126,8 @@ const Store = (function () {
         return state[uid].month
     }
 
-    function _getEndMonth(): number {
-        let month = state[uid].month
+    function _getEndMonth(month?:any): number {
+        if(!month)month = state[uid].month
         if(++month>12){
             return 1
         }else{

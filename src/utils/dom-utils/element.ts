@@ -40,7 +40,8 @@ export function createEL(tagName?: string): HTMLElement {
 }
 
 export function createNode(node: createNodeArguments): (Element | HTMLElement) {
-    if (node.el&&isFunc(node.el)) return node.el()
+    if (node.el&&isFunc(node.el)) return (node.el as any)()
+    if(node.el)return (node.el as any)
     const el = node.name === 'svg' ? createSVG(node.val) : createEL(node.name)
     Object.keys(node).forEach(key => {
         nodeOptions[key as nodeKey](el as HTMLElement, node)

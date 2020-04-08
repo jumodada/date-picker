@@ -9,9 +9,9 @@ export interface types {
     Function: string
 }
 
-export interface createNodeArguments {
+export interface createNodeArguments<T=HTMLElement|Element>{
     name?:'svg'|'span'|'div'|'ul'|'li',
-    el?:()=>HTMLElement|Element
+    el?:(()=>T)|T
     val?:any,
     event?:(e:_Event)=>any,
     class?:string

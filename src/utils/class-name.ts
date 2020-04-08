@@ -7,6 +7,11 @@ export const headerMonthClass = 'fl-datepicker-header-month'
 export const thisMonth = 'fl-datepicker-this-month'
 export const notThisMonth = 'fl-datepicker-not-this-month'
 export const dayHeaderClass = 'fl-datepicker-body-day-header'
+export const dayClass = 'fl-datepicker-body-day'
 export const dayBodyClass = 'fl-datepicker-body-day-body'
 export const monthBodyClass = 'fl-datepicker-body-month-body'
 export const yearBodyClass = 'fl-datepicker-body-year-body'
+
+
+export const leftClass = 'fl-datepicker-left'
+export const rightClass = 'fl-datepicker-right'

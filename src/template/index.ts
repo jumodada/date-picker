@@ -34,7 +34,7 @@ nextTick(() => {
 
 export function createPopover() {
     const {type} = getOptions()
-    createNode(popoverByType[type])
+    createNode(popoverByType[type as 'date'])
 }
 
 export function updatePopover(el: HTMLElement, value: boolean): void {

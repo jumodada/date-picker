@@ -1,5 +1,5 @@
 import {
-    getDP,
+    getDP, getEndMonth, getEndYear,
     getHeader,
     getMonth, getOP, getOptions, getPage,
     getPop,
@@ -15,6 +15,7 @@ import {createPopover, updatePopover} from "../../../template"
 import {appendChild} from "../../../utils/dom-utils/element"
 import {setPopoverStyle} from "../../../template/style"
 import {renderDate, renderYear} from "../../../template/picker/body"
+import nexttick from "../../../utils/nexttick";
 
 export function watchOptions() {
 // todo
@@ -81,6 +82,7 @@ export function watchPopover(value: HTMLElement) {
 
     }
 }
+
 export function watchYear(value:number):void {
     const page = getPage()
     const {ye} = getHeader()
@@ -94,15 +96,29 @@ export function watchYear(value:number):void {
         renderDate()
     }
 }
+const monthMethods = {
+    date:(value:number)=>{
+     // do nothing
+    },
+    'date-range':(value:number)=>{
+        const {rightMe,rightYe} = getHeader()
+        const endYear = getEndYear(value)
+        if(rightMe){
+            rightMe.innerText = getEndMonth(value).toString()+'月'
+        }
+        if(rightYe){
+            rightYe.innerText = endYear.toString()+'年'
+        }
+    }
+}
+
 export function watchMonth(value:number):void {
     if(getMonth()===value)return
-    const {me,rightMe} = getHeader()
+    const {me} = getHeader()
     const {type} = getOptions()
     if(me){
         me.innerText = value.toString()+'月'
     }
-    if(type==='date-range'){
-        rightMe.innerText = (value+1).toString()+'月'
-    }
+    monthMethods[type as 'date'](value)
     renderDate()
 }

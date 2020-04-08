@@ -1,7 +1,17 @@
 import {createNode} from "../../utils/dom-utils/element"
-import {dayHeaderClass, headerClass, headerMonthClass, headerYearClass} from "../../utils/class-name"
-import {getEndMonth, getEndYear, updateHeader} from "../../store"
+import {
+    datepickerBodyClass,
+    dayBodyClass,
+    headerClass,
+    headerMonthClass,
+    headerYearClass,
+    rightClass
+} from "../../utils/class-name"
+import {getEndMonth, getEndYear, updateDP, updateHeader} from "../../store"
 import {increaseMonth, increaseYear} from "./header"
+import {_Event} from "../../types/event"
+import {createDayHeader, createPageBody} from "./body"
+import {dpKey} from "../../types/template"
 
 
 export function createRightHeader() {
@@ -33,12 +43,33 @@ export function createRightHeader() {
     })
 }
 
+export function createRightBody() {
+    return createNode({
+        class: datepickerBodyClass,
+        children: [
+            {el: createDayHeader},
+            {el: createRightDayBody}
+        ]
+    })
+}
+
+export function toSelectEndDate(e:_Event):void {
+    // todo
+}
+
+export function createRightDayBody(): (HTMLElement | Element) {
+    return createPageBody<dpKey>(
+        42, toSelectEndDate, dayBodyClass, updateDP, 'rightBody')
+}
+
+
 export function createRight(): (HTMLElement | Element) {
     return createNode({
-        name: 'ul',
-        class: dayHeaderClass,
+        name: 'div',
+        class: rightClass,
         children: [
-            {el:createRightHeader}
+            {el:createRightHeader},
+            {el:createRightBody}
         ],
     })
 }

@@ -22,10 +22,14 @@ export interface stateValue {
         ye:HTMLElement
         me:HTMLElement
         ar:HTMLElement
+        rightYe:HTMLElement
+        rightMe:HTMLElement
     }
     dayPage:{
         header:any
         body:any
+        rightHeader:any
+        rightBody:any
     }
     otherPage:{
         year:any
