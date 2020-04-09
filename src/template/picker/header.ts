@@ -1,17 +1,17 @@
 import {createNode} from "../../utils/dom-utils/element"
-import {getHeader, getPage, getYear, pageTurning, plusMonth, plusYear, updateHeader, updateYear} from "../../store"
+import {getState, plusMonth, plusYear, updateHeader, updateState} from "../../store"
 import {getRealMonth} from "../../utils/date"
 import {headerClass, headerMonthClass, headerYearClass} from "../../utils/class-name"
 
 export function changeYear(val:number) {
-    if(getPage()!==2){
+    if(getState('pageIdx')!==2){
         plusYear(val)
     }else{
-        const {ye} = getHeader()
+        const {ye} = getState('header')
         if(!ye)return
-        const year= getYear()
+        const year= getState('year')
         const curYear = year+(val>0?10:-10)
-        updateYear(curYear)
+        updateState(curYear,'year')
         ye.innerText =curYear+' - '+(curYear+9)
     }
 }
@@ -30,20 +30,20 @@ export function reduceMonth() {
 }
 
 export function toYear() {
-    if(getPage()!==2){
-        pageTurning(2)
+    if(getState('pageIdx')!==2){
+        updateState(2,'pageIdx')
     }
 }
 export function toMonth() {
-    if(getPage()!==1){
-        pageTurning(1)
+    if(getState('pageIdx')!==1){
+        updateState(1,'pageIdx')
     }
 }
 
 export function createHeader() {
     return createNode({
         name: 'div',
-        class: headerClass,
+        class: [headerClass],
         children: [
             {name: 'svg', val: 'd-left', event: reduceYear, style: 'left:3px'},
             {
@@ -55,16 +55,16 @@ export function createHeader() {
             },
             {
                 name: 'span',
-                val: getYear() + '年',
+                val: getState('year') + '年',
                 event: toYear,
-                class: headerYearClass,
+                class: [headerYearClass],
                 update: {method: updateHeader, name: 'ye'}
             },
             {
                 name: 'span',
                 val: getRealMonth() + '月',
                 event: toMonth,
-                class: headerMonthClass,
+                class: [headerMonthClass],
                 update: {method: updateHeader, name: 'me'}
             },
             {

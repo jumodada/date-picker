@@ -30,7 +30,9 @@ export default class InitState {
     month: number
     date: Date | null
     pageIdx: number
-
+    endYear:number|null
+    endMonth:number|null
+    endDate:Date|null
     constructor() {
         this.reference = null
         this.popover = null
@@ -39,7 +41,10 @@ export default class InitState {
         this.rect = {x: 0, y: 0, width: 0, height: 0, top: 0, right: 0, bottom: 0, left: 0}
         this.year = getFullYear()
         this.month = getRealMonth()
+        this.endYear = null
+        this.endMonth = null
         this.date = null
+        this.endDate = null
         this.header = {
             ye: null,
             me: null,

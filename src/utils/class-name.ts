@@ -12,6 +12,6 @@ export const dayBodyClass = 'fl-datepicker-body-day-body'
 export const monthBodyClass = 'fl-datepicker-body-month-body'
 export const yearBodyClass = 'fl-datepicker-body-year-body'
 
-
+export const dateRangePickerClass = 'fl-datepicker-range'
 export const leftClass = 'fl-datepicker-left'
 export const rightClass = 'fl-datepicker-right'

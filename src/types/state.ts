@@ -7,6 +7,15 @@ export interface Rect {
 }
 export type rectKey = 'width'|'height'|'left'|'top'
 
+export type stateKey  =
+    'reference'|'popover'
+    |'options'|'visible'
+    |'rect'|'year'
+    |'month'|'endYear'
+    |'endMonth'|'endDate'
+    |'date'|'pageIdx'
+    |'header'|'dayPage'|'otherPage'
+
 export interface stateValue {
     reference:HTMLElement
     popover:HTMLElement
@@ -15,6 +24,9 @@ export interface stateValue {
     rect:Rect
     year:number
     month:number
+    endYear:number
+    endMonth:number
+    endDate:Date
     date:Date
     pageIdx:number
     header:{

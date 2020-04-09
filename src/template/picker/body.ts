@@ -1,16 +1,11 @@
 import {createNode, addAttr, removeClass, resetAttr, toggleClass} from "../../utils/dom-utils/element"
 import {createNodeArguments} from "../../types/methods"
 import {
-    getDP,
-    getMonth,
-    getOP,
-    getYear,
-    pageTurning,
+    getState,
     updateDate,
     updateDP,
-    updateMonth,
     updateOP,
-    updateYear
+    updateState
 } from "../../store"
 import {getLastMonthHasDays, getMonthHasDays, getSelectDate, joinDate, whatDayIsMonthFirstDay} from "../../utils/date"
 import nexttick from "../../utils/nexttick"
@@ -36,7 +31,7 @@ export function createDayHeader(): (HTMLElement | Element) {
     })
     return createNode({
         name: 'ul',
-        class: dayHeaderClass,
+        class: [dayHeaderClass],
         update: {method: updateDP, name: 'header'},
         children: childrenNodes,
     })
@@ -45,7 +40,7 @@ export function createDayHeader(): (HTMLElement | Element) {
 export function toSelectDate(e: _Event): void {
     let {innerText, dataset} = e.target
     let view = dataset.view
-    let [year, month] = [getYear(), getMonth()]
+    let [year, month] = [getState('year'), getState('month')]
     if (view === 'pre' && --month === 0) {
         year--
         month = 12
@@ -58,19 +53,19 @@ export function toSelectDate(e: _Event): void {
 }
 
 export function toSelectMonth(e: _Event): void {
-    let parentNode = getOP().month
+    let parentNode = getState('otherPage').month
     let {target} = e
     let selectIMonth = Array.from(parentNode.childNodes).findIndex(child=>(child as any)===target)+1
-    updateMonth(selectIMonth)
-    pageTurning(0)
+    updateState(selectIMonth,'month')
+    updateState(0,'pageIdx')
 }
 
 export function toSelectYear(e: _Event): void {
-    let parentNode = getOP().year
+    let parentNode = getState('otherPage').year
     let {target} = e
     let selectIYear= (Array.from(parentNode.childNodes).find(child=>(child as any)===target) as HTMLElement).innerText
-    updateYear(Number(selectIYear))
-    pageTurning(1)
+    updateState(Number(selectIYear),'year')
+    updateState(1,'pageIdx')
 }
 
 export function createPageBody<T>(
@@ -88,7 +83,7 @@ export function createPageBody<T>(
     })
     return createNode({
         name: 'ul',
-        class: classes,
+        class: [classes],
         update: {method: update, name: updateName},
         children: childrenNodes,
         initial: initial
@@ -97,7 +92,7 @@ export function createPageBody<T>(
 
 export function createDayBody(eventHandler:(e:_Event)=>any,updateName:string): (HTMLElement | Element) {
     return createPageBody<dpKey>(
-        42, toSelectDate, dayBodyClass, updateDP, updateName)
+        42, eventHandler, dayBodyClass, updateDP, updateName)
 }
 
 export function createMonthBody(): (HTMLElement | Element) {
@@ -116,7 +111,7 @@ export function renderDate() {
         if (firstDay === 0) firstDay = 7
         const days = getMonthHasDays()
         const lastMonthDays = getLastMonthHasDays()
-        const childrenNodes = getDP().body?.childNodes
+        const childrenNodes = getState('dayPage').body?.childNodes
         const totalDays = firstDay + days
         const selectDay = getSelectDate()
         if (childrenNodes && childrenNodes.length === 42) {
@@ -150,7 +145,7 @@ export function renderDate() {
 
 export function renderMonth() {
     nexttick(() => {
-        let childrenNodes = getOP().month.childNodes
+        let childrenNodes = getState('otherPage').month.childNodes
         childrenNodes.forEach((node, index) => {
             (node as HTMLElement).innerText = monthName[index].toString()
         })
@@ -159,8 +154,8 @@ export function renderMonth() {
 
 export function renderYear() {
     nexttick(() => {
-        let childrenNodes = getOP().year.childNodes
-        const year = getYear()
+        let childrenNodes = getState('otherPage').year.childNodes
+        const year = getState('year')
         childrenNodes.forEach((node, index) => {
             (node as HTMLElement).innerText = (year+index).toString()
         })
@@ -169,7 +164,7 @@ export function renderYear() {
 
 export function createDay(eventHandler:(e:_Event)=>any,updateName:string) {
     return createNode({
-        class:dayClass,
+        class:[dayClass],
         children: [
             {el: createDayHeader},
             {el: createDayBody(eventHandler,updateName)},
@@ -180,7 +175,7 @@ export function createDay(eventHandler:(e:_Event)=>any,updateName:string) {
 
 export function createBody() {
     return createNode({
-        class: datepickerBodyClass,
+        class: [datepickerBodyClass],
         children: [
             {el: createDay(toSelectDate,'body')},
             {el: createMonthBody},

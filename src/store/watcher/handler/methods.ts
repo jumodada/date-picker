@@ -1,12 +1,8 @@
 import {
-    getDP, getEndMonth, getEndYear,
-    getHeader,
-    getMonth, getOP, getOptions, getPage,
-    getPop,
-    getReference,
-    getYear,
-    openPopover, updateMonth,
-    updateYear
+    getEndMonth, getOptions,
+    getState,
+    openPopover,
+    updateState
 } from "../../index"
 import {on, remove} from "../../../event/eventListener"
 import clickOutside from "../../../utils/clickoutside"
@@ -15,7 +11,6 @@ import {createPopover, updatePopover} from "../../../template"
 import {appendChild} from "../../../utils/dom-utils/element"
 import {setPopoverStyle} from "../../../template/style"
 import {renderDate, renderYear} from "../../../template/picker/body"
-import nexttick from "../../../utils/nexttick";
 
 export function watchOptions() {
 // todo
@@ -27,12 +22,12 @@ export function watchRect() {
 export function watchDate(value:Date) {
     const year = value.getFullYear()
     const month = value.getMonth()+1
-    updateYear(year)
-    updateMonth(month)
+    updateState(year,'year')
+    updateState(month,'month')
     renderDate()
 }
 export function watchReference(ref: HTMLElement) {
-    const preElement = getReference()
+    const preElement = getState('reference')
     remove(preElement, 'click', openPopover)
     remove(document.body,'click', clickOutside)
     if(ref){
@@ -41,11 +36,11 @@ export function watchReference(ref: HTMLElement) {
     }
 }
 export function watchVisible(value: boolean) {
-    const _p = getPop()
+    const _p = getState('popover')
     const _exist = isElementExist(_p)
     if (!_exist) {
         createPopover()
-        updatePopover(getPop(), value)
+        updatePopover(getState('popover'), value)
     } else {
         updatePopover(_p, value)
     }
@@ -58,10 +53,10 @@ export function elementShow(elements:any[],isHidden:boolean) {
     })
 }
 export function watchPageIdx(value:number) {
-    const {ye,me,ar,al} = getHeader()
-    const {header,body} = getDP()
-    const {month,year} = getOP()
-    const yearVal = getYear()
+    const {ye,me,ar,al} = getState('header')
+    const {header,body} = getState('dayPage')
+    const {month,year} = getState('otherPage')
+    const yearVal = getState('year')
     let period = (yearVal as number) + 9
     const date = [me,al,ar,header,body]
     const $elements = [date,[month],[year]]
@@ -74,7 +69,7 @@ export function watchPageIdx(value:number) {
 }
 export function watchPopover(value: HTMLElement) {
     if (value) {
-        const _prePop = getPop()
+        const _prePop = getState('popover')
         if (!isElementExist(_prePop)) {
             appendChild(value)
             setPopoverStyle(value)
@@ -84,12 +79,12 @@ export function watchPopover(value: HTMLElement) {
 }
 
 export function watchYear(value:number):void {
-    const page = getPage()
-    const {ye} = getHeader()
+    const page = getState('pageIdx')
+    const {ye} = getState('header')
     if(ye){
         ye.innerText = value.toString()+'年'
     }
-    if(getYear()===value)return
+    if(getState('year')===value)return
     if(page===2){
         renderYear()
     }else if(page===0){
@@ -101,8 +96,8 @@ const monthMethods = {
      // do nothing
     },
     'date-range':(value:number)=>{
-        const {rightMe,rightYe} = getHeader()
-        const endYear = getEndYear(value)
+        const {rightMe,rightYe} = getState('header')
+        const endYear = getState('endYear')
         if(rightMe){
             rightMe.innerText = getEndMonth(value).toString()+'月'
         }
@@ -113,8 +108,8 @@ const monthMethods = {
 }
 
 export function watchMonth(value:number):void {
-    if(getMonth()===value)return
-    const {me} = getHeader()
+    if(getState('month')===value)return
+    const {me} = getState('header')
     const {type} = getOptions()
     if(me){
         me.innerText = value.toString()+'月'

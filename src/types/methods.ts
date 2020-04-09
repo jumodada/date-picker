@@ -1,25 +1,25 @@
 import {_Event} from "./event"
 
 export interface types {
-    Date:string,
-    Object: string,
-    Array: string,
-    String: string,
+    Date:string
+    Object: string
+    Array: string
+    String: string
     Number: string
     Function: string
 }
 
 export interface createNodeArguments<T=HTMLElement|Element>{
-    name?:'svg'|'span'|'div'|'ul'|'li',
+    name?:'svg'|'span'|'div'|'ul'|'li'
     el?:(()=>T)|T
     val?:any,
-    event?:(e:_Event)=>any,
-    class?:string
+    event?:(e:_Event)=>any
+    class?:string[]
     style?:string
     update?:{
         name?:string,
         method:(val:any,key:any)=>any
-    },
+    }
     children?:createNodeArguments[]
     initial?:'hidden'
 }

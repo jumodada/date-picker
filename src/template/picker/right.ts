@@ -7,7 +7,7 @@ import {
     headerYearClass,
     rightClass
 } from "../../utils/class-name"
-import {getEndMonth, getEndYear, updateDP, updateHeader} from "../../store"
+import {getEndMonth, getState, updateDP, updateHeader} from "../../store"
 import {increaseMonth, increaseYear} from "./header"
 import {_Event} from "../../types/event"
 import {createDayHeader, createPageBody} from "./body"
@@ -17,18 +17,18 @@ import {dpKey} from "../../types/template"
 export function createRightHeader() {
     return createNode({
         name: 'div',
-        class: headerClass,
+        class: [headerClass],
         children: [
             {
                 name: 'span',
-                val: getEndYear() + '年',
-                class: headerYearClass,
+                val: getState('endYear') + '年',
+                class: [headerYearClass],
                 update: {method: updateHeader, name: 'rightYe'}
             },
             {
                 name: 'span',
                 val: getEndMonth() + '月',
-                class: headerMonthClass,
+                class: [headerMonthClass],
                 update: {method: updateHeader, name: 'rightMe'}
             },
             {
@@ -45,7 +45,7 @@ export function createRightHeader() {
 
 export function createRightBody() {
     return createNode({
-        class: datepickerBodyClass,
+        class: [datepickerBodyClass],
         children: [
             {el: createDayHeader},
             {el: createRightDayBody}
@@ -66,7 +66,7 @@ export function createRightDayBody(): (HTMLElement | Element) {
 export function createRight(): (HTMLElement | Element) {
     return createNode({
         name: 'div',
-        class: rightClass,
+        class: [rightClass],
         children: [
             {el:createRightHeader},
             {el:createRightBody}

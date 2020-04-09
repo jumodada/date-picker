@@ -1,13 +1,13 @@
-import {getOptions, getRect, getReference, updatePop, updateRect} from "../store"
+import {getOptions, getState, updateState} from "../store"
 import {positionAttr, _spm} from "../types/popover"
 import nextTick from '../utils/nexttick'
 import {Rect, rectKey} from "../types/state"
 import {createNode} from "../utils/dom-utils/element"
 import {createHeader} from "./picker/header"
 import {createBody} from "./picker/body"
-import {datepickerClass} from "../utils/class-name";
-import {createLeft} from "./picker/left";
-import {createRight} from "./picker/right";
+import {datepickerClass, dateRangePickerClass} from "../utils/class-name"
+import {createLeft} from "./picker/left"
+import {createRight} from "./picker/right"
 
 const transform = {
     top: `translate(0,-100%)`,
@@ -17,16 +17,18 @@ const transform = {
 }
 let popoverByType: any
 
+
 nextTick(() => {
+    const updatePop = (arg:any)=>updateState(arg,'popover')
     popoverByType = {
         date: {
             children: [{el: createHeader}, {el: createBody}],
-            class:datepickerClass,
+            class:[datepickerClass],
             update: {method: updatePop}
         },
         'date-range':{
             children: [{el: createLeft}, {el: createRight}],
-            class: datepickerClass,
+            class: [dateRangePickerClass,datepickerClass],
             update: {method: updatePop}
         }
     }
@@ -48,10 +50,10 @@ export function updatePopover(el: HTMLElement, value: boolean): void {
 
 export function setPopoverLocation(el: HTMLElement) {
     const placement = (getOptions() as any).placement.split('-')[0] as _spm
-    const reference = getReference()
+    const reference = getState('reference')
     let rect = reference.getBoundingClientRect()
     if (diffRect(rect)) return
-    updateRect(rect)
+    updateState(rect,'rect')
     setPosition(el, placement, rect)
     setTransform(el, placement)
 }
@@ -68,7 +70,7 @@ export function setPosition(el: HTMLElement, placement: _spm, rect: Rect) {
 }
 
 export function diffRect(curRect: Rect) {
-    let preRect = getRect()
+    let preRect = getState('rect')
     return Array.from(['width,left', 'top', 'height'])
         .every(key => preRect[key as rectKey] === curRect[key as rectKey])
 }

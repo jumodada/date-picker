@@ -12,7 +12,7 @@ const nodeOptions: NodeOptions = {
         }
     },
     class: (el, node) =>
-        el.setAttribute('class', node.class as any),
+        el.setAttribute('class', (node.class as any).join(' ')),
     style: (el, node) =>
         el.setAttribute('style', node.style as any),
     update: (el, node) =>
