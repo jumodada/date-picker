@@ -30,19 +30,25 @@ export default class InitState {
     month: number
     date: Date | null
     pageIdx: number
-    endYear:number|null
-    endMonth:number|null
+    endYear:number
+    endMonth:number
     endDate:Date|null
     constructor() {
+        let [year,month] = [getFullYear(),getRealMonth()]
+        let [endYear,endMonth] = [year,month+1]
+        if(month===12){
+            endYear++
+            endMonth=1
+        }
         this.reference = null
         this.popover = null
         this.options = new InitOptionsByDate()
         this.visible = false
         this.rect = {x: 0, y: 0, width: 0, height: 0, top: 0, right: 0, bottom: 0, left: 0}
-        this.year = getFullYear()
-        this.month = getRealMonth()
-        this.endYear = null
-        this.endMonth = null
+        this.year = year
+        this.month = month
+        this.endYear = endYear
+        this.endMonth = endMonth
         this.date = null
         this.endDate = null
         this.header = {

@@ -1,4 +1,4 @@
-import {getOptions, getState, updateState} from "../store"
+import { getState, updateState} from "../store"
 import {positionAttr, _spm} from "../types/popover"
 import nextTick from '../utils/nexttick'
 import {Rect, rectKey} from "../types/state"
@@ -35,7 +35,7 @@ nextTick(() => {
 })
 
 export function createPopover() {
-    const {type} = getOptions()
+    const {type} = getState('options')
     createNode(popoverByType[type as 'date'])
 }
 
@@ -49,7 +49,7 @@ export function updatePopover(el: HTMLElement, value: boolean): void {
 }
 
 export function setPopoverLocation(el: HTMLElement) {
-    const placement = (getOptions() as any).placement.split('-')[0] as _spm
+    const placement = (getState('options') as any).placement.split('-')[0] as _spm
     const reference = getState('reference')
     let rect = reference.getBoundingClientRect()
     if (diffRect(rect)) return

@@ -146,7 +146,7 @@ export function renderDate() {
 export function renderMonth() {
     nexttick(() => {
         let childrenNodes = getState('otherPage').month.childNodes
-        childrenNodes.forEach((node, index) => {
+        childrenNodes.forEach((node: HTMLElement, index: any) => {
             (node as HTMLElement).innerText = monthName[index].toString()
         })
     })
@@ -156,7 +156,7 @@ export function renderYear() {
     nexttick(() => {
         let childrenNodes = getState('otherPage').year.childNodes
         const year = getState('year')
-        childrenNodes.forEach((node, index) => {
+        childrenNodes.forEach((node: HTMLElement, index: any) => {
             (node as HTMLElement).innerText = (year+index).toString()
         })
     })

@@ -57,3 +57,16 @@ export function equalDate(preDate:Date,curDate:Date){
     const [cy,cm,cd] = [curDate.getFullYear(),curDate.getMonth(),curDate.getDate()]
     return py===cy&&pm===cm&&pd===cd
 }
+
+export function getNextMonth(val:number):number {
+    let month = ++val
+    if(month===13)month=1
+    return month
+}
+
+export function getBackMonth(val:number):number {
+    let month = --val
+    if(month===0)month=12
+    return month
+}
+

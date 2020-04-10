@@ -2,6 +2,8 @@ import {createNode} from "../../utils/dom-utils/element"
 import {getState, plusMonth, plusYear, updateHeader, updateState} from "../../store"
 import {getRealMonth} from "../../utils/date"
 import {headerClass, headerMonthClass, headerYearClass} from "../../utils/class-name"
+import {createNodeArguments} from "../../types/methods";
+import {_Event} from "../../types/event";
 
 export function changeYear(val:number) {
     if(getState('pageIdx')!==2){
@@ -39,9 +41,8 @@ export function toMonth() {
         updateState(1,'pageIdx')
     }
 }
-
 export function createHeader() {
-    return createNode({
+    let node:createNodeArguments = {
         name: 'div',
         class: [headerClass],
         children: [
@@ -76,5 +77,6 @@ export function createHeader() {
             },
             {name: 'svg', val: 'd-right', event: increaseYear, style: 'right:3px'},
         ]
-    })
+    }
+    return createNode(node)
 }

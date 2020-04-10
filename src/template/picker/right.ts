@@ -7,12 +7,18 @@ import {
     headerYearClass,
     rightClass
 } from "../../utils/class-name"
-import {getEndMonth, getState, updateDP, updateHeader} from "../../store"
-import {increaseMonth, increaseYear} from "./header"
+import {getState, plusMonth, plusYear, updateDP, updateHeader} from "../../store"
 import {_Event} from "../../types/event"
 import {createDayHeader, createPageBody} from "./body"
 import {dpKey} from "../../types/template"
 
+
+function increaseEndMonth() {
+    plusMonth(1,'endMonth')
+}
+function increaseEndYear() {
+    plusYear(1,'endYear')
+}
 
 export function createRightHeader() {
     return createNode({
@@ -27,18 +33,18 @@ export function createRightHeader() {
             },
             {
                 name: 'span',
-                val: getEndMonth() + '月',
+                val: getState('endMonth') + '月',
                 class: [headerMonthClass],
                 update: {method: updateHeader, name: 'rightMe'}
             },
             {
                 name: 'svg',
                 val: 'right',
-                event: increaseMonth,
+                event: increaseEndMonth,
                 style: 'right:30px',
                 update: {method: updateHeader, name: 'ar'}
             },
-            {name: 'svg', val: 'd-right', event: increaseYear, style: 'right:3px'}
+            {name: 'svg', val: 'd-right', event: increaseEndYear, style: 'right:3px'}
         ]
     })
 }

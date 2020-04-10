@@ -5,7 +5,7 @@ import {isNumber} from "../utils/type-of"
 import {dpKey, headerKey, opKey} from "../types/template"
 import {renderDate, renderMonth, renderYear} from "../template/picker/body"
 import {equalDate} from "../utils/date"
-import flexOptions from "../types/options"
+
 const Store = (function () {
     let uid = 0
     const state = [] as State
@@ -13,6 +13,7 @@ const Store = (function () {
     function _toggleToLastUId() {
         uid = state.length - 1
     }
+
     function _changeUId(e: Event) {
         uid = state.findIndex(s => (s.reference as any) === e.target)
     }
@@ -33,16 +34,14 @@ const Store = (function () {
         state[uid].options = mergeOptions(state[uid].options, _o)
     }
 
-    function _getOptions(): flexOptions {
-        return mergeOptions(state[uid].options)
-    }
-
-    function _getState(key:stateKey):any{
+    function _getState(key: stateKey): any {
         return state[uid][key]
     }
-    function _updateState(val: any,key:stateKey): void {
+
+    function _updateState(val: any, key: stateKey): void {
         (state[uid][key] as any) = val
     }
+
     function _closeAllButHasId() {
         state.forEach((s, idx) => {
             if (idx !== uid && s.popover) s.popover.style.display = 'none'
@@ -69,36 +68,31 @@ const Store = (function () {
         } else {
             date = new Date(val)
         }
-        if (equalDate(state[uid].date,date)) return
+        if (equalDate(state[uid].date, date)) return
         state[uid].date = date
     }
-    function _plusYear(val: number) {
+
+    function _plusYear(val: number, key?: 'endYear' | 'year') {
+        if (!key) key = 'year'
         if (isNumber(state[uid].year)) {
-            (state[uid].year as number) += val
+            (state[uid][key] as number) += val
         } else {
-            state[uid].year = val
+            state[uid][key] = val
         }
     }
 
-    function _getEndMonth(month?:any): number {
-        if(!month)month = state[uid].month
-        if(++month>12){
-            return 1
-        }else{
-            return month
-        }
-    }
 
-    function _plusMonth(val: number): void {
-        let month = state[uid].month
+    function _plusMonth(val: number, key?: 'endMonth' | 'month'): void {
+        if (!key) key = 'month'
+        let month = state[uid][key]
         month += val
         if (month > 12 || month < 1) {
             let year = Math.floor(month / 12)
             if (year === 0) year = -1
             month = month > 12 ? (month % 12) : ((month % 12) + 12)
-            _plusYear(year)
+            _plusYear(year,key==='endMonth'?'endYear':'year')
         }
-        state[uid].month = month
+        state[uid][key] = month
     }
 
 
@@ -112,11 +106,12 @@ const Store = (function () {
             renderDate()
         }
     }
+
     function _updateOP(val: any, key: opKey) {
         state[uid].otherPage[key] = val
         if (key === 'month') {
             renderMonth()
-        }else if(key==='year'){
+        } else if (key === 'year') {
             renderYear()
         }
     }
@@ -127,10 +122,8 @@ const Store = (function () {
         _closePopover,
         _openPopover,
         _updateOptions,
-        _getOptions,
         _plusYear,
         _updateHeader,
-        _getEndMonth,
         _plusMonth,
         _updateDP,
         _updateOP,
@@ -144,9 +137,7 @@ export const pushInState = Store._pushInState
 export const closePopover = Store._closePopover
 export const openPopover = Store._openPopover
 export const updateOptions = Store._updateOptions
-export const getOptions = Store._getOptions
 export const plusYear = Store._plusYear
-export const getEndMonth = Store._getEndMonth
 export const plusMonth = Store._plusMonth
 export const updateHeader = Store._updateHeader
 export const updateDP = Store._updateDP
