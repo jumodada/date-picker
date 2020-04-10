@@ -2,8 +2,7 @@ import {createNode} from "../../utils/dom-utils/element"
 import {getState, plusMonth, plusYear, updateHeader, updateState} from "../../store"
 import {getRealMonth} from "../../utils/date"
 import {headerClass, headerMonthClass, headerYearClass} from "../../utils/class-name"
-import {createNodeArguments} from "../../types/methods";
-import {_Event} from "../../types/event";
+import {createNodeArguments} from "../../types/methods"
 
 export function changeYear(val:number) {
     if(getState('pageIdx')!==2){

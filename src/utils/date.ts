@@ -70,3 +70,12 @@ export function getBackMonth(val:number):number {
     return month
 }
 
+export function getNextYear(year:number,month:number):number {
+    if(month===12)return ++year
+    return year
+}
+
+export function getBackYear(year:number,month:number):number {
+    if(month===1)return --year
+    return year
+}
