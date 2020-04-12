@@ -1,5 +1,5 @@
 $blue: #26acee;
-$text-color: rgba(0, 0, 0, 0.62);
+$text-color: rgba(0, 0, 0, 0.52);
 $text-color-fade-1: rgba(0, 0, 0, 0.42);
 $text-color-fade-2: rgba(0, 0, 0, 0.22);
 $border-color-1: #dde0e7;
@@ -95,6 +95,7 @@ $border-color-2: #e7eaf1;
     text-align: center;
     &-day {
       text-align: center;
+      padding-bottom: 10px;
       &-header {
         li {
           color: $text-color-fade-1;

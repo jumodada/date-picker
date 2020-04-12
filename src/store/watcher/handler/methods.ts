@@ -100,6 +100,8 @@ export function watchEndYear(value:number,state:stateValue):void {
     if (rightYe) {
         rightYe.innerText = value.toString() + '年'
     }
+    renderDate('right')
+    nexttick(()=>updateState(getBackYear(value,state.endMonth),'year'))
 }
 
 const monthMethods = {
@@ -117,7 +119,7 @@ export function watchMonth(value: number,state:stateValue): void {
     const {me} = state.header
     const {type} = state.options
     me.innerText = value.toString() + '月'
-    nexttick(()=>monthMethods[type as 'date'](value,state))
+    nexttick(()=>monthMethods[type as unknown as 'date'](value,state))
     renderDate()
 }
 
@@ -125,6 +127,7 @@ export function watchEndMonth(value:number,state:stateValue):void {
     if (state.endMonth === value) return
     const {rightMe} = state.header
     rightMe.innerText = value.toString() + '月'
+    renderDate('right')
     nexttick(()=>{
         updateState(getBackMonth(value),'month')
         updateState(getBackYear(state.endYear,value),'year')

@@ -55,17 +55,17 @@ export function toSelectDate(e: _Event): void {
 export function toSelectMonth(e: _Event): void {
     let parentNode = getState('otherPage').month
     let {target} = e
-    let selectIMonth = Array.from(parentNode.childNodes).findIndex(child=>(child as any)===target)+1
-    updateState(selectIMonth,'month')
-    updateState(0,'pageIdx')
+    let selectIMonth = Array.from(parentNode.childNodes).findIndex(child => (child as any) === target) + 1
+    updateState(selectIMonth, 'month')
+    updateState(0, 'pageIdx')
 }
 
 export function toSelectYear(e: _Event): void {
     let parentNode = getState('otherPage').year
     let {target} = e
-    let selectIYear= (Array.from(parentNode.childNodes).find(child=>(child as any)===target) as HTMLElement).innerText
-    updateState(Number(selectIYear),'year')
-    updateState(1,'pageIdx')
+    let selectIYear = (Array.from(parentNode.childNodes).find(child => (child as any) === target) as HTMLElement).innerText
+    updateState(Number(selectIYear), 'year')
+    updateState(1, 'pageIdx')
 }
 
 export function createPageBody<T>(
@@ -90,7 +90,7 @@ export function createPageBody<T>(
     })
 }
 
-export function createDayBody(eventHandler:(e:_Event)=>any,updateName:string): (HTMLElement | Element) {
+export function createDayBody(eventHandler: (e: _Event) => any, updateName: string): (HTMLElement | Element) {
     return createPageBody<dpKey>(
         42, eventHandler, dayBodyClass, updateDP, updateName)
 }
@@ -105,15 +105,22 @@ export function createYearBody(): (HTMLElement | Element) {
         10, toSelectYear, yearBodyClass, updateOP, 'year', 'hidden')
 }
 
-export function renderDate() {
+export function renderDate(type?: string) {
     nexttick(() => {
-        let firstDay = whatDayIsMonthFirstDay()
+        let month, year, date, el = 'body'
+        if (type === 'right') {
+            month = getState('endMonth')
+            year = getState('endYear')
+            el = 'rightBody'
+            date = getState('endDate')
+        }
+        let firstDay = whatDayIsMonthFirstDay(year, month)
         if (firstDay === 0) firstDay = 7
-        const days = getMonthHasDays()
-        const lastMonthDays = getLastMonthHasDays()
-        const childrenNodes = getState('dayPage').body?.childNodes
+        const days = getMonthHasDays(year, month)
+        const lastMonthDays = getLastMonthHasDays(year, month)
+        const childrenNodes = getState('dayPage')[el as any].childNodes
         const totalDays = firstDay + days
-        const selectDay = getSelectDate()
+        const selectDay = getSelectDate(year,month,date)
         if (childrenNodes && childrenNodes.length === 42) {
             for (let i = 1; i < 43; i++) {
                 const node = childrenNodes[i - 1] as any
@@ -157,17 +164,17 @@ export function renderYear() {
         let childrenNodes = getState('otherPage').year.childNodes
         const year = getState('year')
         childrenNodes.forEach((node: HTMLElement, index: any) => {
-            (node as HTMLElement).innerText = (year+index).toString()
+            (node as HTMLElement).innerText = (year + index).toString()
         })
     })
 }
 
-export function createDay(eventHandler:(e:_Event)=>any,updateName:string) {
+export function createDay(eventHandler: (e: _Event) => any, updateName: string) {
     return createNode({
-        class:[dayClass],
+        class: [dayClass],
         children: [
             {el: createDayHeader},
-            {el: createDayBody(eventHandler,updateName)},
+            {el: createDayBody(eventHandler, updateName)},
         ]
     })
 }
@@ -177,7 +184,7 @@ export function createBody() {
     return createNode({
         class: [datepickerBodyClass],
         children: [
-            {el: createDay(toSelectDate,'body')},
+            {el: createDay(toSelectDate, 'body')},
             {el: createMonthBody},
             {el: createYearBody},
         ]

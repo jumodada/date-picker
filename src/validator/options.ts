@@ -8,9 +8,11 @@ const fixedOptions:flexOptions = {
         'bottom',
         'right'
     ],
-    type:['date','date-range']
+    type:['date','date-range'],
+    unlinkPanels:[true,false]
 }
-const checkLists:string[]= ['placement','type']
+
+const checkLists= ['placement','type']
 
 function _validate(name:string,options:any):boolean {
     if(name in options&&fixedOptions[name as 'placement'].indexOf(options[name]!)===-1){

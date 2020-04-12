@@ -104,6 +104,8 @@ const Store = (function () {
         state[uid].dayPage[key] = val
         if (key === 'body') {
             renderDate()
+        }else if(key==='rightBody'){
+            renderDate('right')
         }
     }
 
