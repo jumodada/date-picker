@@ -1,5 +1,5 @@
 import {createNode, addAttr, removeClass, resetAttr, toggleClass} from "../../utils/dom-utils/element"
-import {createNodeArguments} from "../../types/methods"
+import {CreateNodeArguments} from "../../types/methods"
 import {
     getState,
     updateDate,
@@ -7,7 +7,13 @@ import {
     updateOP,
     updateState
 } from "../../store"
-import {getLastMonthHasDays, getMonthHasDays, getSelectDate, joinDate, whatDayIsMonthFirstDay} from "../../utils/date"
+import {
+    getLastMonthHasDays,
+    getMonthHasDays,
+    getSelectDate,
+    joinDate,
+    whatDayIsMonthFirstDay
+} from "../../utils/date"
 import nexttick from "../../utils/nexttick"
 import {_Event} from "../../types/event"
 import {
@@ -19,14 +25,14 @@ import {
     thisMonth,
     yearBodyClass
 } from "../../utils/class-name"
-import {dpKey, opKey} from "../../types/template"
+import {dpKey, opKey, RenderDateType, RenderDateTypeKey} from "../../types/template"
 import {dayName, monthName} from "../../i18n/zh-CN"
 
 
 export function createDayHeader(): (HTMLElement | Element) {
-    const childrenNodes: createNodeArguments[] = []
+    const childrenNodes: CreateNodeArguments[] = []
     dayName.forEach(name => {
-        let node: createNodeArguments = {name: 'li', val: name}
+        let node: CreateNodeArguments = {name: 'li', val: name}
         childrenNodes.push(node)
     })
     return createNode({
@@ -76,9 +82,9 @@ export function createPageBody<T>(
     updateName: string,
     initial?: 'hidden'
 ): (HTMLElement | Element) {
-    const childrenNodes: createNodeArguments[] = []
+    const childrenNodes: CreateNodeArguments[] = []
     Array.from({length: amount}).forEach(() => {
-        let node: createNodeArguments = {name: 'li', event: event}
+        let node: CreateNodeArguments = {name: 'li', event: event}
         childrenNodes.push(node)
     })
     return createNode({
@@ -104,24 +110,43 @@ export function createYearBody(): (HTMLElement | Element) {
     return createPageBody<opKey>(
         10, toSelectYear, yearBodyClass, updateOP, 'year', 'hidden')
 }
-export function renderDate(type?: string) {
-    const  callback =() => {
-        console.log(1)
-        // tslint:disable-next-line:one-variable-per-declaration
-        let month, year, date, el = 'body'
-        if (type === 'right') {
-            month = getState('endMonth')
-            year = getState('endYear')
-            el = 'rightBody'
-            date = getState('endDate')
+
+const dateType: RenderDateType = {
+    right: {
+        month: 'endMonth',
+        year: 'endYear',
+        date: 'endDate',
+        el: 'rightBody'
+    },
+    left: {
+        month: 'month',
+        year: 'year',
+        date: 'date',
+        el: 'body'
+    }
+}
+
+export function renderDate(type: RenderDateTypeKey = 'left',trigger?:string) {
+    const callback = () => {
+        if(getState('isSelecting')){
+            console.log(1)
+            updateState(false,'isSelecting')
+            return
         }
+        // tslint:disable-next-line:one-variable-per-declaration
+        let month, year, date, el
+        month = getState(dateType[type].month)
+        year = getState(dateType[type].year)
+        el = dateType[type].el
+        date = getState(dateType[type].date)
         let firstDay = whatDayIsMonthFirstDay(year, month)
         if (firstDay === 0) firstDay = 7
         const days = getMonthHasDays(year, month)
         const lastMonthDays: number = getLastMonthHasDays(year, month)[2]
+        console.log(lastMonthDays)
         const childrenNodes = getState('dayPage')[el as any].childNodes
         const totalDays = firstDay + days
-        const selectDay = getSelectDate(year, month, date)
+        const selectDay =getSelectDate(year, month, date)
         if (childrenNodes && childrenNodes.length === 42) {
             for (let i = 1; i < 43; i++) {
                 const node = childrenNodes[i - 1] as any
@@ -149,12 +174,8 @@ export function renderDate(type?: string) {
             console.error('renderDate error ')
         }
     }
-    callback.$FLEXPCIKERTYPE = 'renderdate'+type
+    callback.$FLEXPCIKERTYPE = 'render-date' + type
     nexttick(callback)
-}
-
-export function renderSelectedDay() {
-    // todo
 }
 
 export function renderMonth() {
@@ -185,7 +206,6 @@ export function createDay(eventHandler: (e: _Event) => any, updateName: string) 
         ]
     })
 }
-
 
 export function createBody() {
     return createNode({

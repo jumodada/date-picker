@@ -1,16 +1,15 @@
-import {watchHandleKey, watchHandleKeys} from "../../../types/methods"
+import {watchHandleKey, WatchHandleKeys} from "../../../types/methods"
 import {
     watchReference, watchPopover,
     watchOptions, watchVisible,
-    watchRect, watchYear, watchMonth,
+   watchYear, watchMonth,
     watchPageIdx, watchDate, watchEndMonth, watchEndYear, watchEndDate
 } from "./methods"
-const keys:watchHandleKeys= {
+const keys:WatchHandleKeys= {
     reference:watchReference,
     popover:watchPopover,
     options:watchOptions,
     visible:watchVisible,
-    rect:watchRect,
     year:watchYear,
     date:watchDate,
     month:watchMonth,
@@ -24,7 +23,7 @@ export default {
         return Reflect.get(target, key, receiver)
     },
     set(target: any, key: watchHandleKey, value: any, receiver: any) {
-        keys[key](value,target)
+        keys[key]&&keys[key](value,target)
         return Reflect.set(target, key, value, receiver)
     }
 }

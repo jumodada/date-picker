@@ -5,7 +5,7 @@ import {
     headerYearClass,
     leftClass
 } from "../../utils/class-name"
-import {getState, updateDate, updateHeader} from "../../store"
+import {getState, updateDate, updateHeader, updateState} from "../../store"
 import {getRealMonth, joinDate} from "../../utils/date"
 import {reduceMonth, reduceYear} from "./header"
 import {createDay} from "./body"
@@ -39,7 +39,7 @@ export function createLeftHeader() {
     })
 }
 
-export function toSelectRangeDate(e:_Event):void {
+export function toSelectRangeDate(e:_Event,position?:'right'):void {
     let {innerText, dataset} = e.target
     let view = dataset.view
     let [year, month] = [getState('year'), getState('month')]
@@ -51,7 +51,9 @@ export function toSelectRangeDate(e:_Event):void {
         month = 1
     }
     innerText = joinDate<number, string>(year, month, innerText)
+    updateState(true,'isSelecting')
     updateDate(innerText)
+
 }
 
 export function createLeft(): (HTMLElement | Element) {

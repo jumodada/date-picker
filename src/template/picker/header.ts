@@ -2,7 +2,7 @@ import {createNode} from "../../utils/dom-utils/element"
 import {getState, plusMonth, plusYear, updateHeader, updateState} from "../../store"
 import {getRealMonth} from "../../utils/date"
 import {headerClass, headerMonthClass, headerYearClass} from "../../utils/class-name"
-import {createNodeArguments} from "../../types/methods"
+import {CreateNodeArguments} from "../../types/methods"
 
 export function changeYear(val:number) {
     if(getState('pageIdx')!==2){
@@ -41,7 +41,7 @@ export function toMonth() {
     }
 }
 export function createHeader() {
-    let node:createNodeArguments = {
+    let node:CreateNodeArguments = {
         name: 'div',
         class: [headerClass],
         children: [

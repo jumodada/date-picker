@@ -17,7 +17,7 @@ export function getDay(date?:Date):number {
 export function monthHasDays(year:number,month:number):number {
     return new Date(year, month, 0).getDate()
 }
-export function getLastMonthHasDays(year?:any,month?:any):number[] {
+export function getLastMonthHasDays(year:number,month:number):number[] {
     if(!year||!month)[year,month] = [getState('year'),getState('month')]
     if(month===1){
         month=12
@@ -25,13 +25,11 @@ export function getLastMonthHasDays(year?:any,month?:any):number[] {
     }
     return [year,month,monthHasDays(year, month)]
 }
-export function getMonthHasDays(year?:number,month?:number):number {
-    if(!year||!month) [year,month] = [getState('year'),getState('month')]
-    return monthHasDays(year as any, month as any)
+export function getMonthHasDays(year:number,month:number):number {
+    return monthHasDays(year, month)
 }
 
-export function whatDayIsMonthFirstDay(year?:number,month?:number):number {
-    if(!year||!month) [year,month] = [getState('year'),getState('month')]
+export function whatDayIsMonthFirstDay(year:number,month:number):number {
     const firstDate = new Date(`${year},${month}, 01`)
     return firstDate.getDay()
 }
@@ -40,14 +38,12 @@ export function joinDate<T=number,U=string>(year:T|U,month:T|U,day:T|U) {
     return year+'/'+month+'/'+day
 }
 
-export function getSelectDate(year:number,month:number,date:Date):number|boolean {
+export function getSelectDate(year:number,month:number,date:Date):number {
     if(!date) date = getState('date')
-    if(!date)return 0
-    if(!year||!month)[year,month] = [getFullYear(date),getRealMonth(date)]
     if(year===getState('year')&&month===getState('month')){
         return getDay(date)
     }else{
-        return false
+        return 0
     }
 }
 
@@ -91,8 +87,8 @@ export function getRightDate(isEnd?:boolean):Date {
 }
 
 export function getLeftDate(isEnd?:boolean):Date {
-    if(isEnd)return new Date(getLastMonthHasDays().join('-'))
     const  year = getState('year')
     const month = getState('month')
+    if(isEnd)return new Date(getLastMonthHasDays(year,month).join('-'))
     return new Date([year,month,1].join('-'))
 }

@@ -1,5 +1,5 @@
-import {types} from "../types/methods"
-const types:types= {
+import {Types} from "../types/methods"
+const types:Types= {
     Date: '[object Date]',
     Object: '[object Object]',
     Array: '[object Array]',

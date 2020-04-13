@@ -1,7 +1,7 @@
 import {_Event} from "./event"
 import {StateValue} from "./state"
 
-export interface types {
+export interface Types {
     Date:string
     Object: string
     Array: string
@@ -10,7 +10,7 @@ export interface types {
     Function: string
 }
 
-export interface createNodeArguments<T=HTMLElement|Element>{
+export interface CreateNodeArguments<T=HTMLElement|Element>{
     name?:'svg'|'span'|'div'|'ul'|'li'
     el?:(()=>T)|T
     val?:any,
@@ -21,7 +21,7 @@ export interface createNodeArguments<T=HTMLElement|Element>{
         name?:string,
         method:(val:any,key:any)=>any
     }
-    children?:createNodeArguments[]
+    children?:CreateNodeArguments[]
     initial?:'hidden'
 }
 
@@ -30,17 +30,15 @@ export type watchHandleKey =
     |'popover'
     |'options'
     |'visible'
-    |'rect'
     |'year'
     |'month'
     |'pageIdx'
 
-export interface watchHandleKeys<T=(value:any,state:StateValue)=>any> {
+export interface WatchHandleKeys<T=(value:any,state:StateValue)=>any> {
     reference:T
     popover:T
     options:T
     visible:T
-    rect:T
     month:T
     year:T
     pageIdx:T
@@ -50,7 +48,7 @@ export interface watchHandleKeys<T=(value:any,state:StateValue)=>any> {
     endDate:T
 }
 
-export interface NodeOptions<T=(el:HTMLElement,node:createNodeArguments)=>any> {
+export interface NodeOptions<T=(el:HTMLElement,node:CreateNodeArguments)=>any> {
     event:T
     class:T
     style:T

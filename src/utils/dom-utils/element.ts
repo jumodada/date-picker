@@ -1,5 +1,5 @@
 import {isArray, isFunc} from "../type-of"
-import {createNodeArguments, nodeKey, NodeOptions} from "../../types/methods"
+import {CreateNodeArguments, nodeKey, NodeOptions} from "../../types/methods"
 import createSVG from "../create-svg"
 import {on} from "../../event/eventListener"
 
@@ -39,7 +39,7 @@ export function createEL(tagName?: string): HTMLElement {
     return document.createElement(tagName)
 }
 
-export function createNode(node: createNodeArguments): (Element | HTMLElement) {
+export function createNode(node: CreateNodeArguments): (Element | HTMLElement) {
     if (node.el&&isFunc(node.el)) return (node.el as any)()
     if(node.el)return (node.el as any)
     const el = node.name === 'svg' ? createSVG(node.val) : createEL(node.name)

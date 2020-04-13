@@ -15,12 +15,13 @@ export type stateKey  =
     |'endMonth'|'endDate'
     |'date'|'pageIdx'
     |'header'|'dayPage'
-    |'otherPage'
+    |'otherPage'|'isSelecting'
 
 export interface StateValue {
     reference:HTMLElement
     popover:HTMLElement
     options:FlexOptions
+    isSelecting:boolean
     visible:boolean
     rect:Rect
     year:number

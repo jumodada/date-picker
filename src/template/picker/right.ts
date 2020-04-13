@@ -8,10 +8,10 @@ import {
     rightClass
 } from "../../utils/class-name"
 import {getState, plusMonth, plusYear, updateDP, updateHeader} from "../../store"
-import {_Event} from "../../types/event"
 import {createDayHeader, createPageBody} from "./body"
 import {dpKey} from "../../types/template"
-import {toSelectRangeDate} from "./left";
+import {toSelectRangeDate} from "./left"
+import {_Event} from "../../types/event"
 
 
 function increaseEndMonth() {
@@ -59,9 +59,14 @@ export function createRightBody() {
     })
 }
 
+function toSelectRight(e:_Event) {
+    toSelectRangeDate(e,'right')
+}
+
+
 export function createRightDayBody(): (HTMLElement | Element) {
     return createPageBody<dpKey>(
-        42, toSelectRangeDate, dayBodyClass, updateDP, 'rightBody')
+        42, toSelectRight, dayBodyClass, updateDP, 'rightBody')
 }
 
 

@@ -33,6 +33,7 @@ export default class InitState {
     endYear:number
     endMonth:number
     endDate:Date|null
+    isSelecting:boolean
     constructor() {
         let [year,month] = [getFullYear(),getRealMonth()]
         let [endYear,endMonth] = [year,month+1]
@@ -70,5 +71,6 @@ export default class InitState {
             year: null
         }
         this.pageIdx = 0
+        this.isSelecting = false
     }
 }

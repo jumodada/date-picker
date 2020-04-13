@@ -21,15 +21,7 @@ export function watchOptions() {
 // todo
 }
 
-export function watchRect() {
-// todo
-}
-
 export function watchDate(value: Date, state: StateValue) {
-    let {type} = getState('options')
-    if(type==='date-range'&&
-        (getRightDate()<value||value<getLeftDate())
-    )return
     updateState(value.getFullYear(), 'year')
     updateState(value.getMonth() + 1, 'month')
     renderDate()
@@ -98,9 +90,7 @@ export function watchYear(value: number, state: StateValue): void {
     const page = state.pageIdx
     const {ye} = state.header
     const {type} = state.options
-    if (ye) {
-        ye.innerText = value.toString() + '年'
-    }
+    if (ye)  ye.innerText = value.toString() + '年'
     if (state.year === value) return
     if (page === 2) {
         renderYear()
@@ -115,12 +105,9 @@ export function watchYear(value: number, state: StateValue): void {
 export function watchEndYear(value: number, state: StateValue): void {
     if (state.endYear === value) return
     const {rightYe} = state.header
-    if (rightYe) {
-        rightYe.innerText = value.toString() + '年'
-    }
-
-    renderDate('right')
+    if (rightYe)rightYe.innerText = value.toString() + '年'
     nexttick(() => updateState(getBackYear(value, state.endMonth), 'year'))
+    renderDate('right')
 }
 
 const monthMethods = {
