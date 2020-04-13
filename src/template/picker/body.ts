@@ -142,7 +142,7 @@ export function renderDate(type: RenderDateTypeKey = 'left',trigger?:string) {
         let firstDay = whatDayIsMonthFirstDay(year, month)
         if (firstDay === 0) firstDay = 7
         const days = getMonthHasDays(year, month)
-        const lastMonthDays: number = getLastMonthHasDays(year, month)[2]
+        const lastMonthDays: number = getLastMonthHasDays(year, month)
         console.log(lastMonthDays)
         const childrenNodes = getState('dayPage')[el as any].childNodes
         const totalDays = firstDay + days

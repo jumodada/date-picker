@@ -17,13 +17,13 @@ export function getDay(date?:Date):number {
 export function monthHasDays(year:number,month:number):number {
     return new Date(year, month, 0).getDate()
 }
-export function getLastMonthHasDays(year:number,month:number):number[] {
+export function getLastMonthHasDays(year:number,month:number):number {
     if(!year||!month)[year,month] = [getState('year'),getState('month')]
-    if(month===1){
+    if(--month===0){
         month=12
         year--
     }
-    return [year,month,monthHasDays(year, month)]
+    return monthHasDays(year, month)
 }
 export function getMonthHasDays(year:number,month:number):number {
     return monthHasDays(year, month)
@@ -79,7 +79,7 @@ export function getBackYear(year:number,month:number):number {
 export function getRightDate(isEnd?:boolean):Date {
     const  year = getState('endYear')
     const month = getState('endMonth')
-    let date = getLastMonthHasDays(year,month)
+    let date = [year,month,getMonthHasDays(year,month)]
     if(typeof isEnd!=='undefined' ){
         date = [year,month,1]
     }
@@ -89,6 +89,6 @@ export function getRightDate(isEnd?:boolean):Date {
 export function getLeftDate(isEnd?:boolean):Date {
     const  year = getState('year')
     const month = getState('month')
-    if(isEnd)return new Date(getLastMonthHasDays(year,month).join('-'))
+    if(isEnd)return new Date([year,month,monthHasDays(year,month)].join('-'))
     return new Date([year,month,1].join('-'))
 }
