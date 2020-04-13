@@ -11,10 +11,8 @@ import {reduceMonth, reduceYear} from "./header"
 import {createDay} from "./body"
 import {_Event} from "../../types/event"
 
-
 export function createLeftHeader() {
     return createNode({
-        name: 'div',
         class: [headerClass],
         children: [
             {name: 'svg', val: 'd-left', event: reduceYear, style: 'left:3px'},
@@ -41,8 +39,7 @@ export function createLeftHeader() {
     })
 }
 
-
-export function toSelectStartDate(e:_Event):void {
+export function toSelectRangeDate(e:_Event):void {
     let {innerText, dataset} = e.target
     let view = dataset.view
     let [year, month] = [getState('year'), getState('month')]
@@ -57,14 +54,12 @@ export function toSelectStartDate(e:_Event):void {
     updateDate(innerText)
 }
 
-
 export function createLeft(): (HTMLElement | Element) {
     return createNode({
-        name: 'div',
         class: [leftClass],
         children: [
             {el:createLeftHeader},
-            {el:createDay(toSelectStartDate,'body')},
+            {el:createDay(toSelectRangeDate,'body')},
         ],
     })
 }

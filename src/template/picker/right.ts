@@ -11,6 +11,7 @@ import {getState, plusMonth, plusYear, updateDP, updateHeader} from "../../store
 import {_Event} from "../../types/event"
 import {createDayHeader, createPageBody} from "./body"
 import {dpKey} from "../../types/template"
+import {toSelectRangeDate} from "./left";
 
 
 function increaseEndMonth() {
@@ -22,7 +23,6 @@ function increaseEndYear() {
 
 export function createRightHeader() {
     return createNode({
-        name: 'div',
         class: [headerClass],
         children: [
             {
@@ -59,13 +59,9 @@ export function createRightBody() {
     })
 }
 
-export function toSelectEndDate(e:_Event):void {
-    // todo
-}
-
 export function createRightDayBody(): (HTMLElement | Element) {
     return createPageBody<dpKey>(
-        42, toSelectEndDate, dayBodyClass, updateDP, 'rightBody')
+        42, toSelectRangeDate, dayBodyClass, updateDP, 'rightBody')
 }
 
 

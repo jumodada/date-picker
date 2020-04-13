@@ -149,6 +149,7 @@ export function renderDate(type?: string) {
             console.error('renderDate error ')
         }
     }
+    callback.$FLEXPCIKERTYPE = 'renderdate'+type
     nexttick(callback)
 }
 

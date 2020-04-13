@@ -1,4 +1,4 @@
-import flexOptions from "./options"
+import FlexOptions from "./options"
 export interface Rect {
     width:number
     height:number
@@ -20,7 +20,7 @@ export type stateKey  =
 export interface StateValue {
     reference:HTMLElement
     popover:HTMLElement
-    options:flexOptions
+    options:FlexOptions
     visible:boolean
     rect:Rect
     year:number

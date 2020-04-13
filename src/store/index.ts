@@ -27,13 +27,6 @@ const Store = (function () {
         state[uid].options = mergeOptions(state[uid].options, _o)
     }
 
-    function _updateKeyInOptions(key: string, val: any) {
-        if (typeof val === 'undefined') return
-        const _o = Object.create(null)
-        _o[key] = val
-        state[uid].options = mergeOptions(state[uid].options, _o)
-    }
-
     function _getState(key: stateKey): any {
         return state[uid][key]
     }
@@ -46,10 +39,6 @@ const Store = (function () {
         state.forEach((s, idx) => {
             if (idx !== uid && s.popover) s.popover.style.display = 'none'
         })
-    }
-
-    function _closePopover(): void {
-        state[uid].visible = false
     }
 
     function _openPopover(e: Event): void {
@@ -121,7 +110,6 @@ const Store = (function () {
     return {
         _getState,
         _pushInState,
-        _closePopover,
         _openPopover,
         _updateOptions,
         _plusYear,
@@ -136,7 +124,6 @@ const Store = (function () {
 
 export const getState = Store._getState
 export const pushInState = Store._pushInState
-export const closePopover = Store._closePopover
 export const openPopover = Store._openPopover
 export const updateOptions = Store._updateOptions
 export const plusYear = Store._plusYear

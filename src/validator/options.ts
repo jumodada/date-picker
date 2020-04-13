@@ -1,7 +1,7 @@
-import flexOptions, {placement} from "../types/options"
+import FlexOptions, {placement} from "../types/options"
 import {isObject} from "../utils/type-of"
 
-const fixedOptions:flexOptions = {
+const fixedOptions:FlexOptions = {
     placement:[
         'top',
         'left',

@@ -52,7 +52,8 @@ if (typeof Promise !== 'undefined' && isNative(Promise)) {
 
 function isInCallbacks(cb?: Function) {
     if(!cb)return true
-    return callbacks.some(_cb => _cb.toString() === cb.toString())
+    // @ts-ignore
+    return callbacks.some(_cb => _cb.toString() === cb.toString()&&_cb.$FLEXPCIKERTYPE===cb.$FLEXPCIKERTYPE)
 }
 
 
