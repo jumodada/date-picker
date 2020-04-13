@@ -77,6 +77,7 @@ export function watchPageIdx(value: number, state: StateValue) {
     if (!ye) return
     if (value === 2) {
         ye.innerText = yearVal + ' - ' + period
+        renderYear()
     }
     elementShow($elements.splice(value, 1), false)
     elementShow($elements, true)
