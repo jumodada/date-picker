@@ -104,9 +104,9 @@ export function createYearBody(): (HTMLElement | Element) {
     return createPageBody<opKey>(
         10, toSelectYear, yearBodyClass, updateOP, 'year', 'hidden')
 }
-
 export function renderDate(type?: string) {
-    nexttick(() => {
+    const  callback =() => {
+        console.log(1)
         // tslint:disable-next-line:one-variable-per-declaration
         let month, year, date, el = 'body'
         if (type === 'right') {
@@ -148,7 +148,8 @@ export function renderDate(type?: string) {
         } else {
             console.error('renderDate error ')
         }
-    })
+    }
+    nexttick(callback)
 }
 
 export function renderSelectedDay() {

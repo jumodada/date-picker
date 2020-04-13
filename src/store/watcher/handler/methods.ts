@@ -36,7 +36,6 @@ export function watchDate(value: Date, state: StateValue) {
 }
 
 export function watchEndDate(value: Date, state: StateValue) {
-
     renderDate('right')
 }
 export function watchReference(ref: HTMLElement, state: StateValue) {
