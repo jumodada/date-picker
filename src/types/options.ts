@@ -4,15 +4,15 @@ export type placement =
     |'bottom'
     |'right'
 
-export type type = ('date'|'date-range')[]
+export type type = 'date'|'date-range'
 
-export interface flexOptions {
+export interface FlexOptions {
     placement:placement|placement[]
     type:type|type[]
-    unlinkPanels:boolean[]
+    unlinkPanels:boolean|boolean[]
     format?:string
     offset?:number
     zIndex?:number
 }
 
-export default flexOptions
+export default FlexOptions

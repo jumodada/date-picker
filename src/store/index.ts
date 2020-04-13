@@ -1,6 +1,6 @@
 import {mergeOptions} from "../utils/merge"
 import initState from "./watcher"
-import {State, stateKey, stateValue} from "../types/state"
+import {State, stateKey, StateValue} from "../types/state"
 import {isNumber} from "../utils/type-of"
 import {dpKey, headerKey, opKey} from "../types/template"
 import {renderDate, renderMonth, renderYear} from "../template/picker/body"
@@ -19,7 +19,7 @@ const Store = (function () {
     }
 
     function _pushInState() {
-        state.push(initState() as stateValue)
+        state.push(initState() as StateValue)
         _toggleToLastUId()
     }
 

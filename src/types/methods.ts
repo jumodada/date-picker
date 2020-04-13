@@ -1,5 +1,5 @@
 import {_Event} from "./event"
-import {stateValue} from "./state"
+import {StateValue} from "./state"
 
 export interface types {
     Date:string
@@ -35,7 +35,7 @@ export type watchHandleKey =
     |'month'
     |'pageIdx'
 
-export interface watchHandleKeys<T=(value:any,state:stateValue)=>any> {
+export interface watchHandleKeys<T=(value:any,state:StateValue)=>any> {
     reference:T
     popover:T
     options:T
@@ -47,6 +47,7 @@ export interface watchHandleKeys<T=(value:any,state:stateValue)=>any> {
     date:T
     endMonth:T
     endYear:T
+    endDate:T
 }
 
 export interface NodeOptions<T=(el:HTMLElement,node:createNodeArguments)=>any> {

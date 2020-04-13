@@ -107,6 +107,7 @@ export function createYearBody(): (HTMLElement | Element) {
 
 export function renderDate(type?: string) {
     nexttick(() => {
+        // tslint:disable-next-line:one-variable-per-declaration
         let month, year, date, el = 'body'
         if (type === 'right') {
             month = getState('endMonth')
@@ -117,10 +118,10 @@ export function renderDate(type?: string) {
         let firstDay = whatDayIsMonthFirstDay(year, month)
         if (firstDay === 0) firstDay = 7
         const days = getMonthHasDays(year, month)
-        const lastMonthDays = getLastMonthHasDays(year, month)
+        const lastMonthDays: number = getLastMonthHasDays(year, month)[2]
         const childrenNodes = getState('dayPage')[el as any].childNodes
         const totalDays = firstDay + days
-        const selectDay = getSelectDate(year,month,date)
+        const selectDay = getSelectDate(year, month, date)
         if (childrenNodes && childrenNodes.length === 42) {
             for (let i = 1; i < 43; i++) {
                 const node = childrenNodes[i - 1] as any
@@ -148,6 +149,10 @@ export function renderDate(type?: string) {
             console.error('renderDate error ')
         }
     })
+}
+
+export function renderSelectedDay() {
+    // todo
 }
 
 export function renderMonth() {

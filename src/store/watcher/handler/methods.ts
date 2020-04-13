@@ -1,4 +1,4 @@
-import {openPopover, updateState} from "../../index"
+import {getState, openPopover, updateState} from "../../index"
 import {on, remove} from "../../../event/eventListener"
 import clickOutside from "../../../utils/clickoutside"
 import {isElementExist} from "../../../utils/dom-utils/is-element-exist"
@@ -6,9 +6,16 @@ import {createPopover, updatePopover} from "../../../template"
 import {appendChild} from "../../../utils/dom-utils/element"
 import {setPopoverStyle} from "../../../template/style"
 import {renderDate, renderYear} from "../../../template/picker/body"
-import {getBackMonth, getBackYear, getNextMonth, getNextYear} from "../../../utils/date"
+import {
+    getBackMonth,
+    getBackYear,
+    getRightDate,
+    getNextMonth,
+    getNextYear,
+    getLeftDate
+} from "../../../utils/date"
 import nexttick from "../../../utils/nexttick"
-import {stateValue} from "../../../types/state"
+import {StateValue} from "../../../types/state"
 
 export function watchOptions() {
 // todo
@@ -18,13 +25,21 @@ export function watchRect() {
 // todo
 }
 
-export function watchDate(value: Date,state:stateValue) {
-    updateState(value.getFullYear(),'year')
-    updateState(value.getMonth() + 1,'month')
+export function watchDate(value: Date, state: StateValue) {
+    let {type} = getState('options')
+    if(type==='date-range'&&
+        (getRightDate()<value||value<getLeftDate())
+    )return
+    updateState(value.getFullYear(), 'year')
+    updateState(value.getMonth() + 1, 'month')
     renderDate()
 }
 
-export function watchReference(ref: HTMLElement,state:stateValue) {
+export function watchEndDate(value: Date, state: StateValue) {
+
+    renderDate('right')
+}
+export function watchReference(ref: HTMLElement, state: StateValue) {
     const preElement = state.reference
     remove(preElement, 'click', openPopover)
     remove(document.body, 'click', clickOutside)
@@ -34,7 +49,7 @@ export function watchReference(ref: HTMLElement,state:stateValue) {
     }
 }
 
-export function watchVisible(value: boolean,state:stateValue) {
+export function watchVisible(value: boolean, state: StateValue) {
     const _p = state.popover
     const _exist = isElementExist(_p)
     if (!_exist) {
@@ -52,7 +67,7 @@ export function elementShow(elements: any[], isHidden: boolean) {
     })
 }
 
-export function watchPageIdx(value: number,state:stateValue) {
+export function watchPageIdx(value: number, state: StateValue) {
     const {ye, me, ar, al} = state.header
     const {header, body} = state.dayPage
     const {month, year} = state.otherPage
@@ -68,7 +83,7 @@ export function watchPageIdx(value: number,state:stateValue) {
     elementShow($elements, true)
 }
 
-export function watchPopover(value: HTMLElement,state:stateValue) {
+export function watchPopover(value: HTMLElement, state: StateValue) {
     if (value) {
         const _prePop = state.popover
         if (!isElementExist(_prePop)) {
@@ -79,9 +94,10 @@ export function watchPopover(value: HTMLElement,state:stateValue) {
     }
 }
 
-export function watchYear(value: number,state:stateValue): void {
+export function watchYear(value: number, state: StateValue): void {
     const page = state.pageIdx
     const {ye} = state.header
+    const {type} = state.options
     if (ye) {
         ye.innerText = value.toString() + '年'
     }
@@ -91,46 +107,49 @@ export function watchYear(value: number,state:stateValue): void {
     } else if (page === 0) {
         renderDate()
     }
-    nexttick(()=>updateState(getNextYear(value,state.month),'endYear'))
+    if(type==='date-range'){
+        nexttick(() => updateState(getNextYear(value, state.month), 'endYear'))
+    }
 }
 
-export function watchEndYear(value:number,state:stateValue):void {
+export function watchEndYear(value: number, state: StateValue): void {
     if (state.endYear === value) return
     const {rightYe} = state.header
     if (rightYe) {
         rightYe.innerText = value.toString() + '年'
     }
+
     renderDate('right')
-    nexttick(()=>updateState(getBackYear(value,state.endMonth),'year'))
+    nexttick(() => updateState(getBackYear(value, state.endMonth), 'year'))
 }
 
 const monthMethods = {
-    date: (...arg:any) => {
+    date: (...arg: any) => {
         // do nothing
     },
-    'date-range': (value: number,state:stateValue) => {
-        updateState(getNextMonth(value),'endMonth')
-        updateState(getNextYear(state.year,value),'endYear')
+    'date-range': (value: number, state: StateValue) => {
+        updateState(getNextMonth(value), 'endMonth')
+        updateState(getNextYear(state.year, value), 'endYear')
     }
 }
 
-export function watchMonth(value: number,state:stateValue): void {
+export function watchMonth(value: number, state: StateValue): void {
     if (state.month === value) return
     const {me} = state.header
     const {type} = state.options
     me.innerText = value.toString() + '月'
-    nexttick(()=>monthMethods[type as unknown as 'date'](value,state))
+    nexttick(() => monthMethods[type as unknown as 'date'](value, state))
     renderDate()
 }
 
-export function watchEndMonth(value:number,state:stateValue):void {
+export function watchEndMonth(value: number, state: StateValue): void {
     if (state.endMonth === value) return
     const {rightMe} = state.header
     rightMe.innerText = value.toString() + '月'
     renderDate('right')
-    nexttick(()=>{
-        updateState(getBackMonth(value),'month')
-        updateState(getBackYear(state.endYear,value),'year')
+    nexttick(() => {
+        updateState(getBackMonth(value), 'month')
+        updateState(getBackYear(state.endYear, value), 'year')
     })
 
 }

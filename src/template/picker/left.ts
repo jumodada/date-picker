@@ -5,8 +5,8 @@ import {
     headerYearClass,
     leftClass
 } from "../../utils/class-name"
-import {getState, updateHeader} from "../../store"
-import {getRealMonth} from "../../utils/date"
+import {getState, updateDate, updateHeader} from "../../store"
+import {getRealMonth, joinDate} from "../../utils/date"
 import {reduceMonth, reduceYear} from "./header"
 import {createDay} from "./body"
 import {_Event} from "../../types/event"
@@ -43,7 +43,18 @@ export function createLeftHeader() {
 
 
 export function toSelectStartDate(e:_Event):void {
-    console.log(1)
+    let {innerText, dataset} = e.target
+    let view = dataset.view
+    let [year, month] = [getState('year'), getState('month')]
+    if (view === 'pre' && --month === 0) {
+        year--
+        month = 12
+    } else if (view === 'next' && ++month === 13) {
+        year++
+        month = 1
+    }
+    innerText = joinDate<number, string>(year, month, innerText)
+    updateDate(innerText)
 }
 
 

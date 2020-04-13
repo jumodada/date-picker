@@ -17,7 +17,7 @@ export type stateKey  =
     |'header'|'dayPage'
     |'otherPage'
 
-export interface stateValue {
+export interface StateValue {
     reference:HTMLElement
     popover:HTMLElement
     options:flexOptions
@@ -50,5 +50,5 @@ export interface stateValue {
     }
 
 }
-export type State = stateValue[]
+export type State = StateValue[]
 
