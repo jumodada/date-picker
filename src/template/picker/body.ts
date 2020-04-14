@@ -10,7 +10,7 @@ import {
 import {
     getLastMonthHasDays,
     getMonthHasDays,
-    getSelectDate,
+    getSelectDay,
     joinDate,
     whatDayIsMonthFirstDay
 } from "../../utils/date"
@@ -126,13 +126,8 @@ const dateType: RenderDateType = {
     }
 }
 
-export function renderDate(type: RenderDateTypeKey = 'left',trigger?:string) {
+export function renderDate(type: RenderDateTypeKey = 'left') {
     const callback = () => {
-        if(getState('isSelecting')){
-            console.log(1)
-            updateState(false,'isSelecting')
-            return
-        }
         // tslint:disable-next-line:one-variable-per-declaration
         let month, year, date, el
         month = getState(dateType[type].month)
@@ -143,10 +138,14 @@ export function renderDate(type: RenderDateTypeKey = 'left',trigger?:string) {
         if (firstDay === 0) firstDay = 7
         const days = getMonthHasDays(year, month)
         const lastMonthDays: number = getLastMonthHasDays(year, month)
-        console.log(lastMonthDays)
         const childrenNodes = getState('dayPage')[el as any].childNodes
         const totalDays = firstDay + days
-        const selectDay =getSelectDate(year, month, date)
+        const selectDay =getSelectDay(year, month, date)
+        // if(getState('isSelecting')){
+        //     renderStyle(childrenNodes)
+        //     updateState(false,'isSelecting')
+        //     return
+        // }
         if (childrenNodes && childrenNodes.length === 42) {
             for (let i = 1; i < 43; i++) {
                 const node = childrenNodes[i - 1] as any
@@ -176,6 +175,10 @@ export function renderDate(type: RenderDateTypeKey = 'left',trigger?:string) {
     }
     callback.$FLEXPCIKERTYPE = 'render-date' + type
     nexttick(callback)
+}
+
+export function renderStyle(childrenNodes:HTMLElement[]):void {
+
 }
 
 export function renderMonth() {

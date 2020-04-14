@@ -48,7 +48,7 @@ const Store = (function () {
     }
 
 
-    function _updateDate(val: string): void {
+    function _updateDate(val: string,key:'date'|'endDate' = 'date'): void {
         let date: Date
         if (val.toString().length < 3) {
             const year = getState('year')
@@ -57,11 +57,11 @@ const Store = (function () {
         } else {
             date = new Date(val)
         }
-        if (equalDate(state[uid].date, date)) {
+        if (equalDate(state[uid][key], date)) {
             updateState(false,'isSelecting')
             return
         }
-        state[uid].date = date
+        state[uid][key] = date
     }
 
     function _plusYear(val: number, key?: 'endYear' | 'year') {

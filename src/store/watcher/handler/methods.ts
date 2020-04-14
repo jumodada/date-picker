@@ -28,6 +28,8 @@ export function watchDate(value: Date, state: StateValue) {
 }
 
 export function watchEndDate(value: Date, state: StateValue) {
+    updateState(value.getFullYear(), 'endYear')
+    updateState(value.getMonth() + 1, 'endMonth')
     renderDate('right')
 }
 export function watchReference(ref: HTMLElement, state: StateValue) {
@@ -49,6 +51,7 @@ export function watchVisible(value: boolean, state: StateValue) {
     } else {
         updatePopover(_p, value)
     }
+    updateState(false,'isSelecting')
 }
 
 export function elementShow(elements: any[], isHidden: boolean) {

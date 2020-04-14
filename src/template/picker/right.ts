@@ -60,7 +60,7 @@ export function createRightBody() {
 }
 
 function toSelectRight(e:_Event) {
-    toSelectRangeDate(e,'right')
+    toSelectRangeDate(e,'endDate')
 }
 
 

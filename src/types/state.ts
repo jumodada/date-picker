@@ -31,6 +31,7 @@ export interface StateValue {
     endDate:Date
     date:Date
     pageIdx:number
+    selectRange:(Date|null)[]
     header:{
         al:HTMLElement
         ye:HTMLElement
@@ -49,7 +50,6 @@ export interface StateValue {
         year:any
         month:any
     }
-
 }
 export type State = StateValue[]
 

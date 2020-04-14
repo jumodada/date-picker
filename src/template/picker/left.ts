@@ -39,7 +39,7 @@ export function createLeftHeader() {
     })
 }
 
-export function toSelectRangeDate(e:_Event,position?:'right'):void {
+export function toSelectRangeDate(e:_Event,key:'date'|'endDate'='date'):void {
     let {innerText, dataset} = e.target
     let view = dataset.view
     let [year, month] = [getState('year'), getState('month')]
@@ -52,7 +52,7 @@ export function toSelectRangeDate(e:_Event,position?:'right'):void {
     }
     innerText = joinDate<number, string>(year, month, innerText)
     updateState(true,'isSelecting')
-    updateDate(innerText)
+    updateDate(innerText,key)
 
 }
 

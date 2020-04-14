@@ -38,9 +38,9 @@ export function joinDate<T=number,U=string>(year:T|U,month:T|U,day:T|U) {
     return year+'/'+month+'/'+day
 }
 
-export function getSelectDate(year:number,month:number,date:Date):number {
-    if(!date) date = getState('date')
-    if(year===getState('year')&&month===getState('month')){
+export function getSelectDay(year:number,month:number,date:Date):number {
+    if(!date)return 0
+    if(year===date.getFullYear()&&month===getRealMonth(date)){
         return getDay(date)
     }else{
         return 0
