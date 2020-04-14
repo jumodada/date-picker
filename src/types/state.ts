@@ -15,7 +15,7 @@ export type stateKey  =
     |'endMonth'|'endDate'
     |'date'|'pageIdx'
     |'header'|'dayPage'
-    |'otherPage'|'isSelecting'
+    |'otherPage'|'isSelecting'|'selectRange'
 
 export interface StateValue {
     reference:HTMLElement

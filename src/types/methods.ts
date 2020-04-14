@@ -46,6 +46,7 @@ export interface WatchHandleKeys<T=(value:any,state:StateValue)=>any> {
     endMonth:T
     endYear:T
     endDate:T
+    selectRange:T
 }
 
 export interface NodeOptions<T=(el:HTMLElement,node:CreateNodeArguments)=>any> {
@@ -67,3 +68,8 @@ export type nodeKey =
     'name'|
     'val'|
     'initial'
+
+export interface SelectDayType {
+    date:()=>[number]
+    'date-range':()=>[number]
+}

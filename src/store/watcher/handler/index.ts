@@ -2,8 +2,8 @@ import {watchHandleKey, WatchHandleKeys} from "../../../types/methods"
 import {
     watchReference, watchPopover,
     watchOptions, watchVisible,
-   watchYear, watchMonth,
-    watchPageIdx, watchDate, watchEndMonth, watchEndYear, watchEndDate
+    watchYear, watchMonth,
+    watchPageIdx, watchDate, watchEndMonth, watchEndYear, watchEndDate, watchSelectRange
 } from "./methods"
 const keys:WatchHandleKeys= {
     reference:watchReference,
@@ -16,7 +16,8 @@ const keys:WatchHandleKeys= {
     pageIdx:watchPageIdx,
     endMonth:watchEndMonth,
     endYear:watchEndYear,
-    endDate:watchEndDate
+    endDate:watchEndDate,
+    selectRange:watchSelectRange,
 }
 export default {
     get(target: any, key: watchHandleKey, receiver: any) {

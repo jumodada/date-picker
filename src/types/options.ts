@@ -8,7 +8,7 @@ export type type = 'date'|'date-range'
 
 export interface FlexOptions {
     placement:placement|placement[]
-    type:type|type[]
+    type:type
     unlinkPanels:boolean|boolean[]
     format?:string
     offset?:number

@@ -52,8 +52,14 @@ export function toSelectRangeDate(e:_Event,key:'date'|'endDate'='date'):void {
     }
     innerText = joinDate<number, string>(year, month, innerText)
     updateState(true,'isSelecting')
-    updateDate(innerText,key)
+    updateSelectRange(innerText)
+}
 
+export function updateSelectRange(innerText:string) {
+    let selectRange:any = getState('selectRange').slice(0)
+    if(selectRange.length===2)selectRange.length = 0
+    selectRange.push(innerText)
+    updateState(selectRange,'selectRange')
 }
 
 export function createLeft(): (HTMLElement | Element) {

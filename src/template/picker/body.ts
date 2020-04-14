@@ -115,13 +115,11 @@ const dateType: RenderDateType = {
     right: {
         month: 'endMonth',
         year: 'endYear',
-        date: 'endDate',
         el: 'rightBody'
     },
     left: {
         month: 'month',
         year: 'year',
-        date: 'date',
         el: 'body'
     }
 }
@@ -129,23 +127,18 @@ const dateType: RenderDateType = {
 export function renderDate(type: RenderDateTypeKey = 'left') {
     const callback = () => {
         // tslint:disable-next-line:one-variable-per-declaration
-        let month, year, date, el
+        let month, year, el
         month = getState(dateType[type].month)
         year = getState(dateType[type].year)
         el = dateType[type].el
-        date = getState(dateType[type].date)
         let firstDay = whatDayIsMonthFirstDay(year, month)
         if (firstDay === 0) firstDay = 7
         const days = getMonthHasDays(year, month)
         const lastMonthDays: number = getLastMonthHasDays(year, month)
         const childrenNodes = getState('dayPage')[el as any].childNodes
         const totalDays = firstDay + days
-        const selectDay =getSelectDay(year, month, date)
-        // if(getState('isSelecting')){
-        //     renderStyle(childrenNodes)
-        //     updateState(false,'isSelecting')
-        //     return
-        // }
+        const selectDay = getSelectDay()
+        const isSelecting = getState('isSelecting')
         if (childrenNodes && childrenNodes.length === 42) {
             for (let i = 1; i < 43; i++) {
                 const node = childrenNodes[i - 1] as any
@@ -160,14 +153,16 @@ export function renderDate(type: RenderDateTypeKey = 'left') {
                 } else {
                     innerText = i - firstDay
                 }
-                if (innerText === selectDay && !view) {
+                if (selectDay.indexOf(innerText)>-1 && !view) {
                     addAttr(node, selectedClass)
                 } else {
                     removeClass(node, selectedClass)
                 }
-                node.innerText = innerText.toString()
                 toggleClass(node, isFade ? [notThisMonth, thisMonth] : [thisMonth, notThisMonth])
                 resetAttr(node, view, 'data-view')
+                if (!isSelecting) {
+                    node.innerText = innerText.toString()
+                }
             }
         } else {
             console.error('renderDate error ')
@@ -177,7 +172,7 @@ export function renderDate(type: RenderDateTypeKey = 'left') {
     nexttick(callback)
 }
 
-export function renderStyle(childrenNodes:HTMLElement[]):void {
+export function renderStyle(childrenNodes: HTMLElement[]): void {
 
 }
 

@@ -18,13 +18,11 @@ export interface RenderDateType {
     right:{
         month:'endMonth',
         year:'endYear',
-        date:'endDate',
         el:'rightBody'
     },
     left:{
         month:'month',
         year:'year',
-        date:'date',
         el:'body'
     }
 }
