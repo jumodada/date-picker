@@ -27,6 +27,17 @@ export interface RenderDateType {
     }
 }
 
+export interface RangeDateKey {
+    date:{
+        year:'year',
+        month:'month'
+    },
+    endDate:{
+        year:'endYear',
+        month:'endMonth'
+    }
+}
+
 export type RenderDateTypeKey = 'left'|'right'
 
 export interface OtherPage<T=HTMLElement> {

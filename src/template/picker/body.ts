@@ -137,8 +137,7 @@ export function renderDate(type: RenderDateTypeKey = 'left') {
         const lastMonthDays: number = getLastMonthHasDays(year, month)
         const childrenNodes = getState('dayPage')[el as any].childNodes
         const totalDays = firstDay + days
-        const selectDay = getSelectDay()
-        const isSelecting = getState('isSelecting')
+        const selectDay = getSelectDay(year,month)
         if (childrenNodes && childrenNodes.length === 42) {
             for (let i = 1; i < 43; i++) {
                 const node = childrenNodes[i - 1] as any
@@ -153,6 +152,9 @@ export function renderDate(type: RenderDateTypeKey = 'left') {
                 } else {
                     innerText = i - firstDay
                 }
+                if(type==='right'){
+                    console.log(innerText)
+                }
                 if (selectDay.indexOf(innerText)>-1 && !view) {
                     addAttr(node, selectedClass)
                 } else {
@@ -160,9 +162,7 @@ export function renderDate(type: RenderDateTypeKey = 'left') {
                 }
                 toggleClass(node, isFade ? [notThisMonth, thisMonth] : [thisMonth, notThisMonth])
                 resetAttr(node, view, 'data-view')
-                if (!isSelecting) {
-                    node.innerText = innerText.toString()
-                }
+                node.innerText = innerText.toString()
             }
         } else {
             console.error('renderDate error ')

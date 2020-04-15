@@ -42,28 +42,33 @@ export function joinDate<T = number, U = string>(year: T | U, month: T | U, day:
     return year + '/' + month + '/' + day
 }
 
-const selectDayType:SelectDayType = {
+const selectDayType: SelectDayType = {
     date: () => {
         const date = getState('date')
         if (!date) return [0]
         let [year, month] = [getState('year'), getState('month')]
-        let [endYear, endMonth] = [getState('endYear'), getState('endMonth')]
-        if (year === date.getFullYear() && month === getRealMonth(date)
-            || (endYear === date.getFullYear() && endMonth === getRealMonth(date))
-        ) {
+        if (year === date.getFullYear() && month === getRealMonth(date)) {
             return [getDay(date)]
         } else {
             return [0]
         }
     },
-    'date-range': () => {
-       
+    'date-range': (year: number, month: number) => {
+        const selectRange = getState('selectRange')
+        let selectDay:number[] = []
+        selectRange.forEach((select: string)=>{
+            let ymd = select.split('/')
+            if(year===Number(ymd[0])&&month===Number(ymd[1])){
+                selectDay.push(Number(ymd[2]))
+            }
+        })
+        return selectDay
     }
 }
 
-export function getSelectDay(): number[] {
+export function getSelectDay(year: number, month: number): number[] {
     const {type} = getState('options')
-    return selectDayType[type as 'date']()
+    return selectDayType[type as 'date'](year, month)
 
 }
 

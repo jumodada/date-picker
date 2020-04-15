@@ -70,6 +70,6 @@ export type nodeKey =
     'initial'
 
 export interface SelectDayType {
-    date:()=>[number]
-    'date-range':()=>[number]
+    date:(...arg:any)=>number[]
+    'date-range':(year:number,month:number)=>number[]
 }

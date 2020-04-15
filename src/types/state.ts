@@ -31,7 +31,7 @@ export interface StateValue {
     endDate:Date
     date:Date
     pageIdx:number
-    selectRange:(Date|null)[]
+    selectRange:string[]|[]
     header:{
         al:HTMLElement
         ye:HTMLElement

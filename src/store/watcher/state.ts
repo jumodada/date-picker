@@ -34,7 +34,7 @@ export default class InitState {
     endMonth:number
     endDate:Date|null
     isSelecting:boolean
-    selectRange:(Date|null)[]
+    selectRange:string[]|[]
     constructor() {
         let [year,month] = [getFullYear(),getRealMonth()]
         let [endYear,endMonth] = [year,month+1]

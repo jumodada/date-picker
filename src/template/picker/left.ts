@@ -5,11 +5,12 @@ import {
     headerYearClass,
     leftClass
 } from "../../utils/class-name"
-import {getState, updateDate, updateHeader, updateState} from "../../store"
+import {getState, updateHeader, updateState} from "../../store"
 import {getRealMonth, joinDate} from "../../utils/date"
 import {reduceMonth, reduceYear} from "./header"
 import {createDay} from "./body"
 import {_Event} from "../../types/event"
+import {RangeDateKey} from "../../types/template";
 
 export function createLeftHeader() {
     return createNode({
@@ -38,11 +39,21 @@ export function createLeftHeader() {
         ]
     })
 }
+const rangeDateKey:RangeDateKey ={
+    date:{
+        year:'year',
+        month:'month'
+    },
+    endDate:{
+         year:'endYear',
+         month:'endMonth'
+     }
+}
 
 export function toSelectRangeDate(e:_Event,key:'date'|'endDate'='date'):void {
     let {innerText, dataset} = e.target
     let view = dataset.view
-    let [year, month] = [getState('year'), getState('month')]
+    let [year, month] = [getState(rangeDateKey[key].year), getState(rangeDateKey[key].month)]
     if (view === 'pre' && --month === 0) {
         year--
         month = 12
