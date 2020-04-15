@@ -152,9 +152,6 @@ export function renderDate(type: RenderDateTypeKey = 'left') {
                 } else {
                     innerText = i - firstDay
                 }
-                if(type==='right'){
-                    console.log(innerText)
-                }
                 if (selectDay.indexOf(innerText)>-1 && !view) {
                     addAttr(node, selectedClass)
                 } else {
@@ -170,10 +167,6 @@ export function renderDate(type: RenderDateTypeKey = 'left') {
     }
     callback.$FLEXPCIKERTYPE = 'render-date' + type
     nexttick(callback)
-}
-
-export function renderStyle(childrenNodes: HTMLElement[]): void {
-
 }
 
 export function renderMonth() {
