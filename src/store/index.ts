@@ -57,10 +57,7 @@ const Store = (function () {
         } else {
             date = new Date(val)
         }
-        if (equalDate(state[uid][key], date)) {
-            updateState(false,'isSelecting')
-            return
-        }
+        if (equalDate(state[uid][key], date)) return
         state[uid][key] = date
     }
 

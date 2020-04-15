@@ -62,7 +62,6 @@ export function toSelectRangeDate(e:_Event,key:'date'|'endDate'='date'):void {
         month = 1
     }
     innerText = joinDate<number, string>(year, month, innerText)
-    updateState(true,'isSelecting')
     updateSelectRange(innerText)
 }
 

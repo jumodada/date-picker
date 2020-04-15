@@ -55,7 +55,6 @@ export function watchVisible(value: boolean, state: StateValue) {
     } else {
         updatePopover(_p, value)
     }
-    updateState(false, 'isSelecting')
 }
 
 export function elementShow(elements: any[], isHidden: boolean) {
