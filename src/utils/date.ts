@@ -1,5 +1,5 @@
 import {getState} from "../store"
-import {SelectDayType} from "../types/methods";
+import {SelectDayType} from "../types/methods"
 
 export function getFullYear(date?: Date): number {
     if (!date) date = new Date()
@@ -72,6 +72,7 @@ export function getSelectDay(year: number, month: number): number[] {
 
 }
 
+
 export function equalDate(preDate: Date, curDate: Date) {
     if (!preDate || !curDate) return false
     const [py, pm, pd] = [preDate.getFullYear(), preDate.getMonth(), preDate.getDate()]
@@ -101,19 +102,3 @@ export function getBackYear(year: number, month: number): number {
     return year
 }
 
-export function getRightDate(isEnd?: boolean): Date {
-    const year = getState('endYear')
-    const month = getState('endMonth')
-    let date = [year, month, getMonthHasDays(year, month)]
-    if (typeof isEnd !== 'undefined') {
-        date = [year, month, 1]
-    }
-    return new Date(date.join('-'))
-}
-
-export function getLeftDate(isEnd?: boolean): Date {
-    const year = getState('year')
-    const month = getState('month')
-    if (isEnd) return new Date([year, month, monthHasDays(year, month)].join('-'))
-    return new Date([year, month, 1].join('-'))
-}

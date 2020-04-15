@@ -22,6 +22,7 @@ export interface StateValue {
     popover:HTMLElement
     options:FlexOptions
     visible:boolean
+    confirm:boolean
     rect:Rect
     year:number
     month:number

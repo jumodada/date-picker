@@ -2,6 +2,8 @@ $blue: #26acee;
 $text-color: rgba(0, 0, 0, 0.52);
 $text-color-fade-1: rgba(0, 0, 0, 0.42);
 $text-color-fade-2: rgba(0, 0, 0, 0.22);
+$background-color-dark: rgba(0, 0, 0, 0.05);
+
 $border-color-1: #dde0e7;
 $border-color-2: #e7eaf1;
 .fl-datepicker{
@@ -83,9 +85,11 @@ $border-color-2: #e7eaf1;
     text-align: center;
     display: inline-block;
     width: 40px;
-    height: 40px;
+    height: 34px;
     line-height: 34px;
-    padding: 3px;
+    padding: 0 3px;
+    margin-top: 3px;
+    margin-bottom: 3px;
     font-size: 14px;
     box-sizing: border-box;
     position: relative;
@@ -169,6 +173,17 @@ $border-color-2: #e7eaf1;
     &:hover {
       color: $blue !important;
     }
+  }
+  &-in-range {
+    background-color: $background-color-dark;
+  }
+  &-start-date{
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+  }
+  &-end-date{
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
   }
 
   &-isSelect-day {

@@ -1,4 +1,4 @@
-import {openPopover, updateState} from "../../index"
+import {getState, openPopover, updateState} from "../../index"
 import {on, remove} from "../../../event/eventListener"
 import clickOutside from "../../../utils/clickoutside"
 import {isElementExist} from "../../../utils/dom-utils/is-element-exist"
@@ -32,8 +32,9 @@ export function watchEndDate(value: Date, state: StateValue) {
 }
 
 export function watchSelectRange(value: Date[], state: StateValue) {
-      renderDate()
-      renderDate('right')
+    value.sort((a,b)=>new Date(a)>new Date(b)?1:-1)
+    renderDate()
+    renderDate('right')
 }
 
 export function watchReference(ref: HTMLElement, state: StateValue) {

@@ -18,10 +18,10 @@ import nexttick from "../../utils/nexttick"
 import {_Event} from "../../types/event"
 import {
     datepickerBodyClass,
-    dayBodyClass, dayClass, dayHeaderClass,
+    dayBodyClass, dayClass, dayHeaderClass, endDateClass, inRangeClass,
     monthBodyClass,
     notThisMonth,
-    selectedClass,
+    selectedClass, startDateClass,
     thisMonth,
     yearBodyClass
 } from "../../utils/class-name"
@@ -138,6 +138,7 @@ export function renderDate(type: RenderDateTypeKey = 'left') {
         const childrenNodes = getState('dayPage')[el as any].childNodes
         const totalDays = firstDay + days
         const selectDay = getSelectDay(year,month)
+        let  [startDate,endDate] = [new Date(getState('selectRange')[0]),new Date(getState('selectRange')[1])]
         if (childrenNodes && childrenNodes.length === 42) {
             for (let i = 1; i < 43; i++) {
                 const node = childrenNodes[i - 1] as any
@@ -152,10 +153,17 @@ export function renderDate(type: RenderDateTypeKey = 'left') {
                 } else {
                     innerText = i - firstDay
                 }
-                if (selectDay.indexOf(innerText)>-1 && !view) {
-                    addAttr(node, selectedClass)
-                } else {
+                let viewDate = new Date(year+'/'+month+'/'+innerText)
+                if(!view){
+                    classToggle(node,selectedClass,selectDay.indexOf(innerText)>-1)
+                    classToggle(node,inRangeClass,viewDate>=startDate&&viewDate<=endDate)
+                    classToggle(node,startDateClass,Date.parse(viewDate as any)===Date.parse(startDate as any))
+                    classToggle(node,endDateClass,Date.parse(viewDate  as any)===Date.parse(endDate as any))
+                }else{
                     removeClass(node, selectedClass)
+                    removeClass(node, inRangeClass)
+                    removeClass(node, startDateClass)
+                    removeClass(node, endDateClass)
                 }
                 toggleClass(node, isFade ? [notThisMonth, thisMonth] : [thisMonth, notThisMonth])
                 resetAttr(node, view, 'data-view')
@@ -167,6 +175,14 @@ export function renderDate(type: RenderDateTypeKey = 'left') {
     }
     callback.$FLEXPCIKERTYPE = 'render-date' + type
     nexttick(callback)
+}
+
+export function classToggle(node:HTMLElement,className:string,judge:boolean) {
+    if(judge){
+        addAttr(node, className)
+    }else{
+        removeClass(node, className)
+    }
 }
 
 export function renderMonth() {
