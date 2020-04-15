@@ -1,4 +1,4 @@
-import {_Event} from "./event"
+import {_Event, eventType} from "./event"
 import {StateValue} from "./state"
 
 export interface Types {
@@ -10,11 +10,18 @@ export interface Types {
     Function: string
 }
 
-export interface CreateNodeArguments<T=HTMLElement|Element>{
+export type eventHandler  = (e: _Event) => any
+
+export interface createEventListener {
+    name:eventType,
+    event:eventHandler
+}
+
+export interface CreateNodeArguments<T=HTMLElement|Element,U=(e:_Event)=>any>{
     name?:'svg'|'span'|'div'|'ul'|'li'
     el?:(()=>T)|T
-    val?:any,
-    event?:(e:_Event)=>any
+    val?:any
+    event?:U|({name:eventType,event:U}[])
     class?:string[]
     style?:string
     update?:{

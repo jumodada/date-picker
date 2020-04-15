@@ -10,7 +10,7 @@ import {
 import {getState, plusMonth, plusYear, updateDP, updateHeader} from "../../store"
 import {createDayHeader, createPageBody} from "./body"
 import {dpKey} from "../../types/template"
-import {toSelectRangeDate} from "./left"
+import {hoverSelect, toSelectRangeDate} from "./left"
 import {_Event} from "../../types/event"
 
 
@@ -63,10 +63,16 @@ function toSelectRight(e:_Event) {
     toSelectRangeDate(e,'endDate')
 }
 
+function rightHoverSelect(e:_Event) {
+    hoverSelect(e,'endDate')
+}
 
 export function createRightDayBody(): (HTMLElement | Element) {
     return createPageBody<dpKey>(
-        42, toSelectRight, dayBodyClass, updateDP, 'rightBody')
+        42, [
+            {name:'click',event:toSelectRight},
+            {name:'mouseenter',event:rightHoverSelect},
+            ], dayBodyClass, updateDP, 'rightBody')
 }
 
 

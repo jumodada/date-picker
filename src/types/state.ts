@@ -16,13 +16,14 @@ export type stateKey  =
     |'date'|'pageIdx'
     |'header'|'dayPage'
     |'otherPage'|'selectRange'
+    |'selectStatus'
 
 export interface StateValue {
     reference:HTMLElement
     popover:HTMLElement
     options:FlexOptions
     visible:boolean
-    confirm:boolean
+    selectStatus:'none'|'done'|'selecting'
     rect:Rect
     year:number
     month:number
@@ -50,6 +51,7 @@ export interface StateValue {
         year:any
         month:any
     }
+    selecting:'none'|'done'|'selecting'
 }
 export type State = StateValue[]
 

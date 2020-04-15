@@ -1,5 +1,5 @@
 import {createNode, addAttr, removeClass, resetAttr, toggleClass} from "../../utils/dom-utils/element"
-import {CreateNodeArguments} from "../../types/methods"
+import {createEventListener, CreateNodeArguments, eventHandler} from "../../types/methods"
 import {
     getState,
     updateDate,
@@ -8,14 +8,15 @@ import {
     updateState
 } from "../../store"
 import {
+    compareDate, dateParse,
     getLastMonthHasDays,
-    getMonthHasDays,
+    getMonthHasDays, getRangeDate,
     getSelectDay,
     joinDate,
     whatDayIsMonthFirstDay
 } from "../../utils/date"
 import nexttick from "../../utils/nexttick"
-import {_Event} from "../../types/event"
+import {_Event, eventType} from "../../types/event"
 import {
     datepickerBodyClass,
     dayBodyClass, dayClass, dayHeaderClass, endDateClass, inRangeClass,
@@ -25,7 +26,7 @@ import {
     thisMonth,
     yearBodyClass
 } from "../../utils/class-name"
-import {dpKey, opKey, RenderDateType, RenderDateTypeKey} from "../../types/template"
+import {dpKey, opKey, RangeDateKey, RenderDateType, RenderDateTypeKey} from "../../types/template"
 import {dayName, monthName} from "../../i18n/zh-CN"
 
 
@@ -43,10 +44,21 @@ export function createDayHeader(): (HTMLElement | Element) {
     })
 }
 
-export function toSelectDate(e: _Event): void {
+const rangeDateKey:RangeDateKey ={
+    date:{
+        year:'year',
+        month:'month'
+    },
+    endDate:{
+        year:'endYear',
+        month:'endMonth'
+    }
+}
+
+export function handleSelectDate(e:_Event,key:'date'|'endDate'='date') {
     let {innerText, dataset} = e.target
     let view = dataset.view
-    let [year, month] = [getState('year'), getState('month')]
+    let [year, month] = [getState(rangeDateKey[key].year), getState(rangeDateKey[key].month)]
     if (view === 'pre' && --month === 0) {
         year--
         month = 12
@@ -54,7 +66,12 @@ export function toSelectDate(e: _Event): void {
         year++
         month = 1
     }
-    innerText = joinDate<number, string>(year, month, innerText)
+    return joinDate<number, string>(year, month, innerText)
+}
+
+
+export function toSelectDate(e: _Event): void {
+    let innerText = handleSelectDate(e)
     updateDate(innerText)
 }
 
@@ -76,7 +93,7 @@ export function toSelectYear(e: _Event): void {
 
 export function createPageBody<T>(
     amount: number,
-    event: (e: _Event) => any,
+    event: eventHandler|createEventListener[],
     classes: string,
     update: (val: any, key: T) => any,
     updateName: string,
@@ -84,7 +101,7 @@ export function createPageBody<T>(
 ): (HTMLElement | Element) {
     const childrenNodes: CreateNodeArguments[] = []
     Array.from({length: amount}).forEach(() => {
-        let node: CreateNodeArguments = {name: 'li', event: event}
+        let node: CreateNodeArguments = {name: 'li', event}
         childrenNodes.push(node)
     })
     return createNode({
@@ -96,7 +113,7 @@ export function createPageBody<T>(
     })
 }
 
-export function createDayBody(eventHandler: (e: _Event) => any, updateName: string): (HTMLElement | Element) {
+export function createDayBody(eventHandler: eventHandler|createEventListener[], updateName: string): (HTMLElement | Element) {
     return createPageBody<dpKey>(
         42, eventHandler, dayBodyClass, updateDP, updateName)
 }
@@ -138,7 +155,7 @@ export function renderDate(type: RenderDateTypeKey = 'left') {
         const childrenNodes = getState('dayPage')[el as any].childNodes
         const totalDays = firstDay + days
         const selectDay = getSelectDay(year,month)
-        let  [startDate,endDate] = [new Date(getState('selectRange')[0]),new Date(getState('selectRange')[1])]
+        let  [startDate,endDate] = [getRangeDate()[0],getRangeDate()[1]]
         if (childrenNodes && childrenNodes.length === 42) {
             for (let i = 1; i < 43; i++) {
                 const node = childrenNodes[i - 1] as any
@@ -153,12 +170,13 @@ export function renderDate(type: RenderDateTypeKey = 'left') {
                 } else {
                     innerText = i - firstDay
                 }
-                let viewDate = new Date(year+'/'+month+'/'+innerText)
+                let viewDate = year+'/'+month+'/'+innerText
                 if(!view){
+                    const parseViewDate = dateParse(viewDate)
                     classToggle(node,selectedClass,selectDay.indexOf(innerText)>-1)
-                    classToggle(node,inRangeClass,viewDate>=startDate&&viewDate<=endDate)
-                    classToggle(node,startDateClass,Date.parse(viewDate as any)===Date.parse(startDate as any))
-                    classToggle(node,endDateClass,Date.parse(viewDate  as any)===Date.parse(endDate as any))
+                    classToggle(node,inRangeClass,compareDate(viewDate,startDate)&&compareDate(endDate,viewDate))
+                    classToggle(node,startDateClass,parseViewDate===dateParse(startDate))
+                    classToggle(node,endDateClass,parseViewDate===dateParse(endDate))
                 }else{
                     removeClass(node, selectedClass)
                     removeClass(node, inRangeClass)
@@ -204,7 +222,7 @@ export function renderYear() {
     })
 }
 
-export function createDay(eventHandler: (e: _Event) => any, updateName: string) {
+export function createDay(eventHandler: eventHandler|createEventListener[], updateName: string) {
     return createNode({
         class: [dayClass],
         children: [

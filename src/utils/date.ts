@@ -55,10 +55,10 @@ const selectDayType: SelectDayType = {
     },
     'date-range': (year: number, month: number) => {
         const selectRange = getState('selectRange')
-        let selectDay:number[] = []
-        selectRange.forEach((select: string)=>{
+        let selectDay: number[] = []
+        selectRange.forEach((select: string) => {
             let ymd = select.split('/')
-            if(year===Number(ymd[0])&&month===Number(ymd[1])){
+            if (year === Number(ymd[0]) && month === Number(ymd[1])) {
                 selectDay.push(Number(ymd[2]))
             }
         })
@@ -102,3 +102,16 @@ export function getBackYear(year: number, month: number): number {
     return year
 }
 
+
+export function compareDate(a: string, b: string) {
+    return new Date(a) >= new Date(b)
+}
+
+export function dateParse(date: string): number {
+    return Date.parse(new Date(date) as any)
+}
+
+export function getRangeDate() {
+    let value = getState('selectRange').slice(0)
+    return value.sort((a:string, b:string) => new Date(a) > new Date(b) ? 1 : -1)
+}

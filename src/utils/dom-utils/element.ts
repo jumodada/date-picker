@@ -2,10 +2,18 @@ import {isArray, isFunc} from "../type-of"
 import {CreateNodeArguments, nodeKey, NodeOptions} from "../../types/methods"
 import createSVG from "../create-svg"
 import {on} from "../../event/eventListener"
+import {eventType} from "../../types/event";
 
 const nodeOptions: NodeOptions = {
-    event: (el, node) =>
-        on(el, 'click', node.event as any),
+    event: (el, node) =>{
+        if(isArray(node.event)){
+            (node.event as any).forEach((e:{name:eventType,event:any})=>{
+                on(el, e.name, e.event as any)
+            })
+        }else{
+            on(el, 'click', node.event as any)
+        }
+    },
     val: (el, node) => {
         if (node.name !== 'svg') {
             ;(el as HTMLElement).innerText = node.val

@@ -32,7 +32,11 @@ export function watchEndDate(value: Date, state: StateValue) {
 }
 
 export function watchSelectRange(value: Date[], state: StateValue) {
-    value.sort((a,b)=>new Date(a)>new Date(b)?1:-1)
+    if(value.length===1){
+        updateState('selecting', 'selectStatus')
+    }else if(value.length===0){
+        updateState('none', 'selectStatus')
+    }
     renderDate()
     renderDate('right')
 }
@@ -64,6 +68,7 @@ export function elementShow(elements: any[], isHidden: boolean) {
         arg.forEach((_a: { style: { display: string } }) => _a.style.display = display)
     })
 }
+
 
 export function watchPageIdx(value: number, state: StateValue) {
     const {ye, me, ar, al} = state.header

@@ -7,7 +7,7 @@ export default class InitState {
     popover: null | HTMLElement
     options: FlexOptions
     visible: boolean
-    confirm: boolean
+    selectStatus: 'none'|'done'|'selecting'
     rect: { x: 0, y: 0, width: 0, height: 0, top: 0, right: 0, bottom: 0, left: 0 }
     year: number
     header: {
@@ -73,6 +73,6 @@ export default class InitState {
         }
         this.pageIdx = 0
         this.selectRange = []
-        this.confirm = false
+        this.selectStatus = 'none'
     }
 }
