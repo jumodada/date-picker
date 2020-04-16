@@ -46,14 +46,21 @@ export function toSelectRangeDate(e:_Event,key:'date'|'endDate'='date'):void {
 
 export function updateSelectRange(innerText:string) {
     let selectRange:any = getState('selectRange').slice(0)
-    if(selectRange.length===2)selectRange.length = 0
+    if(selectRange.length===2){
+       if(getState('selectStatus')!=='done'){
+           updateState('done','selectStatus')
+           selectRange.splice(1)
+       }else{
+           updateState('none','selectStatus')
+           selectRange.length = 0
+       }
+    }
     selectRange.push(innerText)
     updateState(selectRange,'selectRange')
 }
 export function hoverUpdateSelectRange(innerText:string) {
     let selectRange:any = getState('selectRange').slice(0)
     selectRange[1] = innerText
-    console.log(selectRange)
     updateState(selectRange,'selectRange')
 }
 

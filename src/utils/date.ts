@@ -42,6 +42,11 @@ export function joinDate<T = number, U = string>(year: T | U, month: T | U, day:
     return year + '/' + month + '/' + day
 }
 
+export function transformDateToN(date: Date) {
+    if (!date) return ''
+    return joinDate(getFullYear(date), getRealMonth(date), getDay(date))
+}
+
 const selectDayType: SelectDayType = {
     date: () => {
         const date = getState('date')
@@ -113,5 +118,5 @@ export function dateParse(date: string): number {
 
 export function getRangeDate() {
     let value = getState('selectRange').slice(0)
-    return value.sort((a:string, b:string) => new Date(a) > new Date(b) ? 1 : -1)
+    return value.sort((a: string, b: string) => new Date(a) > new Date(b) ? 1 : -1)
 }

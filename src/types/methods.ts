@@ -54,6 +54,7 @@ export interface WatchHandleKeys<T=(value:any,state:StateValue)=>any> {
     endYear:T
     endDate:T
     selectRange:T
+    selectStatus:T
 }
 
 export interface NodeOptions<T=(el:HTMLElement,node:CreateNodeArguments)=>any> {

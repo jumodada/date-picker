@@ -10,7 +10,7 @@ import {
     getBackMonth,
     getBackYear,
     getNextMonth,
-    getNextYear,
+    getNextYear, getRangeDate, transformDateToN,
 } from "../../../utils/date"
 import nexttick from "../../../utils/nexttick"
 import {StateValue} from "../../../types/state"
@@ -31,11 +31,21 @@ export function watchEndDate(value: Date, state: StateValue) {
     renderDate('right')
 }
 
+export function watchSelectStatus(value: string) {
+    let [start, end] = [getRangeDate()[0], getRangeDate()[1]]
+    console.log(start,end)
+    if (value === 'done') {
+        nexttick(()=>updateState(new Date(start), 'date'))
+        updateState(new Date(end), 'endDate')
+    }
+    setTimeout(()=>{
+        console.log(getState('selectStatus'))
+    },20)
+}
+
 export function watchSelectRange(value: Date[], state: StateValue) {
-    if(value.length===1){
+    if (value.length === 1) {
         updateState('selecting', 'selectStatus')
-    }else if(value.length===0){
-        updateState('none', 'selectStatus')
     }
     renderDate()
     renderDate('right')
@@ -59,6 +69,19 @@ export function watchVisible(value: boolean, state: StateValue) {
         updatePopover(state.popover, value)
     } else {
         updatePopover(_p, value)
+    }
+    handleDateRange()
+}
+function handleDateRange() {
+    if(getState('options').type!=='date-range')return
+    const selectStatus = getState('selectStatus')
+    if(selectStatus==='selecting')updateState('none','selectStatus')
+    let preStart = transformDateToN(getState('date'))
+    let preEnd = transformDateToN(getState('endDate'))
+    if(preStart&&preEnd){
+        updateState([preStart,preEnd],'selectRange')
+    }else{
+        updateState([],'selectRange')
     }
 }
 
