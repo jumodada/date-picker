@@ -26,21 +26,15 @@ export function watchDate(value: Date, state: StateValue) {
 }
 
 export function watchEndDate(value: Date, state: StateValue) {
-    updateState(value.getFullYear(), 'endYear')
-    updateState(value.getMonth() + 1, 'endMonth')
     renderDate('right')
 }
 
 export function watchSelectStatus(value: string) {
     let [start, end] = [getRangeDate()[0], getRangeDate()[1]]
-    console.log(start,end)
     if (value === 'done') {
         nexttick(()=>updateState(new Date(start), 'date'))
         updateState(new Date(end), 'endDate')
     }
-    setTimeout(()=>{
-        console.log(getState('selectStatus'))
-    },20)
 }
 
 export function watchSelectRange(value: Date[], state: StateValue) {
