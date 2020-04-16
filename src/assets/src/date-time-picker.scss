@@ -7,7 +7,9 @@ $background-color-dark: rgba(0, 0, 0, 0.05);
 $border-color-1: #dde0e7;
 $border-color-2: #e7eaf1;
 .fl-datepicker{
-  box-sizing: border-box;
+  *{
+    box-sizing: border-box;
+  }
   margin: 0;
   padding: 0;
   color: $text-color;
@@ -91,7 +93,6 @@ $border-color-2: #e7eaf1;
     margin-top: 3px;
     margin-bottom: 3px;
     font-size: 14px;
-    box-sizing: border-box;
     position: relative;
     transition: .3s color ease;
   }

@@ -1,10 +1,10 @@
 export type Window = {
     innerHeight: number
-    offsetHeight: number,
-    innerWidth: number,
-    offsetWidth: number,
-    pageXOffset: number,
-    pageYOffset: number,
+    offsetHeight: number
+    innerWidth: number
+    offsetWidth: number
+    pageXOffset: number
+    pageYOffset: number
     getComputedStyle: typeof getComputedStyle,
     addEventListener(type: any, listener: any, optionsOrUseCapture?: any): void,
     removeEventListener(

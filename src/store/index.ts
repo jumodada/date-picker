@@ -37,18 +37,21 @@ const Store = (function () {
 
     function _closeAllButHasId() {
         state.forEach((s, idx) => {
-            if (idx !== uid && s.popover) s.popover.style.display = 'none'
+            if (idx !== uid && s.popover) {
+                s.visible = false
+            }
         })
     }
 
     function _openPopover(e: Event): void {
         _changeUId(e)
         _closeAllButHasId()
+        if (state[uid].visible) return
         state[uid].visible = true
     }
 
 
-    function _updateDate(val: string,key:'date'|'endDate' = 'date'): void {
+    function _updateDate(val: string, key: 'date' | 'endDate' = 'date'): void {
         let date: Date
         if (val.toString().length < 3) {
             const year = getState('year')
@@ -79,7 +82,7 @@ const Store = (function () {
             let year = Math.floor(month / 12)
             if (year === 0) year = -1
             month = month > 12 ? (month % 12) : ((month % 12) + 12)
-            _plusYear(year,key==='endMonth'?'endYear':'year')
+            _plusYear(year, key === 'endMonth' ? 'endYear' : 'year')
         }
         state[uid][key] = month
     }
@@ -93,7 +96,7 @@ const Store = (function () {
         state[uid].dayPage[key] = val
         if (key === 'body') {
             renderDate()
-        }else if(key==='rightBody'){
+        } else if (key === 'rightBody') {
             renderDate('right')
         }
     }

@@ -3,8 +3,9 @@ import {CreateNodeArguments, nodeKey, NodeOptions} from "../../types/methods"
 import createSVG from "../create-svg"
 import {on} from "../../event/eventListener"
 import {eventType} from "../../types/event"
-import {getState} from "../../store";
+import {getState, updateState} from "../../store";
 import {formatParse} from "../format";
+import nexttick from "../nexttick";
 
 const nodeOptions: NodeOptions = {
     event: (el, node) =>{
@@ -116,6 +117,7 @@ export function updateReferenceInDate(date:Date) {
     const ref = getState('reference')
     const {format}  = getState('options')
     ref.value = formatParse(date,format)
+    updateState(false,'visible')
 }
 
 export function updateReferenceInDateRange(start:Date,end:Date) {

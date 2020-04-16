@@ -50,6 +50,7 @@ export function updateSelectRange(innerText:string) {
        if(getState('selectStatus')!=='done'){
            updateState('done','selectStatus')
            selectRange.splice(1)
+           updateState(false,'visible')
        }else{
            updateState('none','selectStatus')
            selectRange.length = 0

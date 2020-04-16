@@ -1,4 +1,4 @@
-import FlexOptions, {FlexOptionsForType, placement} from "../types/options"
+import FlexOptions, {placement} from "../types/options"
 import {isArray, isObject, isString} from "../utils/type-of"
 
 const fixedOptions:FlexOptions = {

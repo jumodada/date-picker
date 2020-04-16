@@ -12,10 +12,7 @@ export interface FlexOptions {
     unlinkPanels?:boolean|boolean[]
     offset?:number
     zIndex?:number
-    format?:string
-}
-export interface FlexOptionsForType {
-    format:(val:any)=>boolean
+    format?:((val:any)=>boolean)|string
 }
 
 export default FlexOptions
