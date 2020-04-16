@@ -31,7 +31,6 @@ function pad(val:any, len?:number) {
     return val
 }
 
-
 export function formatParse(date:Date,format:string):string {
     return format.replace(token,(val:string)=>
         formats[val as formatKey](date))

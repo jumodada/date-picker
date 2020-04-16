@@ -8,11 +8,14 @@ export type type = 'date'|'date-range'
 
 export interface FlexOptions {
     placement:placement|placement[]
-    type:type|type[]
-    unlinkPanels:boolean|boolean[]
-    format?:string
+    type?:type|type[]
+    unlinkPanels?:boolean|boolean[]
     offset?:number
     zIndex?:number
+    format?:string
+}
+export interface FlexOptionsForType {
+    format:(val:any)=>boolean
 }
 
 export default FlexOptions
