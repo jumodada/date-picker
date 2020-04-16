@@ -1,4 +1,11 @@
-import {createNode, addAttr, removeClass, resetAttr, toggleClass} from "../../utils/dom-utils/element"
+import {
+    createNode,
+    addAttr,
+    removeClass,
+    resetAttr,
+    toggleClass,
+    updateReferenceInDate
+} from "../../utils/dom-utils/element"
 import {createEventListener, CreateNodeArguments, eventHandler} from "../../types/methods"
 import {
     getState,
@@ -16,7 +23,7 @@ import {
     whatDayIsMonthFirstDay
 } from "../../utils/date"
 import nexttick from "../../utils/nexttick"
-import {_Event, eventType} from "../../types/event"
+import {_Event} from "../../types/event"
 import {
     datepickerBodyClass,
     dayBodyClass, dayClass, dayHeaderClass, endDateClass, inRangeClass,
@@ -72,6 +79,7 @@ export function handleSelectDate(e:_Event,key:'date'|'endDate'='date') {
 
 export function toSelectDate(e: _Event): void {
     let innerText = handleSelectDate(e)
+    updateReferenceInDate(new Date(innerText))
     updateDate(innerText)
 }
 

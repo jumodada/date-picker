@@ -6,7 +6,7 @@ import {
     leftClass
 } from "../../utils/class-name"
 import {getState, updateHeader, updateState} from "../../store"
-import {compareDate, getRealMonth} from "../../utils/date"
+import {getRealMonth} from "../../utils/date"
 import {reduceMonth, reduceYear} from "./header"
 import {createDay, handleSelectDate} from "./body"
 import {_Event} from "../../types/event"

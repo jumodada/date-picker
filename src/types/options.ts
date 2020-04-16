@@ -8,7 +8,7 @@ export type type = 'date'|'date-range'
 
 export interface FlexOptions {
     placement:placement|placement[]
-    type:type
+    type:type|type[]
     unlinkPanels:boolean|boolean[]
     format?:string
     offset?:number
@@ -16,3 +16,5 @@ export interface FlexOptions {
 }
 
 export default FlexOptions
+
+export type formatKey = 'dd'|'d'|'yyyy'|'yy'|'M'|'MM'

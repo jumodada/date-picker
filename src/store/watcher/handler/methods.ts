@@ -3,7 +3,7 @@ import {on, remove} from "../../../event/eventListener"
 import clickOutside from "../../../utils/clickoutside"
 import {isElementExist} from "../../../utils/dom-utils/is-element-exist"
 import {createPopover, updatePopover} from "../../../template"
-import {appendChild} from "../../../utils/dom-utils/element"
+import {appendChild, updateReferenceInDate, updateReferenceInDateRange} from "../../../utils/dom-utils/element"
 import {setPopoverStyle} from "../../../template/style"
 import {renderDate, renderYear} from "../../../template/picker/body"
 import {
@@ -29,11 +29,14 @@ export function watchEndDate(value: Date, state: StateValue) {
     renderDate('right')
 }
 
-export function watchSelectStatus(value: string) {
+export function watchSelectStatus(value: string,state:StateValue) {
     let [start, end] = [getRangeDate()[0], getRangeDate()[1]]
     if (value === 'done') {
+        let startDate = new Date(start)
+        let endDate = new Date(end)
         nexttick(()=>updateState(new Date(start), 'date'))
         updateState(new Date(end), 'endDate')
+        updateReferenceInDateRange(startDate,endDate)
     }
 }
 
@@ -66,16 +69,17 @@ export function watchVisible(value: boolean, state: StateValue) {
     }
     handleDateRange()
 }
+
 function handleDateRange() {
     if(getState('options').type!=='date-range')return
-    const selectStatus = getState('selectStatus')
-    if(selectStatus==='selecting')updateState('none','selectStatus')
     let preStart = transformDateToN(getState('date'))
     let preEnd = transformDateToN(getState('endDate'))
     if(preStart&&preEnd){
         updateState([preStart,preEnd],'selectRange')
+        updateState('done','selectStatus')
     }else{
         updateState([],'selectRange')
+        updateState('none','selectStatus')
     }
 }
 

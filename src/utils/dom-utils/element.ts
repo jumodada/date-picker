@@ -2,7 +2,9 @@ import {isArray, isFunc} from "../type-of"
 import {CreateNodeArguments, nodeKey, NodeOptions} from "../../types/methods"
 import createSVG from "../create-svg"
 import {on} from "../../event/eventListener"
-import {eventType} from "../../types/event";
+import {eventType} from "../../types/event"
+import {getState} from "../../store";
+import {formatParse} from "../format";
 
 const nodeOptions: NodeOptions = {
     event: (el, node) =>{
@@ -108,4 +110,16 @@ export function removeClass(el: HTMLElement, val: string) {
         attrVal = filterClasses(attrVal,[val])
         el.setAttribute('class', attrVal)
     }
+}
+
+export function updateReferenceInDate(date:Date) {
+    const ref = getState('reference')
+    const {format}  = getState('options')
+    ref.value = formatParse(date,format)
+}
+
+export function updateReferenceInDateRange(start:Date,end:Date) {
+    const ref = getState('reference')
+    const {format}  = getState('options')
+    ref.value = formatParse(start,format) + ' - '+ formatParse(end,format)
 }
