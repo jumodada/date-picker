@@ -121,7 +121,7 @@ const Store = (function () {
         _updateDP,
         _updateOP,
         _updateDate,
-        _updateState
+        _updateState,
     }
 })()
 

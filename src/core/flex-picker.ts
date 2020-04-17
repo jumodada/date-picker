@@ -13,13 +13,14 @@ export default class Flex {
 
     create(el: HTMLInputElement, options: flexOptions) {
         if (options && !validateOptions(options)) return
-
         let _inputElement = findInputElement(el)
         if (!isInputElement(_inputElement as any)) return
         pushInState()
-        updateState(_inputElement,'reference')
         options = mergeOptions<flexOptions>(this.defaults, options)
         updateOptions(options)
+        updateState(_inputElement,'reference')
+    }
+    unbind() {
 
     }
 
