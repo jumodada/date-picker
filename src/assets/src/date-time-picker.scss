@@ -2,7 +2,8 @@ $blue: #00acff;
 $text-color: rgba(0, 0, 0, 0.52);
 $text-color-fade-1: rgba(0, 0, 0, 0.42);
 $text-color-fade-2: rgba(0, 0, 0, 0.22);
-$background-color-dark: rgba(0, 0, 0, 0.05);
+$background-color-light: rgba(0, 0, 0, 0.05);
+$background-color-dark: rgba(0, 0, 0, 0.23);
 
 $border-color-1: #dde0e7;
 $border-color-2: #e7eaf1;
@@ -94,7 +95,6 @@ $border-color-2: #e7eaf1;
     margin-bottom: 3px;
     font-size: 14px;
     position: relative;
-    transition: .3s color ease;
   }
   &-body{
     text-align: center;
@@ -176,13 +176,15 @@ $border-color-2: #e7eaf1;
     }
   }
   &-in-range {
-    background-color: $background-color-dark;
+    background-color: #cae5f5;
   }
   &-start-date{
+    background-color: $blue;
     border-top-left-radius: 16px;
     border-bottom-left-radius: 16px;
   }
   &-end-date{
+    background-color: $blue;
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
   }
@@ -206,6 +208,15 @@ $border-color-2: #e7eaf1;
 
     &:hover {
       color: white !important;
+    }
+  }
+  &-disabled{
+    opacity: .4;
+    background-color: $background-color-dark;
+    cursor: not-allowed !important;
+    color: $text-color-fade-1;
+    &:hover{
+     color:$text-color-fade-1 !important;
     }
   }
 }

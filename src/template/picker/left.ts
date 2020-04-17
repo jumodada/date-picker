@@ -40,6 +40,7 @@ export function createLeftHeader() {
 }
 
 export function toSelectRangeDate(e:_Event,key:'date'|'endDate'='date'):void {
+    if((e.target as any).$flexDisabled)return
     let innerText = handleSelectDate(e,key)
     updateSelectRange(innerText)
 }
@@ -66,6 +67,7 @@ export function hoverUpdateSelectRange(innerText:string) {
 }
 
 export function hoverSelect(e:_Event,key:'date'|'endDate'='date') {
+    if((e.target as any).$flexDisabled)return
     if(getState('selectStatus')!=='selecting')return
     let innerText = handleSelectDate(e,key)
     hoverUpdateSelectRange(innerText)

@@ -16,7 +16,9 @@ export default {
     mounted(){
         this.$dp(this.$refs.test1.$el,{type:'date'})
         this.$dp(this.$refs.test2,{type:'date-range'},)
-        this.$dp(this.$refs.test3.$el,{type:'date-range'},)
+        this.$dp(this.$refs.test3.$el,{type:'date-range',disabled:(date)=>{
+          return date && date.valueOf() < Date.now() + 86400000; 
+}},)
     },
     methods:{
         

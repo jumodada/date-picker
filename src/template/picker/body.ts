@@ -26,7 +26,7 @@ import nexttick from "../../utils/nexttick"
 import {_Event} from "../../types/event"
 import {
     datepickerBodyClass,
-    dayBodyClass, dayClass, dayHeaderClass, endDateClass, inRangeClass,
+    dayBodyClass, dayClass, dayHeaderClass, disabledClass, endDateClass, inRangeClass,
     monthBodyClass,
     notThisMonth,
     selectedClass, startDateClass,
@@ -51,18 +51,18 @@ export function createDayHeader(): (HTMLElement | Element) {
     })
 }
 
-const rangeDateKey:RangeDateKey ={
-    date:{
-        year:'year',
-        month:'month'
+const rangeDateKey: RangeDateKey = {
+    date: {
+        year: 'year',
+        month: 'month'
     },
-    endDate:{
-        year:'endYear',
-        month:'endMonth'
+    endDate: {
+        year: 'endYear',
+        month: 'endMonth'
     }
 }
 
-export function handleSelectDate(e:_Event,key:'date'|'endDate'='date') {
+export function handleSelectDate(e: _Event, key: 'date' | 'endDate' = 'date') {
     let {innerText, dataset} = e.target
     let view = dataset.view
     let [year, month] = [getState(rangeDateKey[key].year), getState(rangeDateKey[key].month)]
@@ -101,7 +101,7 @@ export function toSelectYear(e: _Event): void {
 
 export function createPageBody<T>(
     amount: number,
-    event: eventHandler|createEventListener[],
+    event: eventHandler | createEventListener[],
     classes: string,
     update: (val: any, key: T) => any,
     updateName: string,
@@ -121,7 +121,7 @@ export function createPageBody<T>(
     })
 }
 
-export function createDayBody(eventHandler: eventHandler|createEventListener[], updateName: string): (HTMLElement | Element) {
+export function createDayBody(eventHandler: eventHandler | createEventListener[], updateName: string): (HTMLElement | Element) {
     return createPageBody<dpKey>(
         42, eventHandler, dayBodyClass, updateDP, updateName)
 }
@@ -149,6 +149,17 @@ const dateType: RenderDateType = {
     }
 }
 
+function getViewDate(year: number, month: number, day: number, view: string) {
+    if (view === 'pre' && --month === 0) {
+        month = 12
+        year--
+    } else if (view === 'next' && ++month === 13) {
+        month = 1
+        year++
+    }
+    return year + '/' + month + '/' + day
+}
+
 export function renderDate(type: RenderDateTypeKey = 'left') {
     const callback = () => {
         // tslint:disable-next-line:one-variable-per-declaration
@@ -162,8 +173,8 @@ export function renderDate(type: RenderDateTypeKey = 'left') {
         const lastMonthDays: number = getLastMonthHasDays(year, month)
         const childrenNodes = getState('dayPage')[el as any].childNodes
         const totalDays = firstDay + days
-        const selectDay = getSelectDay(year,month)
-        let  [startDate,endDate] = [getRangeDate()[0],getRangeDate()[1]]
+        const selectDay = getSelectDay(year, month)
+        let [startDate, endDate] = [getRangeDate()[0], getRangeDate()[1]]
         if (childrenNodes && childrenNodes.length === 42) {
             for (let i = 1; i < 43; i++) {
                 const node = childrenNodes[i - 1] as any
@@ -178,22 +189,25 @@ export function renderDate(type: RenderDateTypeKey = 'left') {
                 } else {
                     innerText = i - firstDay
                 }
-                let viewDate = year+'/'+month+'/'+innerText
-                if(!view){
+                let viewDate = getViewDate(year, month, innerText, view)
+                if (!view) {
                     const parseViewDate = dateParse(viewDate)
-                    classToggle(node,selectedClass,selectDay.indexOf(innerText)>-1)
-                    classToggle(node,inRangeClass,compareDate(viewDate,startDate)&&compareDate(endDate,viewDate))
-                    classToggle(node,startDateClass,parseViewDate===dateParse(startDate))
-                    classToggle(node,endDateClass,parseViewDate===dateParse(endDate))
-                }else{
+                    classToggle(node, selectedClass, selectDay.indexOf(innerText) > -1)
+                    classToggle(node, inRangeClass, compareDate(viewDate, startDate) && compareDate(endDate, viewDate))
+                    classToggle(node, startDateClass, parseViewDate === dateParse(startDate))
+                    classToggle(node, endDateClass, parseViewDate === dateParse(endDate))
+                } else {
                     removeClass(node, selectedClass)
                     removeClass(node, inRangeClass)
                     removeClass(node, startDateClass)
                     removeClass(node, endDateClass)
                 }
+                handleDisabled(node, viewDate)
                 toggleClass(node, isFade ? [notThisMonth, thisMonth] : [thisMonth, notThisMonth])
                 resetAttr(node, view, 'data-view')
-                node.innerText = innerText.toString()
+                 let intStr = innerText.toString()
+                 if(node.innerText===intStr)continue
+                node.innerText = intStr
             }
         } else {
             console.error('renderDate error ')
@@ -203,10 +217,19 @@ export function renderDate(type: RenderDateTypeKey = 'left') {
     nexttick(callback)
 }
 
-export function classToggle(node:HTMLElement,className:string,judge:boolean) {
-    if(judge){
+function handleDisabled(node: HTMLElement, date: string) {
+    const {disabled} = getState('options')
+    if (disabled) {
+        const isDisabled = disabled(new Date(date))
+        ;(node as any).$flexDisabled = isDisabled
+        classToggle(node, disabledClass, isDisabled)
+    }
+}
+
+export function classToggle(node: HTMLElement, className: string, judge: boolean) {
+    if (judge) {
         addAttr(node, className)
-    }else{
+    } else {
         removeClass(node, className)
     }
 }
@@ -230,7 +253,7 @@ export function renderYear() {
     })
 }
 
-export function createDay(eventHandler: eventHandler|createEventListener[], updateName: string) {
+export function createDay(eventHandler: eventHandler | createEventListener[], updateName: string) {
     return createNode({
         class: [dayClass],
         children: [

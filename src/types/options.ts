@@ -7,12 +7,22 @@ export type placement =
 export type type = 'date'|'date-range'
 
 export interface FlexOptions {
-    placement:placement|placement[]
-    type?:type|type[]
-    unlinkPanels?:boolean|boolean[]
+    placement:placement
+    type?:type
+    unlinkPanels?:boolean
     offset?:number
     zIndex?:number
-    format?:((val:any)=>boolean)|string
+    format?:string
+    disabled?:(date:Date)=>boolean
+}
+
+export interface FixedOptions {
+    placement:placement[]
+    type?:type[]
+    unlinkPanels?:boolean[]
+    offset?:number
+    zIndex?:number
+    format?:((val:any)=>boolean)
 }
 
 export default FlexOptions
