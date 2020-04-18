@@ -9,7 +9,6 @@ import {equalDate} from "../utils/date"
 const Store = (function () {
     let uid = 0
     const state = [] as State
-
     function _toggleToLastUId() {
         uid = state.length - 1
     }

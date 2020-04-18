@@ -16,7 +16,6 @@ export default class Flex {
         let _inputElement = findInputElement(el)
         if (!isInputElement(_inputElement as any)) return
         pushInState()
-        // @ts-ignore
         options = mergeOptions<flexOptions>(this.defaults, options)
         updateOptions(options)
         this.el = _inputElement
@@ -25,14 +24,12 @@ export default class Flex {
     }
     unbind() {
         let store = getStore()
-        // @ts-ignore
         let idx = store.findIndex(s=>s.reference===this.el)
-        // @ts-ignore
         if(store[idx].popover){
             document.body.removeChild(store[idx].popover)
         }
-        ;(store[idx].reference as any)  = null
-        ;(store[idx].popover as any)  = null
+        ;(store[idx].reference as any) =
+            (store[idx].popover as any)  = null
         store.splice(idx,1)
         if(store.length===0){
             document.body.removeEventListener('click',clickOutside)
