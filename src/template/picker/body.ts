@@ -79,6 +79,7 @@ export function handleSelectDate(e: _Event, key: 'date' | 'endDate' = 'date') {
 
 export function toSelectDate(e: _Event): void {
     if ((e.target as any).$flexDisabled) return
+    if((e.target as any).nodeName.toLowerCase()!=='li')return
     let innerText = handleSelectDate(e)
     updateReferenceInDate(new Date(innerText))
     updateDate(innerText)

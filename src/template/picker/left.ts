@@ -40,6 +40,7 @@ export function createLeftHeader() {
 }
 
 export function toSelectRangeDate(e:_Event,key:'date'|'endDate'='date'):void {
+    if((e.target as any).nodeName.toLowerCase()!=='li')return
     if((e.target as any).$flexDisabled)return
     let innerText = handleSelectDate(e,key)
     updateSelectRange(innerText)
