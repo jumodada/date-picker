@@ -69,10 +69,9 @@ function rightHoverSelect(e:_Event) {
 
 export function createRightDayBody(): (HTMLElement | Element) {
     return createPageBody<dpKey>(
-        42, [
-            {name:'click',event:toSelectRight},
+        42, toSelectRight,[
             {name:'mouseenter',event:rightHoverSelect},
-            ], dayBodyClass, updateDP, 'rightBody')
+        ], dayBodyClass, updateDP, 'rightBody')
 }
 
 

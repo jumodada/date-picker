@@ -78,7 +78,7 @@ export function handleSelectDate(e: _Event, key: 'date' | 'endDate' = 'date') {
 
 
 export function toSelectDate(e: _Event): void {
-    if((e.target as any).$flexDisabled)return
+    if ((e.target as any).$flexDisabled) return
     let innerText = handleSelectDate(e)
     updateReferenceInDate(new Date(innerText))
     updateDate(innerText)
@@ -102,7 +102,8 @@ export function toSelectYear(e: _Event): void {
 
 export function createPageBody<T>(
     amount: number,
-    event: eventHandler | createEventListener[],
+    ulListener: eventHandler | createEventListener[],
+    liListener: createEventListener[] | null,
     classes: string,
     update: (val: any, key: T) => any,
     updateName: string,
@@ -110,11 +111,13 @@ export function createPageBody<T>(
 ): (HTMLElement | Element) {
     const childrenNodes: CreateNodeArguments[] = []
     Array.from({length: amount}).forEach(() => {
-        let node: CreateNodeArguments = {name: 'li', event}
+        let node: CreateNodeArguments = {name: 'li'}
+        if (liListener) node.event = liListener
         childrenNodes.push(node)
     })
     return createNode({
         name: 'ul',
+        event: ulListener,
         class: [classes],
         update: {method: update, name: updateName},
         children: childrenNodes,
@@ -122,19 +125,19 @@ export function createPageBody<T>(
     })
 }
 
-export function createDayBody(eventHandler: eventHandler | createEventListener[], updateName: string): (HTMLElement | Element) {
+export function createDayBody(eventHandler: eventHandler, liListener: any, updateName: string): (HTMLElement | Element) {
     return createPageBody<dpKey>(
-        42, eventHandler, dayBodyClass, updateDP, updateName)
+        42, eventHandler, liListener, dayBodyClass, updateDP, updateName)
 }
 
 export function createMonthBody(): (HTMLElement | Element) {
     return createPageBody<opKey>(
-        12, toSelectMonth, monthBodyClass, updateOP, 'month', 'hidden')
+        12, toSelectMonth, null, monthBodyClass, updateOP, 'month', 'hidden')
 }
 
 export function createYearBody(): (HTMLElement | Element) {
     return createPageBody<opKey>(
-        10, toSelectYear, yearBodyClass, updateOP, 'year', 'hidden')
+        10, toSelectYear, null, yearBodyClass, updateOP, 'year', 'hidden')
 }
 
 const dateType: RenderDateType = {
@@ -206,8 +209,8 @@ export function renderDate(type: RenderDateTypeKey = 'left') {
                 handleDisabled(node, viewDate)
                 toggleClass(node, isFade ? [notThisMonth, thisMonth] : [thisMonth, notThisMonth])
                 resetAttr(node, view, 'data-view')
-                 let intStr = innerText.toString()
-                 if(node.innerText===intStr)continue
+                let intStr = innerText.toString()
+                if (node.innerText === intStr) continue
                 node.innerText = intStr
             }
         } else {
@@ -254,12 +257,12 @@ export function renderYear() {
     })
 }
 
-export function createDay(eventHandler: eventHandler | createEventListener[], updateName: string) {
+export function createDay(eventHandler: eventHandler, liListener: any, updateName: string) {
     return createNode({
         class: [dayClass],
         children: [
             {el: createDayHeader},
-            {el: createDayBody(eventHandler, updateName)},
+            {el: createDayBody(eventHandler, liListener, updateName)},
         ]
     })
 }
@@ -268,7 +271,7 @@ export function createBody() {
     return createNode({
         class: [datepickerBodyClass],
         children: [
-            {el: createDay(toSelectDate, 'body')},
+            {el: createDay(toSelectDate, null, 'body')},
             {el: createMonthBody},
             {el: createYearBody},
         ]

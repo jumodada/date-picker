@@ -78,8 +78,7 @@ export function createLeft(): (HTMLElement | Element) {
         class: [leftClass],
         children: [
             {el:createLeftHeader},
-            {el:createDay([
-                {name:'click',event:toSelectRangeDate},
+            {el:createDay(toSelectRangeDate,[
                 {name:'mouseenter',event:hoverSelect},
                 ],'body')},
         ],

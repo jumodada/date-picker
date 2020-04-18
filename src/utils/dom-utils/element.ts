@@ -5,7 +5,6 @@ import {on} from "../../event/eventListener"
 import {eventType} from "../../types/event"
 import {getState, updateState} from "../../store";
 import {formatParse} from "../format";
-import nexttick from "../nexttick";
 
 const nodeOptions: NodeOptions = {
     event: (el, node) =>{

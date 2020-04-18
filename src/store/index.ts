@@ -14,6 +14,10 @@ const Store = (function () {
         uid = state.length - 1
     }
 
+    function getStore() {
+        return state
+    }
+
     function _changeUId(e: Event) {
         uid = state.findIndex(s => (s.reference as any) === e.target)
     }
@@ -111,6 +115,7 @@ const Store = (function () {
     }
 
     return {
+        getStore,
         _getState,
         _pushInState,
         _openPopover,
@@ -125,6 +130,7 @@ const Store = (function () {
     }
 })()
 
+export const getStore = Store.getStore
 export const getState = Store._getState
 export const pushInState = Store._pushInState
 export const openPopover = Store._openPopover

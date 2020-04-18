@@ -52,7 +52,6 @@ export function watchSelectRange(value: Date[], state: StateValue) {
 export function watchReference(ref: HTMLElement, state: StateValue) {
     const preElement = state.reference
     remove(preElement, 'click', openPopover)
-    remove(document.body, 'click', clickOutside)
     if (ref) {
         on(ref, 'click', openPopover)
         on(document.body, 'click', clickOutside)
