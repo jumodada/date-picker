@@ -45,6 +45,27 @@ require('flex-date-picker/dist/index.css')
     })
 ```
 
+## Options
+
+| Options | Description | Type | Accepted Values | Default |
+|---------|------------ |---------- |-------------  |-------- |
+| type | type of datepicker | string | date/date-range | date |
+| disabled | prohibited dates | function | - | - |
+| format | Output format | string | - | yyyy/mm/dd |
+| disabled | prohibited dates | function | - | - |
+
+## Options Example
+
+- disabled
+
+```js
+datePicker(document.querySelector('#input'),{
+      type:'date',
+      disabled:(date)=>{
+        return date && date.valueOf() < Date.now() 
+      }
+    })
+```
 
 
 
