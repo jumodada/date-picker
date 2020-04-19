@@ -17,14 +17,32 @@ Using yarn:
 $ yarn add flex-date-picker
 ```
 
+## Usage
+
+es6
+```js
+import datePicker from 'flex-date-picker'
+import 'flex-date-picker/dist/index.css'
+```
+CommonJS 
+
+```js
+const datePicker = require('flex-date-picker').default
+require('flex-date-picker/dist/index.css')
+```
+
+
 ## Example
 
 ```html
-<input id=input>
+<input type="text" id="input">
 ```
+
 ```js
-import dp from 'flex-date-picker'
-(this.$refs.test2.$el,{type:'date-range'})
+ datePicker(document.querySelector('#input'),{
+      type:'date'
+       // options...
+    })
 ```
 
 
