@@ -9,7 +9,7 @@ function createInstance(config: FlexOptions): (el:HTMLElement,options:FlexOption
     return (el:HTMLElement,options:FlexOptions)=>{
         const context = new Flex(config)
         // @ts-ignore
-        const instance = Flex.create.call(context,...arguments )
+        const instance = Flex.create.apply(context,arguments)
         extend(context,instance)
         return instance as unknown as flexInstance       
     }
