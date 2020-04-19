@@ -8,7 +8,7 @@ import {equalDate} from "../utils/date"
 
 const Store = (function () {
     let uid = 0
-    const state = [] as State
+    let state = [] as State
     function _toggleToLastUId() {
         uid = state.length - 1
     }
@@ -17,8 +17,10 @@ const Store = (function () {
         return state
     }
 
-    function _changeUId(e: Event) {
-        uid = state.findIndex(s => (s.reference as any) === e.target)
+    function _changeUId(e: Event|HTMLElement) {
+        let el = (e as any).target||e
+        state = state.filter((s,idx)=>Object.keys(s).length>0)
+        uid = state.findIndex(s =>(s.reference as any) === el)
     }
 
     function _pushInState() {
@@ -114,6 +116,7 @@ const Store = (function () {
     }
 
     return {
+        _changeUId,
         getStore,
         _getState,
         _pushInState,
@@ -129,6 +132,7 @@ const Store = (function () {
     }
 })()
 
+export const changeUId = Store._changeUId
 export const getStore = Store.getStore
 export const getState = Store._getState
 export const pushInState = Store._pushInState

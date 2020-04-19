@@ -3,7 +3,7 @@ import {mergeOptions} from "../utils/merge"
 import {validateOptions} from "../validator/options"
 import {isInputElement} from "../validator/input-element"
 import {findInputElement} from "../utils/dom-utils/find-input-element"
-import {getStore, pushInState, updateOptions, updateState} from '../store'
+import {changeUId, getStore, pushInState, updateOptions, updateState} from '../store'
 import clickOutside from "../utils/clickoutside"
 export default class Flex {
     defaults: flexOptions
@@ -16,7 +16,7 @@ export default class Flex {
         let _inputElement = findInputElement(el)
         if (!isInputElement(_inputElement as any)) return
         pushInState()
-        options = mergeOptions<flexOptions>(this.defaults, options)
+        options = mergeOptions<flexOptions>((this as any).defaults, options)
         updateOptions(options)
         this.el = _inputElement
         updateState(_inputElement,'reference')
@@ -24,17 +24,25 @@ export default class Flex {
     }
     unbind() {
         let store = getStore()
-        let idx = store.findIndex(s=>s.reference===this.el)
+        let idx = store.findIndex(s=>s.reference===(this as any).el)
         if(store[idx].popover){
             document.body.removeChild(store[idx].popover)
         }
         ;(store[idx].reference as any) =
             (store[idx].popover as any)  = null
-        store.splice(idx,1)
-        if(store.length===0){
+        ;(store as any)[idx] = {}
+        let isEmpty = store.every(s=>Object.keys(s).length===0)
+        if(isEmpty){
+            store.length = 0
             document.body.removeEventListener('click',clickOutside)
         }
+    }
 
+    on(eventName:string,callback:(...arg:any)=>any){
+        if(eventName==='change'){
+            changeUId((this as any).el)
+            updateState(callback,'dateChange')
+        }
     }
 
 }

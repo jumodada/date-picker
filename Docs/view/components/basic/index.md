@@ -19,7 +19,16 @@ export default {
          }})
         let b = this.$dp(this.$refs.test2.$el,{type:'date-range'},)
         let c = this.$dp(this.$refs.test3,{type:'date-range'},)
-        
+   b.on('change',(date)=>{
+         console.log(date)
+      })
+   c.on('change',(date)=>{
+         console.log(date)
+      })
+        a.on('change',(date)=>{
+         console.log(date)
+      })
+    
     },
     methods:{
         

@@ -1,4 +1,4 @@
-import { getState, updateState} from "../store"
+import {getState, updateState} from "../store"
 import {positionAttr, _spm} from "../types/popover"
 import nextTick from '../utils/nexttick'
 import {Rect, rectKey} from "../types/state"
@@ -86,4 +86,17 @@ export function getPosition({top, left, height, width}: Rect) {
         bottom: {top: _bTop, left: _rLeft - width},
         right: {top: _tTop, left: _rLeft}
     }
+}
+
+
+export function dispatchChange() {
+   nextTick(()=>{
+       const {type} = getState('options')
+       let onChange = getState('dateChange')
+       let [startDate,endDate] = [getState('date'),getState('endDate')]
+       let date = type==='date-range'?[startDate,endDate]:startDate
+       if(onChange){
+           onChange(date)
+       }
+   })
 }

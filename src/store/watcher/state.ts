@@ -35,12 +35,13 @@ export default class InitState {
     endMonth:number
     endDate:Date|null
     selectRange:string[]|[]
+    dateChange:any
     constructor() {
-        let [year,month] = [getFullYear(),getRealMonth()]
-        let [endYear,endMonth] = [year,month+1]
-        if(month===12){
+        let [year, month] = [getFullYear(), getRealMonth()]
+        let [endYear, endMonth] = [year, month + 1]
+        if (month === 12) {
             endYear++
-            endMonth=1
+            endMonth = 1
         }
         this.reference = null
         this.popover = null
@@ -74,5 +75,6 @@ export default class InitState {
         this.pageIdx = 0
         this.selectRange = []
         this.selectStatus = 'none'
+        this.dateChange = null
     }
 }

@@ -35,6 +35,7 @@ import {
 } from "../../utils/class-name"
 import {dpKey, opKey, RangeDateKey, RenderDateType, RenderDateTypeKey} from "../../types/template"
 import {dayName, monthName} from "../../i18n/zh-CN"
+import {dispatchChange} from "../index";
 
 
 export function createDayHeader(): (HTMLElement | Element) {
@@ -83,6 +84,7 @@ export function toSelectDate(e: _Event): void {
     let innerText = handleSelectDate(e)
     updateReferenceInDate(new Date(innerText))
     updateDate(innerText)
+    dispatchChange()
 }
 
 export function toSelectMonth(e: _Event): void {

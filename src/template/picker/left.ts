@@ -10,6 +10,7 @@ import {getRealMonth} from "../../utils/date"
 import {reduceMonth, reduceYear} from "./header"
 import {createDay, handleSelectDate} from "./body"
 import {_Event} from "../../types/event"
+import {dispatchChange} from "../index";
 
 export function createLeftHeader() {
     return createNode({
@@ -53,10 +54,12 @@ export function updateSelectRange(innerText:string) {
            updateState('done','selectStatus')
            selectRange.splice(1)
            updateState(false,'visible')
+           dispatchChange()
        }else{
            updateState('none','selectStatus')
            selectRange.length = 0
        }
+
     }
     selectRange.push(innerText)
     updateState(selectRange,'selectRange')
