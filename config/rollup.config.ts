@@ -4,7 +4,7 @@ import sourceMaps from 'rollup-plugin-sourcemaps'
 import camelCase from 'lodash.camelcase'
 import typescript from 'rollup-plugin-typescript2'
 import json from 'rollup-plugin-json'
-const pkg = require('./package.json')
+const pkg = require('../package.json')
 import { terser } from 'rollup-plugin-terser'
 const libraryName = 'flex-date-time-picker'
 const config = {

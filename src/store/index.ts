@@ -30,6 +30,7 @@ const Store = (function () {
 
     function _updateOptions(_o: object): void {
         state[uid].options = mergeOptions(state[uid].options, _o)
+        console.log(state[uid].options)
     }
 
     function _getState(key: stateKey): any {

@@ -6,13 +6,16 @@
   "module": "dist/flexDatePicker.es5.js",
   "typings": "dist/types/flexDatePicker.d.ts",
   "scripts": {
-    "bc": "gulp build --gulpfile src/assets/gulpfile.js && cp-cli src/assets/lib lib",
-    "dev": "webpack-dev-server --config build/webpack.demo.config.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "bc": "gulp config --gulpfile src/assets/gulpfile.js && cp-cli src/assets/lib lib",
+    "dev": "webpack-dev-server --config config/webpack.demo.config.js",
     "prebp": "rimraf dist",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts",
-    "pub": "sh release.sh",
-    "prepub": "npm run bp"
+    "build": "tsc --module commonjs && rollup -c config/rollup.config.ts",
+    "test": "jest --coverage",
+    "test:watch": "jest --coverage --watch",
+    "test:prod": "npm run lint && npm run test -- --no-cache"
+  },
+  "jest": {
+    "preset": "./config/jest.config"
   },
   "repository": {
     "type": "git",
