@@ -3,6 +3,9 @@
 ## flex-date-picker
 A datepicker for PC
 
+![](https://camo.githubusercontent.com/b39d1e12ba779319ff9bab0f56ba7e41f108d898/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f6c6963656e73652f6a756d6f646164612f76756558696e2e737667)
+![code-test](https://github.com/jumodada/date-picker/workflows/code-test/badge.svg)
+
 ## Installing
 
 Using npm:
@@ -50,7 +53,6 @@ require('flex-date-picker/dist/index.css')
 | Options | Description | Type | Accepted Values | Default |
 |---------|------------ |---------- |-------------  |-------- |
 | type | type of datepicker | string | date/date-range | date |
-| disabled | prohibited dates | function | - | - |
 | format | Output format | string | - | yyyy/mm/dd |
 | disabled | prohibited dates | function | - | - |
 
