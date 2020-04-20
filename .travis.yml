@@ -7,9 +7,3 @@ jobs:
       name: test
       script: yarn test
 
-    - stage: Deploy
-      name: Deploy
-      if: '(NOT type IN (pull_request)) AND (branch = master)'
-      script:
-        - yarn build
-        - yarn deploy
