@@ -16,10 +16,9 @@ import {
 } from "../../store"
 import {
     compareDate, dateParse,
-    getLastMonthHasDays,
-    getMonthHasDays, getRangeDate,
+    getLastMonthHasDays, getRangeDate,
     getSelectDay,
-    joinDate,
+    joinDate, monthHasDays,
     whatDayIsMonthFirstDay
 } from "../../utils/date"
 import nexttick from "../../utils/nexttick"
@@ -176,7 +175,7 @@ export function renderDate(type: RenderDateTypeKey = 'left') {
         el = dateType[type].el
         let firstDay = whatDayIsMonthFirstDay(year, month)
         if (firstDay === 0) firstDay = 7
-        const days = getMonthHasDays(year, month)
+        const days = monthHasDays(year, month)
         const lastMonthDays: number = getLastMonthHasDays(year, month)
         const childrenNodes = getState('dayPage')[el as any].childNodes
         const totalDays = firstDay + days

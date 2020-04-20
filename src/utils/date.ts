@@ -29,10 +29,6 @@ export function getLastMonthHasDays(year: number, month: number): number {
     return monthHasDays(year, month)
 }
 
-export function getMonthHasDays(year: number, month: number): number {
-    return monthHasDays(year, month)
-}
-
 export function whatDayIsMonthFirstDay(year: number, month: number): number {
     const firstDate = new Date(`${year},${month}, 01`)
     return firstDate.getDay()
