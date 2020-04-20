@@ -8,8 +8,8 @@ const types:Types= {
     Function: '[object Function]'
 }
 const toString = Object.prototype.toString
+const typeOf = (val:any, typeName:string) => toString.call(val) === (types as any)[typeName]
 
-export const typeOf = (val:any, typeName:string) => toString.call(val) === (types as any)[typeName]
 export const isNumber = (val:any) => typeOf(val, 'Number') && !Number.isNaN(val)
 export const isObject = (val:any) => typeOf(val, 'Object')
 export const isFunc = (val:any) => typeOf(val, 'Function')

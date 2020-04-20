@@ -17,7 +17,7 @@ export default {
         let a = this.$dp(this.$refs.test1.$el,{type:'date',disabled:(date)=>{
           return date && date.valueOf() < Date.now() + 86400000; 
          }})
-        let b = this.$dp(this.$refs.test2.$el,{type:'date-range'},)
+        let b = this.$dp(this.$refs.test2.$el,{type:'date-range',xx:'123'},)
         let c = this.$dp(this.$refs.test3,{type:'date-range'},)
    b.on('change',(date)=>{
          console.log(date)
