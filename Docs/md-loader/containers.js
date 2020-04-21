@@ -12,7 +12,7 @@ module.exports = md => {
         const content = tokens[idx + 1].type === 'fence' ? tokens[idx + 1].content : '';
         return `<demo-card>
         ${description ? `<div>${md.render(description)}</div>` : ''}
-        <!--element-demo: ${content}:element-demo-->
+        <!--demo: ${content}:-demo-->
         `;
       }
       return '</demo-card>';

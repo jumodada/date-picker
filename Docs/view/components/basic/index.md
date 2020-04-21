@@ -1,26 +1,15 @@
-# 基础
+# 日期选择器
 
-## 基础
+## 基本用法
 :::demo 暂定
 ```html
 <Input width="300" ref="int" />
 <script>
 export default {
-    data(){
-        return {
-          
-        }
-    },
     mounted(){
          let el = this.$refs.int.$el
-         this.datePicker(el,{type:'date',disabled:(date)=>{
-          return date && date.valueOf() < Date.now() + 86400000; 
-         }})
-    
+         this.datePicker(el)
     },
-    methods:{
-        
-    }
  
 }
 </script>

@@ -8,9 +8,9 @@ const md = require('./config');
 module.exports = function(source) {
   const content = md.render(source);
 
-  const startTag = '<demo:';
+  const startTag = '<!--demo:';
   const startTagLen = startTag.length;
-  const endTag = ':demo>';
+  const endTag = ':-demo-->';
   const endTagLen = endTag.length;
 
   let componenetsString = '';
@@ -27,7 +27,7 @@ module.exports = function(source) {
     const html = stripTemplate(commentContent);
     const script = stripScript(commentContent);
     let demoComponentContent = genInlineComponentText(html, script);
-    const demoComponentName = `demo${id}`;
+    const demoComponentName = `firm-demo${id}`;
     output.push(`<template slot="source"><${demoComponentName} /></template>`);
     componenetsString += `${JSON.stringify(demoComponentName)}: ${demoComponentContent},`;
 
@@ -41,7 +41,7 @@ module.exports = function(source) {
   if (componenetsString) {
     pageScript = `<script>
       export default {
-        name: 'component-doc',
+        name: 'component-exhibition',
         components: {
           ${componenetsString}
         }
@@ -55,9 +55,9 @@ module.exports = function(source) {
   output.push(content.slice(start));
   return `
     <template>
-      <section class="content">
+      <div>
         ${output.join('')}
-      </section>
+      </div>
     </template>
     ${pageScript}
   `;
