@@ -29,6 +29,15 @@ export default [
                 component: (resolve) => require(['../view/components/install/index.md'], resolve)
             },
             {
+                path: '/components/start',
+                name: 'Start',
+                meta: {
+                    name: '快速开始',
+                    type: 'compass'
+                },
+                component: (resolve) => require(['../view/components/start/index.md'], resolve)
+            },
+            {
                 path: '/components/use',
                 name: 'Usage',
                 meta: {
@@ -36,6 +45,15 @@ export default [
                     type: 'component'
                 },
                 component: (resolve) => require(['../view/components/basic/index.md'], resolve)
+            },
+            {
+                path: '/components/API',
+                name: 'API',
+                meta: {
+                    name: '接口',
+                    type: 'component'
+                },
+                component: (resolve) => require(['../view/components/API/index.md'], resolve)
             },
         ]
     },

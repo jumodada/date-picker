@@ -1,8 +1,12 @@
 <style lang="scss">
+    code{
+        background: #fff4d4;
+        padding: 5px;
+        border-radius: 5px;
+    }
     .firm-components-page {
         display: flex;
         width: 100%;
-
         &-content {
             padding: 20px 20px 20px 80px;
             width: 100%;
@@ -27,7 +31,6 @@
             a {
                 text-decoration: none;
                 color: #ffb311;
-                opacity: 0;
             }
             >div >table{
                 width: 100%;
