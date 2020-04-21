@@ -9,10 +9,10 @@
         </div>
         <div class="card-group-item-content">
             <div class="card-group-item-content-header">
-                组件
+                快速开始
             </div>
             <div class="card-group-item-content-main">
-                安装即用，快速开发
+                安装即用
             </div>
             <div class="card-group-item-content-more">
                 更多

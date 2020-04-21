@@ -3,7 +3,6 @@
     .demo-card-wrapper {
         width: 60vw;
         position: relative;
-        margin-left: 21px;
         display: inline-flex;
         flex-direction: column;
         border: 1px solid #e2e2e2;

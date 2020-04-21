@@ -11,10 +11,9 @@
             overflow-x: hidden;
             overflow-y: auto;
             scroll-behavior: smooth;
-            h1 {
-                margin-left: 21px;
+            h2{
+                margin-left: -20px;
             }
-
             h2, h3, h4, h5 {
                 text-align: left;
 
@@ -91,7 +90,7 @@
 <script>
     import slider from '../slide'
     import catalogue from '../catalogue'
-    import xScroll from "../../utils/scroll"
+    import xScroll from "../../directive/scroll"
     export default {
         name: "components",
         directives: {

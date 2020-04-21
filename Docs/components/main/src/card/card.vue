@@ -2,7 +2,7 @@
     <div class="firm-main-card">
         <span class="firm-mark"></span>
         <div :class="{active:isActive}" class="description" ref="description">
-            一个基于Vue2.0的PC端组件库
+            A Datepicker for PC
         </div>
         <div class="card-group">
             <cardCompass></cardCompass>
@@ -28,8 +28,12 @@
             return {
                 isActive: false,
             }
+        },
+        mounted() {
+            setTimeout(()=>{
+                this.isActive = true
+            },100)
         }
-
     }
 </script>
 

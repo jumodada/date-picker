@@ -1,69 +1,63 @@
 const {
-    stripScript,
-    stripTemplate,
-    genInlineComponentText
-} = require('./utils');
-const md = require('./config')
+  stripScript,
+  stripTemplate,
+  genInlineComponentText
+} = require('./util');
+const md = require('./config');
 
 module.exports = function(source) {
-    let content = md.render(source)
-    content = content.replace(/<pre><code class="language-html">/g, '<template slot="highlight"><pre v-pre><code class="html">').replace(/<\/pre>/g, '</pre></template>')
-    const startTag = '<!--demo:';
-    const startTagLen = startTag.length;
-    const endTag = ':-demo-->';
-    const endTagLen = endTag.length;
+  const content = md.render(source);
 
-    let componentsString = '';
-    let id = 0; // demo 的 id
-    let output = []; // 输出的内容
-    let start = 0; // 字符串开始位置
+  const startTag = '<demo:';
+  const startTagLen = startTag.length;
+  const endTag = ':demo>';
+  const endTagLen = endTag.length;
 
-    let commentStart = content.indexOf(startTag)
-    let commentEnd = content.indexOf(endTag, commentStart + startTagLen)
-    while (commentStart !== -1 && commentEnd !== -1) {
-        output.push(content.slice(start, commentStart))
-        const commentContent = content.slice(commentStart + startTagLen, commentEnd)
-        const html = stripTemplate(commentContent)
-        const script = stripScript(commentContent)
-        let demoComponentContent = genInlineComponentText(html, script)
-        const demoComponentName = `firm-demo${id}`
-        output.push(`<template slot="source"><${demoComponentName} /></template>`);
-        componentsString += `${JSON.stringify(demoComponentName)}: ${demoComponentContent},`
+  let componenetsString = '';
+  let id = 0; // demo 的 id
+  let output = []; // 输出的内容
+  let start = 0; // 字符串开始位置
 
-        // 重新计算下一次的位置
-        id++
-        start = commentEnd + endTagLen
-        commentStart = content.indexOf(startTag, start)
-        commentEnd = content.indexOf(endTag, commentStart + startTagLen)
-    }
+  let commentStart = content.indexOf(startTag);
+  let commentEnd = content.indexOf(endTag, commentStart + startTagLen);
+  while (commentStart !== -1 && commentEnd !== -1) {
+    output.push(content.slice(start, commentStart));
 
-    let pageScript = ''
-    if (componentsString) {
-        pageScript = `<script>
+    const commentContent = content.slice(commentStart + startTagLen, commentEnd);
+    const html = stripTemplate(commentContent);
+    const script = stripScript(commentContent);
+    let demoComponentContent = genInlineComponentText(html, script);
+    const demoComponentName = `demo${id}`;
+    output.push(`<template slot="source"><${demoComponentName} /></template>`);
+    componenetsString += `${JSON.stringify(demoComponentName)}: ${demoComponentContent},`;
+
+    id++;
+    start = commentEnd + endTagLen;
+    commentStart = content.indexOf(startTag, start);
+    commentEnd = content.indexOf(endTag, commentStart + startTagLen);
+  }
+
+  let pageScript = '';
+  if (componenetsString) {
+    pageScript = `<script>
       export default {
-        name: 'component-exhibition',
+        name: 'component-doc',
         components: {
-          ${componentsString}
+          ${componenetsString}
         }
       }
     </script>`;
-    }
+  } else if (content.indexOf('<script>') === 0) { // 硬编码，有待改善
+    start = content.indexOf('</script>') + '</script>'.length;
+    pageScript = content.slice(0, start);
+  }
 
-    output.push(content.slice(start))
-    output.forEach((item,index)=>{
-        if(item.indexOf('slot="highlight"')>-1){
-            let _ni = item.match(/mounted\(\)\{\s*([\s\S]+)\}\,\s*methods/)[1]
-            output[index] =
-                `<template slot="highlight"><pre v-pre><code class="html">`
-                + _ni
-                +`</code></pre></template></demo-card>' `
-        }
-    })
-    return `
+  output.push(content.slice(start));
+  return `
     <template>
-      <div>
+      <section class="content">
         ${output.join('')}
-      </div>
+      </section>
     </template>
     ${pageScript}
   `;

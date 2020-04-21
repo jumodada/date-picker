@@ -19,7 +19,7 @@
                 指南
             </div>
             <div class="card-group-item-content-main">
-                包括组件功能、流程使用逻辑、以及友好的API设计
+                提供友好的API
             </div>
             <div class="card-group-item-content-more">
                 更多

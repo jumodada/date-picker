@@ -18,7 +18,7 @@
                 交流
             </div>
             <div class="card-group-item-content-main">
-                个人项目玩具，希望与更多vue开发者交流UI组件的开发和日常使用
+                个人初期项目，后面会加入更多的功能。希望能提供好的建议。
             </div>
             <div class="card-group-item-content-more">
                 更多

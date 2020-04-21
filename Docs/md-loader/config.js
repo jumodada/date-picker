@@ -1,21 +1,26 @@
-const Config = require('markdown-it-chain')
-const anchor = require('markdown-it-anchor')
-const containers = require('./containers')
-const slugify = require('transliteration').slugify
-const config = new Config()
+const Config = require('markdown-it-chain');
+const anchorPlugin = require('markdown-it-anchor');
+const slugify = require('transliteration').slugify;
+const containers = require('./containers');
+const overWriteFenceRule = require('./fence');
+
+const config = new Config();
 
 config
-    .options.html(true).end()
-    .plugin('anchor').use(anchor, [
-    {
-        permalinkSymbol:'#',
-        permalink: true,
-        permalinkBefore: true,
-        level: 2,
-        slugify: slugify,
-    }
-]).end()
-    .plugin('containers').use(containers).end()
+  .options.html(true).end()
 
-const md = config.toMd()
-module.exports = md
+  .plugin('anchor').use(anchorPlugin, [
+    {
+      level: 2,
+      slugify: slugify,
+      permalink: true,
+      permalinkBefore: true
+    }
+  ]).end()
+
+  .plugin('containers').use(containers).end();
+
+const md = config.toMd();
+overWriteFenceRule(md);
+
+module.exports = md;

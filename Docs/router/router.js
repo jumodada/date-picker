@@ -21,7 +21,7 @@ export default [
         children: [
             {
                 path: '/components/install',
-                name: 'install',
+                name: 'Install',
                 meta: {
                     name: '安装',
                     type: 'compass'
@@ -29,10 +29,10 @@ export default [
                 component: (resolve) => require(['../view/components/install/index.md'], resolve)
             },
             {
-                path: '/components/Basic',
-                name: 'Basic',
+                path: '/components/use',
+                name: 'Usage',
                 meta: {
-                    name: '基础',
+                    name: '使用',
                     type: 'component'
                 },
                 component: (resolve) => require(['../view/components/basic/index.md'], resolve)

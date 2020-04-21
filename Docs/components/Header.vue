@@ -36,7 +36,7 @@
             return {
                 routerItems: [
                     {name: '首页', value: ''},
-                    {name: '组件', value: 'components'},
+                    {name: '安装', value: 'components'},
                     {name: '指南', value: ''},
                 ],
                 atHome: true

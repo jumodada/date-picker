@@ -10,8 +10,8 @@ import '../src/assets/src/date-time-picker.scss'
 Vue.component(demoCard.name, demoCard)
 Vue.component(Input.name, Input)
 Vue.component(Icon.name,Icon)
-import dp from './date-picker'
-Vue.prototype.$dp = dp
+import datePicker from './date-picker'
+Vue.prototype.datePicker = datePicker
 router.afterEach(() => {
    Vue.nextTick(() => document.querySelectorAll('pre code').forEach(block=>highlightJs.highlightBlock(block)))
 })
