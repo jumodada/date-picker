@@ -5,12 +5,10 @@ export interface Rect {
     left:number
     top:number
 }
-export type rectKey = 'width'|'height'|'left'|'top'
 
 export type stateKey  =
     'reference'|'popover'
-    |'options'|'visible'
-    |'rect'|'year'
+    |'options'|'visible' |'year'
     |'month'|'endYear'
     |'endMonth'|'endDate'
     |'date'|'pageIdx'
@@ -24,7 +22,6 @@ export interface StateValue {
     options:FlexOptions
     visible:boolean
     selectStatus:'none'|'done'|'selecting'
-    rect:Rect
     year:number
     month:number
     endYear:number

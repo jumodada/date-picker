@@ -5,6 +5,8 @@ import {isInputElement} from "../validator/input-element"
 import {findInputElement} from "../utils/dom-utils/find-input-element"
 import {changeUId, getStore, pushInState, updateOptions, updateState} from '../store'
 import clickOutside from "../utils/clickoutside"
+import {getAllScrollParents} from "../utils/window";
+import {setPopoverLocation} from "../template";
 export default class Flex {
     defaults: flexOptions
     static el:any
@@ -19,6 +21,12 @@ export default class Flex {
         options = mergeOptions<flexOptions>((this as any).defaults, options)
         updateOptions(options)
         this.el = _inputElement
+        let xx = getAllScrollParents(this.el)
+        xx.forEach((el:any)=>{
+            if(!el)return
+            el.addEventListener('scroll',setPopoverLocation)
+        })
+        window.addEventListener('resize', setPopoverLocation as any)
         updateState(_inputElement,'reference')
         return this
     }

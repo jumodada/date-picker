@@ -8,7 +8,6 @@ export default class InitState {
     options: FlexOptions
     visible: boolean
     selectStatus: 'none'|'done'|'selecting'
-    rect: { x: 0, y: 0, width: 0, height: 0, top: 0, right: 0, bottom: 0, left: 0 }
     year: number
     header: {
         ye: any
@@ -47,7 +46,6 @@ export default class InitState {
         this.popover = null
         this.options = new InitOptionsByDate()
         this.visible = false
-        this.rect = {x: 0, y: 0, width: 0, height: 0, top: 0, right: 0, bottom: 0, left: 0}
         this.year = year
         this.month = month
         this.endYear = endYear
