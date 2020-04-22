@@ -8,5 +8,5 @@ export interface flex {
 
 
 export interface flexInstance extends flex{
-
+    create(el: HTMLElement,options:flexOptions): void
 }
