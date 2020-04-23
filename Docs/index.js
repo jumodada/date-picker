@@ -11,7 +11,9 @@ Vue.component(demoCard.name, demoCard)
 Vue.component(Input.name, Input)
 Vue.component(Icon.name,Icon)
 import datePicker from './date-picker'
+import Message from './components/message'
 Vue.prototype.datePicker = datePicker
+Vue.prototype.$message = Message
 router.afterEach(() => {
    Vue.nextTick(() => document.querySelectorAll('pre code').forEach(block=>highlightJs.highlightBlock(block)))
 })

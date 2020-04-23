@@ -7,7 +7,7 @@
         flex-direction: column;
         border: 1px solid #e2e2e2;
         border-radius: 5px;
-
+        margin-bottom: 50px;
         .demo-card-source {
             padding: 33px 23px;
 

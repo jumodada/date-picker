@@ -55,6 +55,7 @@ require('flex-date-picker/dist/index.css')
 |---------|------------ |---------- |-------------  |-------- |
 | type | type of datepicker | string | date/date-range | date |
 | format | Output format | string | - | yyyy/mm/dd |
+| placement | datepicker placement | string | top/bottom/right/left | bottom |
 | disabled | prohibited dates | function | - | - |
 
 ## Options Example
