@@ -3,10 +3,34 @@ import {mergeOptions} from "../utils/merge"
 import {validateOptions} from "../validator/options"
 import {isInputElement} from "../validator/input-element"
 import {findInputElement} from "../utils/dom-utils/find-input-element"
-import {changeUId, getStore, pushInState, updateOptions, updateState} from '../store'
+import {changeUId, getSP, getStore, pushInState, updateOptions, updateSP, updateState} from '../store'
 import clickOutside from "../utils/clickoutside"
-import {getAllScrollParents} from "../utils/window";
-import {setPopoverLocation} from "../template";
+import {getAllScrollParents} from "../utils/window"
+import {setPopoverLocation} from "../template"
+
+const listenToScrollParents = (el:HTMLElement) => {
+    let scrollParents = getAllScrollParents(el)
+    scrollParents.forEach((el:any)=>{
+        if(!el)return
+        el.addEventListener('scroll',setPopoverLocation)
+        updateSP(el)
+    })
+    window.addEventListener('resize', setPopoverLocation as any)
+}
+const removeListenerOnSP = () => {
+    getSP().forEach(el=>{
+        el.removeEventListener('scroll',setPopoverLocation)
+    })
+    let store = getStore()
+    store.forEach(s=> {
+        if(!s.reference)return
+        listenToScrollParents(s.reference)
+    })
+    if(store.length===0){
+        window.removeEventListener('resize',setPopoverLocation as any)
+    }
+}
+
 export default class Flex {
     defaults: flexOptions
     static el:any
@@ -21,12 +45,7 @@ export default class Flex {
         options = mergeOptions<flexOptions>((this as any).defaults, options)
         updateOptions(options)
         this.el = _inputElement
-        let xx = getAllScrollParents(this.el)
-        xx.forEach((el:any)=>{
-            if(!el)return
-            el.addEventListener('scroll',setPopoverLocation)
-        })
-        window.addEventListener('resize', setPopoverLocation as any)
+        listenToScrollParents(this.el)
         updateState(_inputElement,'reference')
         return this
     }
@@ -44,6 +63,7 @@ export default class Flex {
             store.length = 0
             document.body.removeEventListener('click',clickOutside)
         }
+        removeListenerOnSP()
     }
 
     on(eventName:string,callback:(...arg:any)=>any){

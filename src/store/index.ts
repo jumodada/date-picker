@@ -9,8 +9,19 @@ import {equalDate} from "../utils/date"
 const Store = (function () {
     let uid = 0
     let state = [] as State
+    let scrollParents:any[] = []
     function _toggleToLastUId() {
         uid = state.length - 1
+    }
+
+    function _getSP():any[] {
+        return scrollParents
+    }
+
+    function _updateSP(el:HTMLElement) {
+        if(!el)return
+        let isNew = scrollParents.every((parent:any)=>el!==parent)
+        if(isNew)scrollParents.push(el)
     }
 
     function getStore() {
@@ -117,6 +128,8 @@ const Store = (function () {
 
     return {
         _changeUId,
+        _getSP,
+        _updateSP,
         getStore,
         _getState,
         _pushInState,
@@ -132,6 +145,8 @@ const Store = (function () {
     }
 })()
 
+export const getSP = Store._getSP
+export const updateSP = Store._updateSP
 export const changeUId = Store._changeUId
 export const getStore = Store.getStore
 export const getState = Store._getState

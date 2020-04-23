@@ -10,6 +10,7 @@ import {createRight} from "./picker/right"
 import {isHTMLElement} from "../utils/window"
 import {Rect} from "../types/state"
 
+
 const transform = {
     top: `translate(0,-100%)`,
     left: `translate(-100%,0)`,
@@ -17,7 +18,6 @@ const transform = {
     right: `translate(0,0)`
 }
 let popoverByType: any
-
 
 nextTick(() => {
     const updatePop = (arg:any)=>updateState(arg,'popover')
