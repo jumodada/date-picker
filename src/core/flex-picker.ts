@@ -54,6 +54,7 @@ export default class Flex {
     unbind() {
         let store = getStore()
         let idx = store.findIndex(s=>s.reference===(this as any).el)
+        if(idx===-1)return console.warn('Input Element is not exists')
         if(store[idx].popover){
             document.body.removeChild(store[idx].popover)
         }
@@ -83,8 +84,9 @@ export default class Flex {
     }
     getYear(){
         let date = this.getDate()
-        if(!date||!date[0])return date
-        if(isArray(date)){
+        let isArr = isArray(date)
+        if(!date||(isArr&&!date[0]))return date
+        if(isArr){
             return date.map((d:any)=>d.getFullYear())
         }else{
             return date.getFullYear()
@@ -92,8 +94,9 @@ export default class Flex {
     }
     getMonth(){
         let date = this.getDate()
-        if(!date||!date[0])return date
-        if(isArray(date)){
+        let isArr = isArray(date)
+        if(!date||(isArr&&!date[0]))return date
+        if(isArr){
             return date.map((d:any)=>getRealMonth(d))
         }else{
             return getRealMonth(date)

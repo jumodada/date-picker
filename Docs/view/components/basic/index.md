@@ -104,16 +104,58 @@ export default {
 
 
 ## 解绑Unbind
-:::demo通过`unbind`函数可以解除对输入框的绑定，同时会在dom树上删除弹出框的节点以及一些事件监听。
+:::demo通过`unbind`方法可以解除对输入框的绑定，同时会在dom树上删除弹出框的节点以及一些事件监听。
 ```html
-<Input width="300" ref="int" />
+<Input style="display:inline-flex" width="300" ref="int" />
+<f-button @click="datepickerUnbind">解除绑定</f-button>
 <script>
 export default {
+    data(){
+         return {
+           datepicker:null
+         }
+    },
     mounted(){
          let el = this.$refs.int.$el
-         let dp = this.datePicker(el,{type:'date-range'})
-         dp.unbind()
+         this.datepicker = this.datePicker(el,{type:'date-range'})
     },
+    methods:{
+      datepickerUnbind(){
+        this.datepicker.unbind()
+     } 
+   }
+ 
+}
+</script>
+
+```
+:::
+
+## 获取Date
+:::demo通过`getDate`方法可以获取选择的日期，如果没有选择，则返回null。
+```html
+<Input style="display:inline-flex" width="300" ref="int" />
+<f-button @click="getDate">获取日期</f-button>
+<f-button @click="getYear">获取选择的年份</f-button>
+<script>
+export default {
+    data(){
+         return {
+           datepicker:null
+         }
+    },
+    mounted(){
+         let el = this.$refs.int.$el
+         this.datepicker = this.datePicker(el)
+    },
+    methods:{
+      getDate(){
+        console.log(this.datepicker.getDate())
+      },
+      getYear(){
+      this.$message.success('你选择了'+this.datepicker.getYear()+'年')
+      }
+   }
  
 }
 </script>

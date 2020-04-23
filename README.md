@@ -71,6 +71,19 @@ datePicker(document.querySelector('#input'),{
     })
 ```
 
+### Method
+| name | Description  | 
+|---------|---------- |
+| unbind | unbind  | 
+| getDate | Get the currently selected date | 
+| getYear | Get the currently selected year | 
+| getMonth |Get the currently selected month | 
+
+### Event   
+| name | Description  | 
+|---------|---------- |
+| change | Event triggered when the date changes | 
+
 
 
 
