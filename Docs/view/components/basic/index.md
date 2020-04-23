@@ -111,7 +111,7 @@ export default {
 export default {
     mounted(){
          let el = this.$refs.int.$el
-         let dp = this.datePicker(el)
+         let dp = this.datePicker(el,{type:'date-range'})
          dp.unbind()
     },
  
@@ -133,6 +133,7 @@ export default {
            type:'date',
            placement:'top'
          })
+    
     },
  
 }

@@ -3,10 +3,12 @@ import {mergeOptions} from "../utils/merge"
 import {validateOptions} from "../validator/options"
 import {isInputElement} from "../validator/input-element"
 import {findInputElement} from "../utils/dom-utils/find-input-element"
-import {changeUId, getSP, getStore, pushInState, updateOptions, updateSP, updateState} from '../store'
+import {changeUId, getSP, getState, getStore, pushInState, updateOptions, updateSP, updateState} from '../store'
 import clickOutside from "../utils/clickoutside"
 import {getAllScrollParents} from "../utils/window"
 import {setPopoverLocation} from "../template"
+import {isArray} from "../utils/type-of";
+import {getRealMonth} from "../utils/date";
 
 const listenToScrollParents = (el:HTMLElement) => {
     let scrollParents = getAllScrollParents(el)
@@ -70,6 +72,31 @@ export default class Flex {
         if(eventName==='change'){
             changeUId((this as any).el)
             updateState(callback,'dateChange')
+        }
+    }
+
+    getDate():any{
+        changeUId((this as any).el)
+        const {type} = getState('options')
+        if(type==='date')return getState('date')
+        if(type==='date-range')return [getState('date'),getState('endDate')]
+    }
+    getYear(){
+        let date = this.getDate()
+        if(!date||!date[0])return date
+        if(isArray(date)){
+            return date.map((d:any)=>d.getFullYear())
+        }else{
+            return date.getFullYear()
+        }
+    }
+    getMonth(){
+        let date = this.getDate()
+        if(!date||!date[0])return date
+        if(isArray(date)){
+            return date.map((d:any)=>getRealMonth(d))
+        }else{
+            return getRealMonth(date)
         }
     }
 
