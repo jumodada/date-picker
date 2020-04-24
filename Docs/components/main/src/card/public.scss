@@ -71,6 +71,10 @@
     }
 
     &-more {
+      a{
+        color: white;
+        text-decoration: none;
+      }
       color: white;
       display: inline-flex;
       align-items: center;

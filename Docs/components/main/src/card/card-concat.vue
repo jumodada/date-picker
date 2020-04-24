@@ -18,15 +18,11 @@
                 交流
             </div>
             <div class="card-group-item-content-main">
-                个人初期项目，后面会加入更多的功能。希望能提供好的建议。
-            </div>
-            <div class="card-group-item-content-more">
-                更多
-                <f-icon color="white" name="right"></f-icon>
+                个人初期项目，后面会加入更多的功能。希望能提issue或者加好友。
             </div>
         </div>
         <div class="card-group-item-content-more">
-            更多
+            <a target="_blank" href="https://s1.ax1x.com/2020/04/24/J0Lc38.jpg">更多</a>
             <f-icon color="white" name="right"></f-icon>
         </div>
     </div>

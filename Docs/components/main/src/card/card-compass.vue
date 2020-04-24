@@ -16,13 +16,13 @@
         </div>
         <div class="card-group-item-content">
             <div class="card-group-item-content-header">
-                指南
+                快速开发
             </div>
             <div class="card-group-item-content-main">
-                提供友好的API
+                不依赖其他库，基于原生
             </div>
             <div class="card-group-item-content-more">
-                更多
+               <router-link :to="`components/start`">更多</router-link>
                 <f-icon color="white" name="right"></f-icon>
             </div>
         </div>

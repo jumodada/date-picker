@@ -9,13 +9,13 @@
         </div>
         <div class="card-group-item-content">
             <div class="card-group-item-content-header">
-                快速开始
+                安装
             </div>
             <div class="card-group-item-content-main">
-                安装即用
+                仅8.76kb,安装即用
             </div>
             <div class="card-group-item-content-more">
-                更多
+                <router-link :to="`components/install`">更多</router-link>
                 <f-icon color="white" name="right"></f-icon>
             </div>
         </div>

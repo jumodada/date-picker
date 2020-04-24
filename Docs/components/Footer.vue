@@ -3,10 +3,12 @@
         <div class="firm-footer-link">
             <div class="firm-footer-link-to">
                 <span>前往</span>
-                <span>首页</span>
-                <span>安装</span>
-                <span>开始使用</span>
-<!--                <span>github</span>-->
+                <span @click="toTop">
+                    首页
+                </span>
+                <span>
+                    <router-link to="components/install">安装</router-link>
+                </span>
             </div>
             <div class="firm-footer-link-dependence">
                 <span>官网依赖</span>
@@ -17,18 +19,14 @@
             </div>
             <div class="firm-footer-link-about">
                 <span>关于</span>
-                <span> <a target="_blank" href="https://github.com/jumodada/firm">github</a></span>
-<!--                <span> <a target="_blank" href="https://github.com/juliangarnier/anime">联系邮箱</a></span>-->
-<!--                <span> <a target="_blank" href="https://github.com/markedjs/marked">API设计</a></span>-->
+                <span> <a target="_blank" href="https://github.com/jumodada/date-picker">github</a></span>
             </div>
             <div class="firm-footer-link-more">
                 <span>更多</span>
-                <span  class="nav-react">
-                    <f-icon style="margin-right: 10px" font-size="30px" name="React"></f-icon>
-                    React</span>
-<!--                <span class="nav-svg">-->
-<!--                    <f-icon color="#cccccc" style="margin-right: 10px" font-size="30px" name="svg"></f-icon>-->
-<!--                    SVG</span>-->
+                <a target="_blank" href="https://github.com/livelyPeng/pl-table"  class="nav-react">
+                    <f-icon style="margin-right: 10px" font-size="40px" name="Vue"></f-icon>
+                    PL-table</a>
+
             </div>
         </div>
     </div>
@@ -38,7 +36,10 @@
     export default {
         name: "Footer",
         methods:{
-
+            toTop(){
+                let el = document.querySelector('#app')
+                el.scrollTo(0,0)
+            }
         }
     }
 </script>
@@ -58,6 +59,10 @@
             margin-left: 60px;
             margin-right: 60px;
             flex-direction: column;
+            a{
+                font-size: 14px;
+                text-decoration: none;
+            }
             span{
                 font-size: 13px;
                 a{

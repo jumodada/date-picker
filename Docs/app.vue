@@ -31,6 +31,7 @@
     #app {
         width: 100%;
         height: 100vh;
+        scroll-behavior: smooth;
         overflow-x: hidden;
     }
 </style>
