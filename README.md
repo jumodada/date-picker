@@ -7,6 +7,10 @@ A datepicker for PC
 ![](https://github.com/jumodada/date-picker/workflows/code-test/badge.svg)
 [![build status](https://www.travis-ci.org/jumodada/date-picker.svg?branch=master)](https://www.travis-ci.org/github/jumodada/date-picker)
 
+## Doc
+
+https://jumodada.github.io/date-picker/#/
+
 ## Installing
 
 Using npm:
