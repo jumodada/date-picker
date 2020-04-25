@@ -6,9 +6,9 @@ const cssmin = require('gulp-cssmin');
 
 function compile() {
   return src('./src/*.scss')
-    .pipe(sass.sync())
-    .pipe(cssmin())
-    .pipe(dest('./lib'));
+      .pipe(sass.sync())
+      .pipe(cssmin())
+      .pipe(dest('./lib'));
 }
 
 

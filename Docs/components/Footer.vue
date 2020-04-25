@@ -53,12 +53,30 @@
     position: relative;
     &-link{
         display: flex;
+        justify-content: center;
+        width: 100%;
         text-align: center;
         &-to,&-about,&-dependence,&-more{
             display: flex;
-            margin-left: 60px;
-            margin-right: 60px;
+            margin-left: 2vw;
+            margin-right: 2vw;
             flex-direction: column;
+            @media (min-width: 577px) {
+                margin-left: 2.5vw;
+                margin-right: 2.5vw;
+            }
+            @media (min-width: 769px) {
+                margin-left: 3.5vw;
+                margin-right: 3.5vw;
+            }
+            @media (min-width: 993px) {
+                margin-left: 6vw;
+                margin-right: 6vw;
+            }
+            @media (min-width: 1201px) {
+                margin-left: 6.5vw;
+                margin-right: 6.5vw;
+            }
             a{
                 font-size: 14px;
                 text-decoration: none;

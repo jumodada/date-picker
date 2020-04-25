@@ -11,6 +11,8 @@ $border-color-2: #e7eaf1;
   *{
     box-sizing: border-box;
   }
+  transition: .3s transform ease,.3s opacity;
+  transform: scaleY(0.8);
   margin: 0;
   padding: 0;
   color: $text-color;
@@ -219,4 +221,12 @@ $border-color-2: #e7eaf1;
      color:$text-color-fade-1 !important;
     }
   }
+}
+
+.fl-close-animation{
+  opacity: 0;
+}
+
+.fl-open-animation{
+  opacity: 1;
 }

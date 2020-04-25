@@ -1,10 +1,17 @@
 import {getState, updateState} from "../store"
 import {positionAttr, _spm} from "../types/popover"
 import nextTick from '../utils/nexttick'
-import {createNode} from "../utils/dom-utils/element"
+import {createNode, toggleClass} from "../utils/dom-utils/element"
 import {createHeader} from "./picker/header"
 import {createBody} from "./picker/body"
-import {datepickerClass, dateRangePickerClass} from "../utils/class-name"
+import {
+    closeAnimation,
+    datepickerClass,
+    dateRangePickerClass,
+    notThisMonth,
+    openAnimation,
+    thisMonth
+} from "../utils/class-name"
 import {createLeft} from "./picker/left"
 import {createRight} from "./picker/right"
 import {isHTMLElement} from "../utils/window"
@@ -44,9 +51,19 @@ export function updatePopover(el: HTMLElement, value: boolean): void {
     if (value) {
         el.style.display = ''
         setPopoverLocation(el)
+        toggleClass(el, [openAnimation,closeAnimation] )
     } else {
-        el.style.display = 'none'
+        toggleClass(el, [closeAnimation, openAnimation] )
+        addAnimation(el)
     }
+}
+
+function addAnimation(el:HTMLElement) {
+    let {transform} = el.style
+    if(transform.indexOf('scaleY')===-1){
+        el.style.transform =  transform+' scaleY(.8)'
+    }
+    el.style.display = 'none'
 }
 
 export function setPopoverLocation(el: HTMLElement) {
@@ -60,7 +77,7 @@ export function setPopoverLocation(el: HTMLElement) {
 }
 
 export function setTransform(el: HTMLElement, placement: any) {
-    nextTick(() => el.style.transform = transform[placement as _spm])
+    nextTick(() =>el.style.transform = transform[placement as _spm])
 }
 
 export function setPosition(el: HTMLElement, placement: _spm, rect: Rect) {
