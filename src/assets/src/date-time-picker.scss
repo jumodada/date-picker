@@ -171,12 +171,6 @@ $border-color-2: #e7eaf1;
   &-not-this-month {
     color: $text-color-fade-2;
   }
-
-  &-this-month {
-    &:hover {
-      color: $blue !important;
-    }
-  }
   &-in-range {
     background-color: #cae5f5;
   }
@@ -221,10 +215,6 @@ $border-color-2: #e7eaf1;
      color:$text-color-fade-1 !important;
     }
   }
-}
-
-.fl-close-animation{
-  opacity: 0;
 }
 
 .fl-open-animation{

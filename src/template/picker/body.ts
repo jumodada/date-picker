@@ -1,10 +1,7 @@
 import {
     createNode,
-    addAttr,
-    removeClass,
     resetAttr,
-    toggleClass,
-    updateReferenceInDate
+    updateReferenceInDate, removeClasses, toggleClass
 } from "../../utils/dom-utils/element"
 import {createEventListener, CreateNodeArguments, eventHandler} from "../../types/methods"
 import {
@@ -29,7 +26,6 @@ import {
     monthBodyClass,
     notThisMonth,
     selectedClass, startDateClass,
-    thisMonth,
     yearBodyClass
 } from "../../utils/class-name"
 import {dpKey, opKey, RangeDateKey, RenderDateType, RenderDateTypeKey} from "../../types/template"
@@ -198,18 +194,15 @@ export function renderDate(type: RenderDateTypeKey = 'left') {
                 let viewDate = getViewDate(year, month, innerText, view)
                 if (!view) {
                     const parseViewDate = dateParse(viewDate)
-                    classToggle(node, selectedClass, selectDay.indexOf(innerText) > -1)
-                    classToggle(node, inRangeClass, compareDate(viewDate, startDate) && compareDate(endDate, viewDate))
-                    classToggle(node, startDateClass, parseViewDate === dateParse(startDate))
-                    classToggle(node, endDateClass, parseViewDate === dateParse(endDate))
+                    toggleClass(node, selectedClass, selectDay.indexOf(innerText) > -1)
+                    toggleClass(node, inRangeClass, compareDate(viewDate, startDate) && compareDate(endDate, viewDate))
+                    toggleClass(node, startDateClass, parseViewDate === dateParse(startDate))
+                    toggleClass(node, endDateClass, parseViewDate === dateParse(endDate))
                 } else {
-                    removeClass(node, selectedClass)
-                    removeClass(node, inRangeClass)
-                    removeClass(node, startDateClass)
-                    removeClass(node, endDateClass)
+                    removeClasses(node,[selectedClass,inRangeClass,startDateClass,endDateClass])
                 }
                 handleDisabled(node, viewDate)
-                toggleClass(node, isFade ? [notThisMonth, thisMonth] : [thisMonth, notThisMonth])
+                toggleClass(node, notThisMonth, isFade)
                 resetAttr(node, view, 'data-view')
                 let intStr = innerText.toString()
                 if (node.innerText === intStr) continue
@@ -228,17 +221,10 @@ function handleDisabled(node: HTMLElement, date: string) {
     if (disabled) {
         const isDisabled = disabled(new Date(date))
         ;(node as any).$flexDisabled = isDisabled
-        classToggle(node, disabledClass, isDisabled)
+        toggleClass(node, disabledClass, isDisabled)
     }
 }
 
-export function classToggle(node: HTMLElement, className: string, judge: boolean) {
-    if (judge) {
-        addAttr(node, className)
-    } else {
-        removeClass(node, className)
-    }
-}
 
 export function renderMonth() {
     nexttick(() => {

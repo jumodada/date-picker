@@ -5,12 +5,9 @@ import {createNode, toggleClass} from "../utils/dom-utils/element"
 import {createHeader} from "./picker/header"
 import {createBody} from "./picker/body"
 import {
-    closeAnimation,
     datepickerClass,
     dateRangePickerClass,
-    notThisMonth,
     openAnimation,
-    thisMonth
 } from "../utils/class-name"
 import {createLeft} from "./picker/left"
 import {createRight} from "./picker/right"
@@ -51,9 +48,9 @@ export function updatePopover(el: HTMLElement, value: boolean): void {
     if (value) {
         el.style.display = ''
         setPopoverLocation(el)
-        toggleClass(el, [openAnimation,closeAnimation] )
+        toggleClass(el, openAnimation ,true)
     } else {
-        toggleClass(el, [closeAnimation, openAnimation] )
+        toggleClass(el, openAnimation,false )
         addAnimation(el)
     }
 }

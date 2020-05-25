@@ -10,7 +10,7 @@ import {getRealMonth} from "../../utils/date"
 import {reduceMonth, reduceYear} from "./header"
 import {createDay, handleSelectDate} from "./body"
 import {_Event} from "../../types/event"
-import {dispatchChange} from "../index";
+import {dispatchChange} from "../index"
 
 export function createLeftHeader() {
     return createNode({
@@ -59,7 +59,6 @@ export function updateSelectRange(innerText:string) {
            updateState('none','selectStatus')
            selectRange.length = 0
        }
-
     }
     selectRange.push(innerText)
     updateState(selectRange,'selectRange')
@@ -67,6 +66,7 @@ export function updateSelectRange(innerText:string) {
 export function hoverUpdateSelectRange(innerText:string) {
     let selectRange:any = getState('selectRange').slice(0)
     selectRange[1] = innerText
+    console.log(innerText)
     updateState(selectRange,'selectRange')
 }
 

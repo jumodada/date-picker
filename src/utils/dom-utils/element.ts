@@ -96,19 +96,22 @@ function filterClasses(classes:string,val:string[]) {
     return classes
 }
 
-export function toggleClass(el: HTMLElement, val: string[]) {
-    let classes = el.getAttribute('class')
-    if (!classes) classes= ''
-    let [fv, sv] = [val[0], val[1]]
-    classes = filterClasses(classes,[fv,sv]) + ' ' + fv
-    el.setAttribute('class', classes)
+export function toggleClass(node: HTMLElement, className: string, judge: boolean) {
+    if (judge) {
+        addAttr(node, className)
+    } else {
+        removeClasses(node, [className])
+    }
 }
 
-export function removeClass(el: HTMLElement, val: string) {
-    let attrVal: string | null = el.getAttribute('class')
-    if (attrVal && attrVal.indexOf(val) > -1) {
-        attrVal = filterClasses(attrVal,[val])
-        el.setAttribute('class', attrVal)
+export function removeClasses(el: HTMLElement, classes: string[]) {
+    let attr: string | null = el.getAttribute('class')
+    classes.forEach(cls=>removeClass(el,attr,cls))
+}
+export function removeClass(el: HTMLElement,attr:string| null, cls: string) {
+    if (attr && attr.indexOf(cls) > -1) {
+        attr = filterClasses(attr,[cls])
+        el.setAttribute('class', attr)
     }
 }
 
