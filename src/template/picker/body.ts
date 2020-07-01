@@ -30,7 +30,7 @@ import {
 } from "../../utils/class-name"
 import {dpKey, opKey, RangeDateKey, RenderDateType, RenderDateTypeKey} from "../../types/template"
 import {dayName, monthName} from "../../i18n/zh-CN"
-import {dispatchChange} from "../index";
+import {dispatchChange} from "../index"
 
 
 export function createDayHeader(): (HTMLElement | Element) {
@@ -83,7 +83,7 @@ export function toSelectDate(e: _Event): void {
 }
 
 export function toSelectMonth(e: _Event): void {
-    let parentNode = getState('otherPage').month
+    let parentNode = getState('ymNode').month
     let {target} = e
     let selectIMonth = Array.from(parentNode.childNodes).findIndex(child => (child as any) === target) + 1
     updateState(selectIMonth, 'month')
@@ -91,7 +91,7 @@ export function toSelectMonth(e: _Event): void {
 }
 
 export function toSelectYear(e: _Event): void {
-    let parentNode = getState('otherPage').year
+    let parentNode = getState('ymNode').year
     let {target} = e
     let selectIYear = (Array.from(parentNode.childNodes).find(child => (child as any) === target) as HTMLElement).innerText
     updateState(Number(selectIYear), 'year')
@@ -99,7 +99,7 @@ export function toSelectYear(e: _Event): void {
 }
 
 export function createPageBody<T>(
-    amount: number,
+    length: number,
     ulListener: eventHandler | createEventListener[],
     liListener: createEventListener[] | null,
     classes: string,
@@ -107,19 +107,19 @@ export function createPageBody<T>(
     updateName: string,
     initial?: 'hidden'
 ): (HTMLElement | Element) {
-    const childrenNodes: CreateNodeArguments[] = []
-    Array.from({length: amount}).forEach(() => {
+    const children: CreateNodeArguments[] = []
+    Array.from({length}).forEach(() => {
         let node: CreateNodeArguments = {name: 'li'}
         if (liListener) node.event = liListener
-        childrenNodes.push(node)
+        children.push(node)
     })
     return createNode({
         name: 'ul',
         event: ulListener,
         class: [classes],
         update: {method: update, name: updateName},
-        children: childrenNodes,
-        initial: initial
+        children,
+        initial
     })
 }
 
@@ -173,7 +173,7 @@ export function renderDate(type: RenderDateTypeKey = 'left') {
         if (firstDay === 0) firstDay = 7
         const days = monthHasDays(year, month)
         const lastMonthDays: number = getLastMonthHasDays(year, month)
-        const childrenNodes = getState('dayPage')[el as any].childNodes
+        const childrenNodes = getState('dayNode')[el as any].childNodes
         const totalDays = firstDay + days
         const selectDay = getSelectDay(year, month)
         let [startDate, endDate] = [getRangeDate()[0], getRangeDate()[1]]
@@ -228,7 +228,7 @@ function handleDisabled(node: HTMLElement, date: string) {
 
 export function renderMonth() {
     nexttick(() => {
-        let childrenNodes = getState('otherPage').month.childNodes
+        let childrenNodes = getState('ymNode').month.childNodes
         childrenNodes.forEach((node: HTMLElement, index: any) => {
             (node as HTMLElement).innerText = monthName[index].toString()
         })
@@ -237,7 +237,7 @@ export function renderMonth() {
 
 export function renderYear() {
     nexttick(() => {
-        let childrenNodes = getState('otherPage').year.childNodes
+        let childrenNodes = getState('ymNode').year.childNodes
         const year = getState('year')
         childrenNodes.forEach((node: HTMLElement, index: any) => {
             (node as HTMLElement).innerText = (year + index).toString()

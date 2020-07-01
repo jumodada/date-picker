@@ -3,16 +3,16 @@ import {CreateNodeArguments, nodeKey, NodeOptions} from "../../types/methods"
 import createSVG from "../create-svg"
 import {on} from "../../event/eventListener"
 import {eventType} from "../../types/event"
-import {getState, updateState} from "../../store";
-import {formatParse} from "../format";
+import {getState, updateState} from "../../store"
+import {formatParse} from "../format"
 
 const nodeOptions: NodeOptions = {
-    event: (el, node) =>{
-        if(isArray(node.event)){
-            (node.event as any).forEach((e:{name:eventType,event:any})=>{
+    event: (el, node) => {
+        if (isArray(node.event)) {
+            (node.event as any).forEach((e: { name: eventType, event: any }) => {
                 on(el, e.name, e.event as any)
             })
-        }else{
+        } else {
             on(el, 'click', node.event as any)
         }
     },
@@ -36,9 +36,9 @@ const nodeOptions: NodeOptions = {
     name: () => {
         // todo
     },
-    initial:(el, node)=>{
-        if(node.initial==='hidden'){
-            addAttr(el,'display:none','style')
+    initial: (el, node) => {
+        if (node.initial === 'hidden') {
+            addAttr(el, 'display:none', 'style')
         }
     }
 }
@@ -50,8 +50,8 @@ export function createEL(tagName?: string): HTMLElement {
 }
 
 export function createNode(node: CreateNodeArguments): (Element | HTMLElement) {
-    if (node.el&&isFunc(node.el)) return (node.el as any)()
-    if(node.el)return (node.el as any)
+    if (node.el && isFunc(node.el)) return (node.el as any)()
+    if (node.el) return (node.el as any)
     const el = node.name === 'svg' ? createSVG(node.val) : createEL(node.name)
     Object.keys(node).forEach(key => {
         nodeOptions[key as nodeKey](el as HTMLElement, node)
@@ -89,8 +89,8 @@ export function addAttr(el: HTMLElement, val: string, name?: string) {
     }
 }
 
-function filterClasses(classes:string,val:string[]) {
-    val.forEach(v=>{
+function filterClasses(classes: string, val: string[]) {
+    val.forEach(v => {
         classes = classes.split(' ').filter(c => c !== v && c).join(' ')
     })
     return classes
@@ -106,24 +106,25 @@ export function toggleClass(node: HTMLElement, className: string, judge: boolean
 
 export function removeClasses(el: HTMLElement, classes: string[]) {
     let attr: string | null = el.getAttribute('class')
-    classes.forEach(cls=>removeClass(el,attr,cls))
+    classes.forEach(cls => removeClass(el, attr, cls))
 }
-export function removeClass(el: HTMLElement,attr:string| null, cls: string) {
+
+export function removeClass(el: HTMLElement, attr: string | null, cls: string) {
     if (attr && attr.indexOf(cls) > -1) {
-        attr = filterClasses(attr,[cls])
+        attr = filterClasses(attr, [cls])
         el.setAttribute('class', attr)
     }
 }
 
-export function updateReferenceInDate(date:Date) {
+export function updateReferenceInDate(date: Date) {
     const ref = getState('reference')
-    const {format}  = getState('options')
-    ref.value = formatParse(date,format)
-    updateState(false,'visible')
+    const {format} = getState('options')
+    ref.value = formatParse(date, format)
+    updateState(false, 'visible')
 }
 
-export function updateReferenceInDateRange(start:Date,end:Date) {
+export function updateReferenceInDateRange(start: Date, end: Date) {
     const ref = getState('reference')
-    const {format}  = getState('options')
-    ref.value = formatParse(start,format) + ' - '+ formatParse(end,format)
+    const {format} = getState('options')
+    ref.value = formatParse(start, format) + ' - ' + formatParse(end, format)
 }

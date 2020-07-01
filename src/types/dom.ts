@@ -17,4 +17,4 @@ export type Window = {
     Node: Node,
     toString(): '[object Window]',
     devicePixelRatio: number
-    }
+}

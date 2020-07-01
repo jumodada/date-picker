@@ -92,9 +92,9 @@ export function elementShow(elements: any[], isHidden: boolean) {
 
 
 export function watchPageIdx(value: number, state: StateValue) {
-    const {ye, me, ar, al} = state.header
-    const {header, body} = state.dayPage
-    const {month, year} = state.otherPage
+    const {ye, me, ar, al} = state.headerNode
+    const {header, body} = state.dayNode
+    const {month, year} = state.ymNode
     const yearVal = state.year
     let period = (yearVal as number) + 9
     const date = [me, al, ar, header, body]
@@ -121,7 +121,7 @@ export function watchPopover(value: HTMLElement, state: StateValue) {
 
 export function watchYear(value: number, state: StateValue): void {
     const page = state.pageIdx
-    const {ye} = state.header
+    const {ye} = state.headerNode
     const {type} = state.options
     if (ye) ye.innerText = value.toString() + '年'
     if (state.year === value) return
@@ -137,7 +137,7 @@ export function watchYear(value: number, state: StateValue): void {
 
 export function watchEndYear(value: number, state: StateValue): void {
     if (state.endYear === value) return
-    const {rightYe} = state.header
+    const {rightYe} = state.headerNode
     if (rightYe) rightYe.innerText = value.toString() + '年'
     nexttick(() => updateState(getBackYear(value, state.endMonth), 'year'))
     renderDate('right')
@@ -155,7 +155,7 @@ const monthMethods = {
 
 export function watchMonth(value: number, state: StateValue): void {
     if (state.month === value) return
-    const {me} = state.header
+    const {me} = state.headerNode
     const {type} = state.options
     me.innerText = value.toString() + '月'
     nexttick(() => monthMethods[type as unknown as 'date'](value, state))
@@ -164,7 +164,7 @@ export function watchMonth(value: number, state: StateValue): void {
 
 export function watchEndMonth(value: number, state: StateValue): void {
     if (state.endMonth === value) return
-    const {rightMe} = state.header
+    const {rightMe} = state.headerNode
     rightMe.innerText = value.toString() + '月'
     nexttick(() => {
         renderDate('right')

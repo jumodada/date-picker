@@ -8,7 +8,7 @@ export function changeYear(val:number) {
     if(getState('pageIdx')!==2){
         plusYear(val)
     }else{
-        const {ye} = getState('header')
+        const {ye} = getState('headerNode')
         if(!ye)return
         const year= getState('year')
         const curYear = year+(val>0?10:-10)

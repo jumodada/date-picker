@@ -12,8 +12,8 @@ export type stateKey  =
     |'month'|'endYear'
     |'endMonth'|'endDate'
     |'date'|'pageIdx'
-    |'header'|'dayPage'
-    |'otherPage'|'selectRange'
+    |'headerNode'|'dayNode'
+    |'ymNode'|'selectRange'
     |'selectStatus'|'dateChange'
 
 export interface StateValue {
@@ -30,7 +30,7 @@ export interface StateValue {
     date:Date
     pageIdx:number
     selectRange:string[]|[]
-    header:{
+    headerNode:{
         al:HTMLElement
         ye:HTMLElement
         me:HTMLElement
@@ -38,13 +38,13 @@ export interface StateValue {
         rightYe:HTMLElement
         rightMe:HTMLElement
     }
-    dayPage:{
+    dayNode:{
         header:any
         body:any
         rightHeader:any
         rightBody:any
     }
-    otherPage:{
+    ymNode:{
         year:any
         month:any
     }

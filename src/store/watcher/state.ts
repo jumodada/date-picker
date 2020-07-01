@@ -9,7 +9,7 @@ export default class InitState {
     visible: boolean
     selectStatus: 'none'|'done'|'selecting'
     year: number
-    header: {
+    headerNode: {
         ye: any
         me: any
         al: any
@@ -17,13 +17,13 @@ export default class InitState {
         rightYe: any
         rightMe: any
     }
-    dayPage: {
+    dayNode: {
         header: any
         body: any
         rightHeader: any
         rightBody: any
     }
-    otherPage: {
+    ymNode: {
         year: any
         month: any
     }
@@ -52,7 +52,7 @@ export default class InitState {
         this.endMonth = endMonth
         this.date = null
         this.endDate = null
-        this.header = {
+        this.headerNode = {
             ye: null,
             me: null,
             al: null,
@@ -60,13 +60,13 @@ export default class InitState {
             rightYe: null,
             rightMe: null
         }
-        this.dayPage = {
+        this.dayNode = {
             header: null,
             body: null,
             rightHeader: null,
             rightBody: null
         }
-        this.otherPage = {
+        this.ymNode = {
             month: null,
             year: null
         }

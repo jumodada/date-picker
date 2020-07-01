@@ -1,4 +1,4 @@
-export interface Header<T =HTMLElement|null> {
+export interface HeaderNode<T =HTMLElement|null> {
     ar:T
     al:T
     ye:T
@@ -7,7 +7,7 @@ export interface Header<T =HTMLElement|null> {
     rightMe:T
 }
 
-export interface DayPage<T=HTMLElement> {
+export interface DayNode<T=HTMLElement> {
     header:T
     body:T
     rightHeader:T,
@@ -40,7 +40,7 @@ export interface RangeDateKey {
 
 export type RenderDateTypeKey = 'left'|'right'
 
-export interface OtherPage<T=HTMLElement> {
+export interface YmNode<T=HTMLElement> {
     month:T
     year:T
 }

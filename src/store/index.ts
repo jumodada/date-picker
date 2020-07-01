@@ -105,11 +105,11 @@ const Store = (function () {
 
 
     function _updateHeader(val: any, key: headerKey) {
-        state[uid].header[key] = val
+        state[uid].headerNode[key] = val
     }
 
     function _updateDP(val: any, key: dpKey) {
-        state[uid].dayPage[key] = val
+        state[uid].dayNode[key] = val
         if (key === 'body') {
             renderDate()
         } else if (key === 'rightBody') {
@@ -118,7 +118,7 @@ const Store = (function () {
     }
 
     function _updateOP(val: any, key: opKey) {
-        state[uid].otherPage[key] = val
+        state[uid].ymNode[key] = val
         if (key === 'month') {
             renderMonth()
         } else if (key === 'year') {

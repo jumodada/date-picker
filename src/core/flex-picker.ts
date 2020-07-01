@@ -7,8 +7,8 @@ import {changeUId, getSP, getState, getStore, pushInState, updateOptions, update
 import clickOutside from "../utils/clickoutside"
 import {getAllScrollParents} from "../utils/window"
 import {setPopoverLocation} from "../template"
-import {isArray} from "../utils/type-of";
-import {getRealMonth} from "../utils/date";
+import {isArray} from "../utils/type-of"
+import {getRealMonth} from "../utils/date"
 
 const listenToScrollParents = (el:HTMLElement) => {
     let scrollParents = getAllScrollParents(el)

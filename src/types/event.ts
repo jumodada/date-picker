@@ -7,7 +7,6 @@ export type eventType =
     |'focus'
     |'blur'
 
-
 export interface _Event{
     isTrusted: boolean
     screenX: number
