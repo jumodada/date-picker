@@ -102,7 +102,5 @@ export default class Flex {
             return getRealMonth(date)
         }
     }
-
     
-
 }
