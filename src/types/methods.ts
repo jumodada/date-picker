@@ -78,6 +78,6 @@ export type nodeKey =
     'initial'
 
 export interface SelectDayType {
-    date:(...arg:any)=>number[]
+    date:(...arg:any[])=>number[]
     'date-range':(year:number,month:number)=>number[]
 }

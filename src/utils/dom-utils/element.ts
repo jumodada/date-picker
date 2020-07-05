@@ -26,7 +26,7 @@ const nodeOptions: NodeOptions = {
     style: (el, node) =>
         el.setAttribute('style', node.style as any),
     update: (el, node) =>
-        node.update?.method(el, node.update.name),
+        node.update?.method(el, node.update?.name),
     children: (el, node) => {
         node.children?.forEach(child => {
             let childNode = createNode(child)

@@ -217,6 +217,34 @@ $border-color-2: #e7eaf1;
   }
 }
 
-.fl-open-animation{
-  opacity: 1;
+@keyframes datepickerShow {
+  0%{
+    display: block;
+    opacity: 0;
+    transform: scaleY(0.8);
+  }
+  100%{
+    display: block;
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+@keyframes datepickerHidden {
+  0%{
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  100%{
+    opacity: 0;
+    visibility: hidden;
+    transform: scaleY(.8);
+  }
+}
+
+
+.fl-datepicker-show{
+  animation: datepickerShow .3s;
+}
+.fl-datepicker-hidden{
+  animation: datepickerHidden .3s forwards;
 }

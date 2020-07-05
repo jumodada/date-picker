@@ -7,7 +7,8 @@ import {createBody} from "./picker/body"
 import {
     datepickerClass,
     dateRangePickerClass,
-    openAnimation,
+    datepickerShow,
+    datepickerHidden
 } from "../utils/class-name"
 import {createLeft} from "./picker/left"
 import {createRight} from "./picker/right"
@@ -48,18 +49,16 @@ export function updatePopover(el: HTMLElement, value: boolean): void {
     if (value) {
         el.style.display = ''
         setPopoverLocation(el)
-        toggleClass(el, openAnimation ,true)
+        toggleClass(el, datepickerShow ,true)
+        toggleClass(el, datepickerHidden,false )
     } else {
-        toggleClass(el, openAnimation,false )
-        addAnimation(el)
+        toggleClass(el, datepickerShow,false )
+        toggleClass(el, datepickerHidden,true )
+        // addAnimation(el)
     }
 }
 
 function addAnimation(el:HTMLElement) {
-    let {transform} = el.style
-    if(transform.indexOf('scaleY')===-1){
-        el.style.transform =  transform+' scaleY(.8)'
-    }
     el.style.display = 'none'
 }
 
