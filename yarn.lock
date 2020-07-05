@@ -5218,6 +5218,11 @@ flagged-respawn@^1.0.0:
   resolved "https://registry.npm.taobao.org/flagged-respawn/download/flagged-respawn-1.0.1.tgz#e7de6f1279ddd9ca9aac8a5971d618606b3aab41"
   integrity sha1-595vEnnd2cqarIpZcdYYYGs6q0E=
 
+flex-date-picker@^1.2.7:
+  version "1.2.7"
+  resolved "https://registry.npmjs.org/flex-date-picker/-/flex-date-picker-1.2.7.tgz#90c1f84426e1236a83cc052013110b70ad259bc0"
+  integrity sha512-jRU/Nv/KtQygAmPGh5gdaK9O8zyJnjezJBifiyE6DLAsNYUBZLWr+C5auaaBQwoy3CNej7XMgsAdKxezQv1eHQ==
+
 flush-write-stream@^1.0.0, flush-write-stream@^1.0.2:
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/flush-write-stream/download/flush-write-stream-1.1.1.tgz#8dd7d873a1babc207d94ead0c2e0e44276ebf2e8"

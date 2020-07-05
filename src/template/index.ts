@@ -47,19 +47,13 @@ export function createPopover() {
 
 export function updatePopover(el: HTMLElement, value: boolean): void {
     if (value) {
-        el.style.display = ''
         setPopoverLocation(el)
         toggleClass(el, datepickerShow ,true)
         toggleClass(el, datepickerHidden,false )
     } else {
         toggleClass(el, datepickerShow,false )
         toggleClass(el, datepickerHidden,true )
-        // addAnimation(el)
     }
-}
-
-function addAnimation(el:HTMLElement) {
-    el.style.display = 'none'
 }
 
 export function setPopoverLocation(el: HTMLElement) {
