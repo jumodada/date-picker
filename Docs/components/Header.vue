@@ -2,7 +2,7 @@
     <div class="header" :class="{other:!atHome,'components-page':!atHome}">
         <div class="header-brand">
             <router-link :to="'/'">
-                <f-icon :color="fColor" font-size="30" name="F"></f-icon>
+                <f-icon :color="fColor" font-size="30" name="f1"></f-icon>
             </router-link>
         </div>
         <div class="header-nav">

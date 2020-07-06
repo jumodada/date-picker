@@ -1,5 +1,5 @@
 <template>
-    <svg class="f-icon" @click="$emit('click',$event)" :style="{fill:`${color}`,fontSize: fontWidth}" :class="{loading:loading}">
+    <svg class="f-icon" @click="$emit('click',$event)" :style="{fill:`${color}`,fontSize: fontWidth||width}" :class="{loading:loading}">
         <use :xlink:href="`#icon-${name}`"></use>
     </svg>
 </template>
@@ -15,6 +15,10 @@
               type:Number|String,
               default: '1em '
             },
+            width:{
+              default:0,
+              type:Number|String
+            },
             color: {
                 type: String
             },
@@ -25,6 +29,7 @@
         },
         computed:{
             fontWidth(){
+                if(this.width)return 0
                 return this.fontSize +'px'
             }
         }
