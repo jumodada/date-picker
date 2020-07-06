@@ -1,6 +1,6 @@
 <template>
     <div class="firm-main">
-        <card></card>
+        <logo></logo>
         <div class="divide-line"></div>
         <Footer></Footer>
     </div>
@@ -8,15 +8,12 @@
 
 <script>
     import {destroyEventListener, elementShowAddActive} from "../../utils/lazy-active"
-    import card from './src/card/card'
+    import logo from './src/logo'
     import Footer from '../Footer'
 
     export default {
         name: "Main",
-        components: {
-            card,
-            Footer
-        },
+        components: {logo, Footer},
         mounted() {
             elementShowAddActive(this)
         },
