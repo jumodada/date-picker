@@ -43,8 +43,8 @@
                 </g>
             </g>
         </svg>
-        <div class="flex-logo-title">
-            一个日期选择器
+        <div>
+            <f-button @click="toStart" class="flex-logo-enter" type="warn"> 快速上手 →</f-button>
         </div>
     </div>
 </template>
@@ -62,7 +62,12 @@
                 isActive: false,
             }
         },
-        mounted() {
+        methods:{
+            toStart(){
+                this.$router.push({
+                    path:'components/start'
+                })
+            }
         }
     }
 </script>
@@ -88,6 +93,11 @@
             font-size: 2rem;
             color: white;
             font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+        }
+        &-enter{
+            width: 140px;
+            height: 60px;
+            font-size: 17px !important;
         }
     }
 

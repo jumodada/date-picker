@@ -2,6 +2,7 @@
     <div class="firm-main">
         <logo></logo>
         <card></card>
+        <Code></Code>
         <div class="divide-line"></div>
         <Footer></Footer>
     </div>
@@ -12,10 +13,10 @@
     import card from "./src/card/card"
     import logo from './src/logo'
     import Footer from '../Footer'
-
+    import Code from './src/code/index'
     export default {
         name: "Main",
-        components: {logo, Footer,card},
+        components: {logo, Footer,card,Code},
         mounted() {
             elementShowAddActive(this)
         },
