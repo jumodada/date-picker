@@ -1,4 +1,4 @@
-<img src='./Docs/assets/svg/logo.svg' height='60'  />
+<img src='./Docs/assets/svg/logo.svg' height='210'  />
 
 ## flex-date-picker
 A datepicker for PC
