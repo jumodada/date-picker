@@ -7,10 +7,10 @@
   "module": "dist/flexDatePicker.es5.js",
   "scripts": {
     "bc": "gulp build --gulpfile src/assets/gulpfile.js && cp-cli src/assets/lib lib",
-    "dev": "webpack-dev-server --config config/webpack.demo.config.ts",
+    "dev": "webpack-dev-server --config config/webpack.demo.config.js",
     "prebp": "rimraf dist",
     "build": "tsc --module commonjs && rollup -c config/rollup.config.ts",
-    "build:demo": "webpack --config config/webpack.demo.config.ts",
+    "build:demo": "webpack --config config/webpack.demo.config.js",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watch",
     "test:prod": "npm run lint && npm run test -- --no-cache"
