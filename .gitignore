@@ -7,6 +7,6 @@ lib
 coverage
 waiter.config.js
 dist
-docs
 .Ds_Store/
 .rpt2_cache
+Docs
