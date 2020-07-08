@@ -1,6 +1,6 @@
 {
   "name": "flex-date-picker",
-  "version": "1.2.7",
+  "version": "1.2.9",
   "description": "轻量好用的日期选择器",
   "main": "dist/flexDatePicker.umd.js",
   "style": "dist/index.css",
