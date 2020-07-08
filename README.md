@@ -1,4 +1,4 @@
-<img src='./Docs/assets/svg/logo.svg' height='210'  />
+<img src='https://wx1.sbimg.cn/2020/07/08/C9e48.jpg' height='210'  />
 
 ## flex-date-picker
 A datepicker for PC
