@@ -1,7 +1,7 @@
-<img src='https://wx1.sbimg.cn/2020/07/08/C9e48.jpg' height='210'  />
+<img src="https://wx1.sbimg.cn/2020/07/08/C9e48.jpg" height="210"/>
 
 ## flex-date-picker
-A datepicker for PC
+A datepicker for PC(尚未完成功能和单元测试，请勿用于开发)
 
 ![](https://camo.githubusercontent.com/b39d1e12ba779319ff9bab0f56ba7e41f108d898/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f6c6963656e73652f6a756d6f646164612f76756558696e2e737667)
 ![](https://github.com/jumodada/date-picker/workflows/code-test/badge.svg)
