@@ -12,7 +12,7 @@ export interface Types {
 
 export type eventHandler  = (e: _Event) => any
 
-export interface createEventListener {
+export interface CreateEventListener {
     name:eventType,
     event:eventHandler
 }

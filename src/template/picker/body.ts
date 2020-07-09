@@ -3,7 +3,7 @@ import {
     resetAttr,
     updateReferenceInDate, removeClasses, toggleClass
 } from "../../utils/dom-utils/element"
-import {createEventListener, CreateNodeArguments, eventHandler} from "../../types/methods"
+import {CreateEventListener, CreateNodeArguments, eventHandler} from "../../types/methods"
 import {
     getState,
     updateDate,
@@ -100,8 +100,8 @@ export function toSelectYear(e: _Event): void {
 
 export function createPageBody<T>(
     length: number,
-    ulListener: eventHandler | createEventListener[],
-    liListener: createEventListener[] | null,
+    ulListener: eventHandler | CreateEventListener[],
+    liListener: CreateEventListener[] | null,
     classes: string,
     update: (val: any, key: T) => any,
     updateName: string,
