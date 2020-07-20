@@ -77,11 +77,10 @@ export function resetAttr(el: HTMLElement, val: string, name?: string) {
 
 export function addAttr(el: HTMLElement, val: string, name?: string) {
     if (!name) name = 'class'
-    let attrVal = el.getAttribute(name)
-
-    if (attrVal) {
-        if (attrVal.indexOf(val) === -1) {
-            val += ' ' + attrVal
+    let attr = el.getAttribute(name)
+    if (attr) {
+        if (attr.indexOf(val) === -1) {
+            val += ' ' + attr
             el.setAttribute(name, val)
         }
     } else {
@@ -96,8 +95,8 @@ function filterClasses(classes: string, val: string[]) {
     return classes
 }
 
-export function toggleClass(node: HTMLElement, className: string, judge: boolean) {
-    if (judge) {
+export function toggleClass(node: HTMLElement, className: string, isNull: boolean) {
+    if (isNull) {
         addAttr(node, className)
     } else {
         removeClasses(node, [className])

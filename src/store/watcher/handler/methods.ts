@@ -4,7 +4,7 @@ import clickOutside from "../../../utils/clickoutside"
 import {isElementExist} from "../../../utils/dom-utils/is-element-exist"
 import {createPopover, updatePopover} from "../../../template"
 import {appendChild, updateReferenceInDateRange} from "../../../utils/dom-utils/element"
-import {setPopoverStyle} from "../../../template/style"
+import {setPopoverStyle} from "../../../template/set-attribute"
 import {renderDate, renderYear} from "../../../template/picker/body"
 import {
     getBackMonth,

@@ -18,3 +18,9 @@ export type Window = {
     toString(): '[object Window]',
     devicePixelRatio: number
 }
+
+export type nodeStyle = {
+    position:'absolute'|'relative'|'static'
+    display:'none'|'block'|'inline-block'
+    'z-index':number
+}
